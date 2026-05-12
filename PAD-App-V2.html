@@ -1,0 +1,2560 @@
+<!doctype html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Pad M365 Mockup",
+  "schemaVersion": 1,
+  "description": "Mockup interactivo de cómo se vería PAD M365 ya terminado. 5 pantallas (Designer Inbox, Item Detail, SR League Dashboard, Reassignment Kanban, Licensing Packages) con datos realistas de Q2 2027 FTF para presentar a leadership."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PAD · MMXO — Interactive Mockup</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+  background: #F3F4F6;
+  color: #1F2937;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.app { min-height: 100vh; }
+
+.demo-banner {
+  background: linear-gradient(90deg, #FEF3C7 0%, #FDE68A 100%);
+  color: #78350F;
+  padding: 6px 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #F59E0B;
+}
+
+.topbar {
+  background: #1F2937;
+  color: white;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #374151;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; }
+.brand-mark {
+  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+  color: white;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800;
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.capsule-selector {
+  background: #374151;
+  color: #E5E7EB;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+.capsule-selector option { background: #1F2937; }
+.user-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: #374151;
+  padding: 4px 12px 4px 4px;
+  border-radius: 999px;
+}
+.avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F59E0B, #EC4899);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px; color: white;
+}
+.user-pill select {
+  background: transparent;
+  color: white;
+  border: 0;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}
+.user-pill select option { background: #1F2937; }
+
+.tabs {
+  background: white;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B7280;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.tab:hover { color: #1F2937; }
+.tab.active { color: #2563EB; border-bottom-color: #2563EB; }
+.tab-icon { font-size: 14px; }
+.tab-badge {
+  background: #FEE2E2;
+  color: #B91C1C;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+.tab-badge.b-blue { background: #DBEAFE; color: #1E40AF; }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 12px;
+}
+.breadcrumb a {
+  color: #2563EB;
+  cursor: pointer;
+  text-decoration: none;
+}
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { color: #9CA3AF; }
+.breadcrumb .current { color: #1F2937; font-weight: 600; }
+
+.main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+.page-head { margin-bottom: 16px; }
+.page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.page-sub { color: #6B7280; font-size: 13px; }
+
+/* Capsule banner — prominent at top of designer inbox */
+.capsule-banner {
+  background: linear-gradient(135deg, #1F2937 0%, #2563EB 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(31,41,55,0.15);
+}
+.capsule-banner-left h2 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.capsule-banner-left .capsule-name {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.capsule-banner-left .capsule-meta {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+}
+.capsule-banner-left .you-have {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.capsule-banner-right {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 24px;
+  text-align: center;
+}
+.cb-stat .v {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+.cb-stat .l {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+}
+.cb-stat.alert .v { color: #FCD34D; }
+.cb-stat.success .v { color: #6EE7B7; }
+.cb-stat.danger .v { color: #FCA5A5; }
+
+.card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+}
+.card-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 14px;
+}
+.card-body { padding: 16px 18px; }
+
+/* Team cards in inbox — restructured */
+.teams-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.teams-section-head h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.team-group {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.team-head {
+  padding: 14px 18px;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 16px;
+}
+.team-head:hover { background: #F3F4F6; }
+.team-meta { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 220px; }
+.team-logo {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+.team-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; }
+.team-info span { font-size: 12px; color: #6B7280; }
+
+.team-status-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex: 1;
+  font-size: 11px;
+}
+.team-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.tsp-rework { background: #FEE2E2; color: #991B1B; }
+.tsp-rework.zero { background: #F3F4F6; color: #9CA3AF; }
+.tsp-review { background: #E0E7FF; color: #3730A3; }
+.tsp-review.zero { background: #F3F4F6; color: #9CA3AF; }
+.tsp-approved { background: #D1FAE5; color: #065F46; }
+.tsp-approved.zero { background: #F3F4F6; color: #9CA3AF; }
+.tsp-needed { background: #DBEAFE; color: #1E40AF; }
+.tsp-needed.zero { background: #F3F4F6; color: #9CA3AF; }
+
+.team-progress {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px;
+  color: #6B7280;
+  flex: 0 0 auto;
+}
+.progress-bar {
+  width: 100px; height: 6px;
+  background: #E5E7EB;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10B981, #34D399);
+  border-radius: 999px;
+}
+
+.team-expand-toggle {
+  background: transparent;
+  border: 1px solid #E5E7EB;
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #6B7280;
+  flex: 0 0 auto;
+}
+
+.styles-list { padding: 8px; }
+.style-row {
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 130px 130px 90px 60px;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+}
+.style-row:hover { background: #F9FAFB; }
+.style-code { font-weight: 600; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 12px; }
+.style-due { color: #6B7280; font-size: 12px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.b-needed { background: #DBEAFE; color: #1E40AF; }
+.b-progress { background: #FEF3C7; color: #92400E; }
+.b-peer { background: #E0E7FF; color: #3730A3; }
+.b-sr { background: #FCE7F3; color: #9D174D; }
+.b-approved { background: #D1FAE5; color: #065F46; }
+.b-licensing { background: #E9D5FF; color: #5B21B6; }
+.b-rework { background: #FEE2E2; color: #991B1B; }
+.b-complete { background: #D1FAE5; color: #064E3B; }
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-needed { background: #2563EB; }
+.dot-progress { background: #F59E0B; }
+.dot-peer { background: #6366F1; }
+.dot-sr { background: #EC4899; }
+.dot-approved { background: #10B981; }
+.dot-licensing { background: #8B5CF6; }
+.dot-rework { background: #DC2626; }
+
+.rework-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.rwp-peer { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+.rwp-sr { background: #FCE7F3; color: #9D174D; border: 1px solid #FBCFE8; }
+.rwp-lic { background: #E9D5FF; color: #5B21B6; border: 1px solid #DDD6FE; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+}
+.detail-main { background: white; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
+.detail-figma {
+  height: 420px;
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.detail-figma::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.figma-frame {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  color: #1F2937;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.figma-frame-label {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-size: 11px;
+  color: #94A3B8;
+  font-weight: 500;
+}
+.figma-frame .badge-frame {
+  display: inline-block;
+  background: #F3F4F6;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.figma-frame h4 { font-family: serif; font-size: 24px; margin-bottom: 6px; font-style: italic; }
+.figma-frame p { font-size: 11px; color: #6B7280; }
+.figma-frame .garment {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(135deg, #9CA3AF 0%, #6B7280 100%);
+  border-radius: 8px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+}
+.figma-marker {
+  position: absolute;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #EC4899;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.figma-toolbar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  gap: 6px;
+}
+.figma-tool {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+.figma-tool.active { background: #2563EB; }
+
+.detail-meta { padding: 18px; border-top: 1px solid #F3F4F6; }
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 13px;
+}
+.detail-row .label { color: #6B7280; }
+.detail-row .val { font-weight: 500; }
+
+.rework-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px 18px;
+  background: #FEF2F2;
+  border-top: 1px solid #FECACA;
+  border-bottom: 1px solid #FECACA;
+}
+.rwk-cell {
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #FECACA;
+}
+.rwk-cell.zero { opacity: 0.5; border-color: #E5E7EB; }
+.rwk-cell .rwk-val { font-size: 22px; font-weight: 800; color: #991B1B; line-height: 1; }
+.rwk-cell.zero .rwk-val { color: #9CA3AF; }
+.rwk-cell .rwk-label { font-size: 10px; font-weight: 600; color: #6B7280; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+.detail-side { display: flex; flex-direction: column; gap: 12px; }
+.side-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.side-card-head {
+  padding: 12px 16px;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+  font-weight: 600;
+  font-size: 13px;
+}
+.timeline { padding: 4px 16px 16px; }
+.timeline-item {
+  position: relative;
+  padding-left: 20px;
+  padding-bottom: 14px;
+  font-size: 12px;
+}
+.timeline-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 16px;
+  bottom: -2px;
+  width: 2px;
+  background: #E5E7EB;
+}
+.timeline-item .dot-tl {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 1.5px #E5E7EB;
+}
+.timeline-item.done .dot-tl { background: #10B981; box-shadow: 0 0 0 1.5px #10B981; }
+.timeline-item.current .dot-tl { background: #2563EB; box-shadow: 0 0 0 2px #2563EB; }
+.timeline-item.rework .dot-tl { background: #DC2626; box-shadow: 0 0 0 1.5px #DC2626; }
+.timeline-item .tl-title { font-weight: 600; color: #1F2937; }
+.timeline-item .tl-when { color: #6B7280; font-size: 11px; }
+
+.comment-thread { padding: 12px 16px; }
+.comment {
+  background: #F9FAFB;
+  border-left: 3px solid #2563EB;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.comment .author { font-weight: 600; margin-bottom: 4px; display: flex; gap: 6px; align-items: center; }
+.comment.rework { border-left-color: #DC2626; background: #FEF2F2; }
+.comment.figma-source {
+  border-left-color: #A855F7;
+  background: linear-gradient(90deg, #FAF5FF 0%, #F9FAFB 100%);
+}
+.comment .figma-tag {
+  background: #A855F7;
+  color: white;
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.queue-table { background: white; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
+.queue-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 130px 130px 110px 90px 200px;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  align-items: center;
+  font-size: 13px;
+}
+.queue-row.head { background: #F9FAFB; font-weight: 600; font-size: 12px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.4px; }
+.queue-row:not(.head):hover { background: #F9FAFB; }
+.queue-row:last-child { border-bottom: 0; }
+.queue-priority {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #DC2626, #EF4444);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.queue-priority.medium { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+.queue-priority.low { background: linear-gradient(135deg, #6B7280, #9CA3AF); }
+.action-pair { display: flex; gap: 6px; }
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.kpi {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 16px;
+}
+.kpi .label {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.kpi .value { font-size: 28px; font-weight: 800; color: #1F2937; line-height: 1; }
+.kpi .unit { font-size: 14px; color: #6B7280; font-weight: 400; }
+.kpi .delta { font-size: 12px; margin-top: 4px; }
+.kpi .delta.up { color: #059669; }
+.kpi .delta.down { color: #DC2626; }
+.kpi.alert { border-color: #F59E0B; background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); }
+.kpi.success { border-color: #10B981; background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); }
+
+.league-table { background: white; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
+.league-table-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.league-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 90px 1.5fr 110px 110px 80px;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  align-items: center;
+  font-size: 13px;
+}
+.league-row:hover { background: #F9FAFB; }
+.league-row:last-child { border-bottom: 0; }
+.league-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: white;
+}
+.lt-nfl { background: #1E40AF; }
+.lt-mlb { background: #DC2626; }
+.lt-nba { background: #EA580C; }
+.lt-nhl { background: #1E293B; }
+.lt-wnba { background: #DB2777; }
+.lt-college { background: #059669; }
+
+.league-progress-wrap { display: flex; align-items: center; gap: 8px; }
+.league-progress-bar {
+  flex: 1; height: 8px;
+  background: #E5E7EB;
+  border-radius: 999px;
+  overflow: hidden;
+  min-width: 100px;
+}
+.league-progress-fill { height: 100%; border-radius: 999px; }
+.lpf-100 { background: linear-gradient(90deg, #10B981, #34D399); }
+.lpf-high { background: linear-gradient(90deg, #34D399, #FBBF24); }
+.lpf-mid { background: linear-gradient(90deg, #FBBF24, #F59E0B); }
+.lpf-low { background: #DC2626; }
+
+.deadline-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-align: center;
+}
+.dt-ready { background: #D1FAE5; color: #065F46; }
+.dt-soon { background: #FEF3C7; color: #92400E; }
+.dt-fine { background: #DBEAFE; color: #1E40AF; }
+.dt-late { background: #FEE2E2; color: #991B1B; }
+
+.btn {
+  background: #2563EB;
+  color: white;
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-ghost {
+  background: transparent;
+  color: #2563EB;
+  border: 1px solid #DBEAFE;
+}
+.btn-success { background: #10B981; }
+.btn-danger { background: #DC2626; }
+.btn-sm { padding: 4px 10px; font-size: 11px; }
+
+.kanban {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+.kanban-col {
+  flex: 0 0 240px;
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 400px;
+}
+.kanban-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.kanban-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+}
+.kanban-name { font-weight: 600; font-size: 13px; }
+.kanban-meta { font-size: 11px; color: #6B7280; }
+.team-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.team-card:hover { border-color: #2563EB; box-shadow: 0 2px 6px rgba(37,99,235,0.15); }
+.team-card-name { font-size: 12px; font-weight: 600; }
+.team-card-meta { font-size: 11px; color: #6B7280; display: flex; justify-content: space-between; align-items: center; }
+
+.capsule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.capsule-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.capsule-card:hover { border-color: #2563EB; box-shadow: 0 4px 16px rgba(37,99,235,0.1); }
+.capsule-card.active { border-color: #2563EB; box-shadow: 0 2px 12px rgba(37,99,235,0.1); }
+.capsule-card-head {
+  padding: 16px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.capsule-card-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.capsule-card-status {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.cs-active { background: #DBEAFE; color: #1E40AF; }
+.cs-licensing { background: #E9D5FF; color: #5B21B6; }
+.cs-planning { background: #F3F4F6; color: #6B7280; }
+.cs-closing { background: #FEF3C7; color: #92400E; }
+
+.capsule-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid #F3F4F6;
+}
+.cap-stat {
+  padding: 12px;
+  text-align: center;
+  border-right: 1px solid #F3F4F6;
+}
+.cap-stat:last-child { border-right: 0; }
+.cap-stat .v { font-size: 18px; font-weight: 800; }
+.cap-stat .l { font-size: 10px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; }
+
+.capsule-card-leagues {
+  padding: 12px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.league-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: white;
+}
+.league-chip.dim { opacity: 0.4; }
+.league-chip-status {
+  background: rgba(255,255,255,0.3);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 9px;
+}
+
+.leagues-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.lg-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lg-card:hover { border-color: #2563EB; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.lg-card-head {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #F3F4F6;
+}
+.lg-card-body { padding: 14px 16px; }
+.lg-progress-circle { font-size: 22px; font-weight: 800; margin: 6px 0; }
+.lg-progress-circle.green { color: #059669; }
+.lg-progress-circle.amber { color: #D97706; }
+.lg-progress-circle.red { color: #DC2626; }
+.lg-card-stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 11px;
+  color: #6B7280;
+  margin-top: 8px;
+}
+.lg-card-stats strong { color: #1F2937; font-size: 14px; display: block; }
+
+.subreport-head { background: white; border: 1px solid #E5E7EB; border-radius: 12px; padding: 18px 22px; margin-bottom: 16px; }
+.subreport-head-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.sla-progress { display: flex; align-items: center; gap: 8px; min-width: 200px; padding: 12px 0; }
+.sla-step { flex: 1; text-align: center; font-size: 10px; position: relative; }
+.sla-step .num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #E5E7EB;
+  color: #6B7280;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  margin: 0 auto 4px;
+  font-size: 11px;
+}
+.sla-step.done .num { background: #10B981; color: white; }
+.sla-step.current .num { background: #2563EB; color: white; box-shadow: 0 0 0 3px #DBEAFE; }
+.sla-step.late .num { background: #DC2626; color: white; }
+.sla-step .lbl { font-size: 9px; color: #6B7280; font-weight: 600; }
+.sla-step.done .lbl, .sla-step.current .lbl { color: #1F2937; }
+.sla-step::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #E5E7EB;
+  z-index: -1;
+}
+.sla-step:last-child::after { display: none; }
+.sla-step.done::after { background: #10B981; }
+
+.subreport-table { background: white; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
+.subreport-row {
+  display: grid;
+  grid-template-columns: 200px 140px 130px 130px 110px 90px;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #F3F4F6;
+  align-items: center;
+  font-size: 13px;
+}
+.subreport-row.head { background: #F9FAFB; font-weight: 600; font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.4px; }
+.subreport-row:not(.head):hover { background: #F9FAFB; }
+.subreport-row:last-child { border-bottom: 0; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+@media (max-width: 900px) {
+  .detail-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .leagues-grid { grid-template-columns: 1fr; }
+  .capsule-grid { grid-template-columns: 1fr; }
+  .capsule-banner { grid-template-columns: 1fr; }
+  .capsule-banner-right { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="demo-banner">
+  Live SharePoint data · sign in with your work account · changes write back to your lists
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">PD</div>
+    <div>MMXO PAD</div>
+  </div>
+  <div class="topbar-right">
+    <select class="capsule-selector" id="capsuleSelect">
+      <option value="q2-2027-ftf">Capsule: Q2 2027 FTF</option>
+      <option value="q2-2027-vanity">Capsule: Q2 2027 VANITY</option>
+      <option value="q2-2027-charm">Capsule: Q2 2027 CHARM</option>
+      <option value="q3-2027">Capsule: Q3 2027 (planning)</option>
+    </select>
+    <div class="user-pill">
+      <div class="avatar" id="userAvatar">DI</div>
+      <select id="roleSelect">
+        <option value="designer">Diana · Designer</option>
+        <option value="sr">Mel · SR Reviewer</option>
+        <option value="licensing">Camila · Licensing</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabsNav"></nav>
+
+<main class="main">
+  <!-- DESIGNER: INBOX (capsule-first hierarchy) -->
+  <div class="screen" id="screen-inbox">
+    <div class="capsule-banner">
+      <div class="capsule-banner-left">
+        <h2>Active capsule · your assignment</h2>
+        <div class="capsule-name">Q2 2027 FTF</div>
+        <div class="capsule-meta">Design deadline May 5 · capsule rollout May 30, 2026</div>
+        <div class="you-have">In this capsule you have <strong>4 teams · 21 styles</strong></div>
+      </div>
+      <div class="capsule-banner-right">
+        <div class="cb-stat">
+          <div class="v">8</div>
+          <div class="l">To do</div>
+        </div>
+        <div class="cb-stat alert">
+          <div class="v">4</div>
+          <div class="l">In rework</div>
+        </div>
+        <div class="cb-stat">
+          <div class="v">5</div>
+          <div class="l">In review</div>
+        </div>
+        <div class="cb-stat success">
+          <div class="v">4</div>
+          <div class="l">Approved</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="teams-section-head">
+      <h3>Your teams in this capsule (4)</h3>
+      <button class="btn btn-ghost btn-sm">Sort by deadline ↓</button>
+    </div>
+
+    <div id="teamGroupsContainer"></div>
+  </div>
+
+  <!-- DESIGNER: ITEM DETAIL -->
+  <div class="screen" id="screen-detail">
+    <div class="page-head">
+      <div class="page-title">NFL_KANSAS CITY CHIEFS_VANITY_01</div>
+      <div class="page-sub">
+        Kansas City Chiefs · NFL · Q2 2027 FTF · Stage:
+        <span class="badge b-rework"><span class="dot dot-rework"></span>Sketch Needed (Peer Rework #1)</span>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-main">
+        <div class="detail-figma">
+          <div class="figma-toolbar">
+            <div class="figma-tool active">↖</div>
+            <div class="figma-tool">▭</div>
+            <div class="figma-tool">✏</div>
+            <div class="figma-tool">💬</div>
+          </div>
+          <div class="figma-frame">
+            <span class="figma-frame-label">Figma · Q2 2027 VANITY · node 156-326</span>
+            <div class="badge-frame">WMNS VANITY · KCC · 01</div>
+            <h4>Kansas City</h4>
+            <p>Est. 1960 · American Football Conference</p>
+            <div class="garment">👕</div>
+            <div class="figma-marker" style="top: 20%; right: 22%;">A</div>
+            <div class="figma-marker" style="top: 70%; left: 18%; background: #F59E0B;">B</div>
+          </div>
+        </div>
+
+        <div class="rework-summary">
+          <div class="rwk-cell">
+            <div class="rwk-val">1</div>
+            <div class="rwk-label">Peer Rework</div>
+          </div>
+          <div class="rwk-cell zero">
+            <div class="rwk-val">0</div>
+            <div class="rwk-label">SR Rework</div>
+          </div>
+          <div class="rwk-cell zero">
+            <div class="rwk-val">0</div>
+            <div class="rwk-label">Licensing Rework</div>
+          </div>
+        </div>
+
+        <div class="detail-meta">
+          <div class="detail-row"><span class="label">Server file</span><span class="val">/Q2 VANITY/NFL/STAGE 1/KCC/...VANITY_01.ai</span></div>
+          <div class="detail-row"><span class="label">Brand</span><span class="val">Pro Standard</span></div>
+          <div class="detail-row"><span class="label">Factory</span><span class="val">FACTORY-A · MX</span></div>
+          <div class="detail-row"><span class="label">Due Date</span><span class="val">May 5, 2026</span></div>
+          <div class="detail-row"><span class="label">Original Designer</span><span class="val">Diana Adame · #727</span></div>
+          <div class="detail-row"><span class="label">Peer Reviewer</span><span class="val">Amanda Mireles · #1022</span></div>
+          <div class="detail-row"><span class="label">SR Reviewer</span><span class="val">Mel · pending</span></div>
+        </div>
+      </div>
+
+      <div class="detail-side">
+        <div class="side-card">
+          <div class="side-card-head">Cycle timeline</div>
+          <div class="timeline">
+            <div class="timeline-item done">
+              <div class="dot-tl"></div>
+              <div class="tl-title">Sketch uploaded · v1</div>
+              <div class="tl-when">Apr 22 · 11:32 · server save</div>
+            </div>
+            <div class="timeline-item rework">
+              <div class="dot-tl"></div>
+              <div class="tl-title">Peer rejected · Color · Rework #1</div>
+              <div class="tl-when">Apr 22 · 14:18 · Amanda Mireles</div>
+            </div>
+            <div class="timeline-item current">
+              <div class="dot-tl"></div>
+              <div class="tl-title">Reset · Sketch needed (v2)</div>
+              <div class="tl-when">Apr 22 · 14:18 · Peer rework counter +1</div>
+            </div>
+            <div class="timeline-item">
+              <div class="dot-tl"></div>
+              <div class="tl-title">Peer review</div>
+              <div class="tl-when">pending</div>
+            </div>
+            <div class="timeline-item">
+              <div class="dot-tl"></div>
+              <div class="tl-title">SR review</div>
+              <div class="tl-when">pending</div>
+            </div>
+            <div class="timeline-item">
+              <div class="dot-tl"></div>
+              <div class="tl-title">Licensing batch</div>
+              <div class="tl-when">when NFL Q2 FTF reaches 100%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-card-head">Comments</div>
+          <div class="comment-thread">
+            <div class="comment rework">
+              <div class="author">
+                <div class="avatar" style="width:20px;height:20px;font-size:9px;background:linear-gradient(135deg,#9333EA,#EC4899)">AM</div>
+                Amanda Mireles · 14:18 · Peer Rework
+              </div>
+              "Logo color does not match slick. Pantone should be PMS 200C. See marker A on Figma frame."
+            </div>
+            <div class="comment figma-source">
+              <div class="author">
+                <span class="figma-tag">FIGMA</span>
+                Amanda Mireles · 14:15
+              </div>
+              "Marker B: logotype is 4mm to the left of the optical center"
+            </div>
+            <div class="comment figma-source">
+              <div class="author">
+                <span class="figma-tag">FIGMA</span>
+                Amanda Mireles · 14:12
+              </div>
+              "Marker A: review enzyme wash gradient level"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SR: MY APPROVAL QUEUE -->
+  <div class="screen" id="screen-queue">
+    <div class="page-head">
+      <div class="page-title">My approval queue</div>
+      <div class="page-sub">Styles waiting for your SR decision · before they can move to licensing batch</div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi alert">
+        <div class="label">Awaiting your review</div>
+        <div class="value">14 <span class="unit">styles</span></div>
+        <div class="delta down">3 high priority</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Currently in SR review</div>
+        <div class="value">5 <span class="unit">styles</span></div>
+        <div class="delta">In progress by you</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Avg time to decide</div>
+        <div class="value">1.8 <span class="unit">days</span></div>
+        <div class="delta up">vs 4.2d in PLM</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Approved by you · Q2</div>
+        <div class="value">142 <span class="unit">styles</span></div>
+        <div class="delta">52% of cycle</div>
+      </div>
+    </div>
+
+    <div class="queue-table">
+      <div class="queue-row head">
+        <span>Pri</span>
+        <span>Style</span>
+        <span>Team</span>
+        <span>Original Designer</span>
+        <span>Peer Decision</span>
+        <span>Waiting</span>
+        <span>Action</span>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority">!</div>
+        <div>
+          <div class="style-code">NFL_CLE_VANITY_03</div>
+          <div style="font-size:11px;color:#6B7280">Cleveland Browns · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-nfl">NFL</span> Browns</div>
+        <div>Brisa Hernandez · #1022</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div style="font-weight:700;color:#DC2626">3d 14h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority">!</div>
+        <div>
+          <div class="style-code">NFL_DET_VANITY_02</div>
+          <div style="font-size:11px;color:#6B7280">Detroit Lions · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-nfl">NFL</span> Lions</div>
+        <div>Andrea Cardenas · #914</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div style="font-weight:700;color:#DC2626">2d 8h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority">!</div>
+        <div>
+          <div class="style-code">NFL_DET_VANITY_03</div>
+          <div style="font-size:11px;color:#6B7280">Detroit Lions · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-nfl">NFL</span> Lions</div>
+        <div>Andrea Cardenas · #914</div>
+        <div><span class="badge b-approved">✓ Approved w/ comments</span></div>
+        <div style="font-weight:700;color:#DC2626">2d 6h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority medium">M</div>
+        <div>
+          <div class="style-code">MLB_LAD_VANITY_03</div>
+          <div style="font-size:11px;color:#6B7280">LA Dodgers · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-mlb">MLB</span> Dodgers</div>
+        <div>Diana Adame · #727</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div style="color:#92400E">1d 3h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority medium">M</div>
+        <div>
+          <div class="style-code">NBA_DET_VANITY_05</div>
+          <div style="font-size:11px;color:#6B7280">Detroit Pistons · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-nba">NBA</span> Pistons</div>
+        <div>Diana Adame · #727</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div style="color:#92400E">22h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority low">·</div>
+        <div>
+          <div class="style-code">COLLEGE_TEX_VANITY_01</div>
+          <div style="font-size:11px;color:#6B7280">Texas Longhorns · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-college">COLL</span> Longhorns</div>
+        <div>Diana Adame · #727</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div>4h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+      <div class="queue-row">
+        <div class="queue-priority low">·</div>
+        <div>
+          <div class="style-code">WNBA_LV_VANITY_01</div>
+          <div style="font-size:11px;color:#6B7280">Las Vegas Aces · Q2 2027 FTF</div>
+        </div>
+        <div><span class="league-tag lt-wnba">WNBA</span> Aces</div>
+        <div>Arantxa Denegri · #743</div>
+        <div><span class="badge b-approved">✓ Approved</span></div>
+        <div>2h</div>
+        <div class="action-pair">
+          <button class="btn btn-sm btn-success">Approve</button>
+          <button class="btn btn-sm btn-danger">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:12px 16px;background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;font-size:13px;color:#92400E">
+      <strong>⚠ Reminder.</strong> 3 styles in NFL Cleveland Browns + Detroit Lions are blocking the NFL league completion (currently 94%). Approve these to unlock the licensing batch.
+    </div>
+  </div>
+
+  <!-- SR: LEAGUE DASHBOARD -->
+  <div class="screen" id="screen-leagues">
+    <div class="page-head">
+      <div class="page-title">League Completion Dashboard</div>
+      <div class="page-sub">Q2 2027 FTF · Licensing fires automatically when a league reaches 100% SR Approved</div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Capsule completion</div>
+        <div class="value">86<span class="unit">%</span></div>
+        <div class="delta up">↑ +12% vs last week</div>
+      </div>
+      <div class="kpi success">
+        <div class="label">Leagues complete</div>
+        <div class="value">2 <span class="unit">/ 6</span></div>
+        <div class="delta up">NBA, WNBA → in licensing</div>
+      </div>
+      <div class="kpi alert">
+        <div class="label">Closest league</div>
+        <div class="value">94<span class="unit">% NFL</span></div>
+        <div class="delta">6 styles missing · 5d deadline</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Stragglers</div>
+        <div class="value">15 <span class="unit">styles</span></div>
+        <div class="delta down">3 with rework counter ≥2</div>
+      </div>
+    </div>
+
+    <div class="league-table">
+      <div class="league-table-head">
+        <span>Status by league · Q2 2027 FTF</span>
+        <button class="btn btn-ghost btn-sm">Export to CSV</button>
+      </div>
+
+      <div class="league-row">
+        <span class="league-tag lt-nba">NBA</span>
+        <span><strong>Q2 2027 FTF</strong> · 50 styles · 13 teams</span>
+        <span style="text-align:center;font-weight:700">100%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-100" style="width:100%"></div></div></div>
+        <span class="deadline-tag dt-ready">✓ ready</span>
+        <span class="badge b-licensing">In Licensing</span>
+        <button class="btn btn-sm btn-ghost">View</button>
+      </div>
+
+      <div class="league-row">
+        <span class="league-tag lt-wnba">WNBA</span>
+        <span><strong>Q2 2027 FTF</strong> · 12 styles · 12 teams</span>
+        <span style="text-align:center;font-weight:700">100%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-100" style="width:100%"></div></div></div>
+        <span class="deadline-tag dt-ready">✓ ready</span>
+        <span class="badge b-licensing">In Licensing</span>
+        <button class="btn btn-sm btn-ghost">View</button>
+      </div>
+
+      <div class="league-row" style="background:#FFFBEB">
+        <span class="league-tag lt-nfl">NFL</span>
+        <span><strong>Q2 2027 FTF</strong> · 90 styles · 32 teams · ⚠ prioritize</span>
+        <span style="text-align:center;font-weight:700">94%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-high" style="width:94%"></div></div></div>
+        <span class="deadline-tag dt-soon">5d</span>
+        <span class="badge b-progress">6 pending</span>
+        <button class="btn btn-sm">Push designers</button>
+      </div>
+
+      <div class="league-row">
+        <span class="league-tag lt-mlb">MLB</span>
+        <span><strong>Q2 2027 FTF</strong> · 75 styles · 30 teams</span>
+        <span style="text-align:center;font-weight:700">78%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-mid" style="width:78%"></div></div></div>
+        <span class="deadline-tag dt-fine">8d</span>
+        <span class="badge b-peer">17 pending</span>
+        <button class="btn btn-sm btn-ghost">Drill-down</button>
+      </div>
+
+      <div class="league-row">
+        <span class="league-tag lt-college">COLLEGE</span>
+        <span><strong>Q2 2027 FTF</strong> · 30 styles · 12 teams</span>
+        <span style="text-align:center;font-weight:700">73%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-mid" style="width:73%"></div></div></div>
+        <span class="deadline-tag dt-fine">10d</span>
+        <span class="badge b-progress">8 pending</span>
+        <button class="btn btn-sm btn-ghost">Drill-down</button>
+      </div>
+
+      <div class="league-row">
+        <span class="league-tag lt-nhl">NHL</span>
+        <span><strong>Q2 2027 FTF</strong> · 22 styles · 16 teams</span>
+        <span style="text-align:center;font-weight:700">65%</span>
+        <div class="league-progress-wrap"><div class="league-progress-bar"><div class="league-progress-fill lpf-low" style="width:65%"></div></div></div>
+        <span class="deadline-tag dt-fine">12d</span>
+        <span class="badge b-progress">8 pending</span>
+        <button class="btn btn-sm btn-ghost">Drill-down</button>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:12px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:13px;color:#1E40AF">
+      <strong>💡 Auto insight.</strong> NFL is at 94% but deadline in 5 days. The 6 missing styles are from Cleveland Browns (3) and Detroit Lions (3) — all waiting for your SR approval. Consider clearing your queue first.
+    </div>
+  </div>
+
+  <!-- SR: REASSIGNMENT KANBAN -->
+  <div class="screen" id="screen-kanban">
+    <div class="page-head">
+      <div class="page-title">Reassignment Kanban</div>
+      <div class="page-sub">SR only · Capsule Q2 2027 FTF · Drag-and-drop team cards between designers</div>
+    </div>
+
+    <div class="kanban">
+      <div class="kanban-col">
+        <div class="kanban-head">
+          <div class="kanban-avatar" style="background:linear-gradient(135deg,#F59E0B,#EC4899)">DI</div>
+          <div>
+            <div class="kanban-name">Diana Adame</div>
+            <div class="kanban-meta">#727 · 21 styles · 4 teams</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Kansas City Chiefs</div>
+          <div class="team-card-meta"><span class="league-tag lt-nfl" style="font-size:9px;padding:1px 6px">NFL</span><span>5 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">LA Dodgers</div>
+          <div class="team-card-meta"><span class="league-tag lt-mlb" style="font-size:9px;padding:1px 6px">MLB</span><span>4 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Detroit Pistons</div>
+          <div class="team-card-meta"><span class="league-tag lt-nba" style="font-size:9px;padding:1px 6px">NBA</span><span>4 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Texas Longhorns</div>
+          <div class="team-card-meta"><span class="league-tag lt-college" style="font-size:9px;padding:1px 6px">COLL</span><span>3 styles</span></div>
+        </div>
+      </div>
+
+      <div class="kanban-col">
+        <div class="kanban-head">
+          <div class="kanban-avatar" style="background:linear-gradient(135deg,#06B6D4,#3B82F6)">AC</div>
+          <div>
+            <div class="kanban-name">Andrea Cardenas</div>
+            <div class="kanban-meta">#914 · 17 styles</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Detroit Lions</div>
+          <div class="team-card-meta"><span class="league-tag lt-nfl" style="font-size:9px;padding:1px 6px">NFL</span><span>5 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Houston Astros</div>
+          <div class="team-card-meta"><span class="league-tag lt-mlb" style="font-size:9px;padding:1px 6px">MLB</span><span>5 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Cincinnati Reds</div>
+          <div class="team-card-meta"><span class="league-tag lt-mlb" style="font-size:9px;padding:1px 6px">MLB</span><span>4 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Ohio State Buckeyes</div>
+          <div class="team-card-meta"><span class="league-tag lt-college" style="font-size:9px;padding:1px 6px">COLL</span><span>3 styles</span></div>
+        </div>
+      </div>
+
+      <div class="kanban-col">
+        <div class="kanban-head">
+          <div class="kanban-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">AM</div>
+          <div>
+            <div class="kanban-name">Amanda Mireles</div>
+            <div class="kanban-meta">#1022 · 17 styles</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Atlanta Hawks</div>
+          <div class="team-card-meta"><span class="league-tag lt-nba" style="font-size:9px;padding:1px 6px">NBA</span><span>5 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Cleveland Browns</div>
+          <div class="team-card-meta"><span class="league-tag lt-nfl" style="font-size:9px;padding:1px 6px">NFL</span><span>4 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Chicago Bulls</div>
+          <div class="team-card-meta"><span class="league-tag lt-nba" style="font-size:9px;padding:1px 6px">NBA</span><span>4 styles</span></div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Miami Heat</div>
+          <div class="team-card-meta"><span class="league-tag lt-nba" style="font-size:9px;padding:1px 6px">NBA</span><span>4 styles</span></div>
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border:2px dashed #93C5FD;background:#EFF6FF">
+        <div class="kanban-head">
+          <div class="kanban-avatar" style="background:linear-gradient(135deg,#10B981,#06B6D4)">OR</div>
+          <div>
+            <div class="kanban-name">Omar Ruiz</div>
+            <div class="kanban-meta">#1049 · 14 styles · vacation 5d</div>
+          </div>
+        </div>
+        <div style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;padding:10px;font-size:11px;color:#78350F;margin-bottom:8px">
+          ⚠ <strong>Vacation override active</strong>: peer reviews redirected to Andrea until Apr 27
+        </div>
+        <div class="team-card" style="opacity:0.6">
+          <div class="team-card-name">Atlanta Braves</div>
+          <div class="team-card-meta"><span class="league-tag lt-mlb" style="font-size:9px;padding:1px 6px">MLB</span><span>4 styles · sketch needed only</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;padding:10px 14px;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;font-size:12px;color:#6B7280">
+      <strong>Tip:</strong> Dragging a team card between columns triggers Flow 10 (Reassignment fan-out). If there are styles in-flight (Sketch Uploaded=Yes), it will ask for a reason before transferring ownership.
+    </div>
+  </div>
+
+  <!-- LICENSING: CAPSULES OVERVIEW -->
+  <div class="screen" id="screen-lic-capsules">
+    <div class="page-head">
+      <div class="page-title">Licensing · Capsules overview</div>
+      <div class="page-sub">All capsules in flight · click a capsule to see its leagues</div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Active capsules</div>
+        <div class="value">3</div>
+        <div class="delta">Q2 2027 FTF + VANITY + CHARM</div>
+      </div>
+      <div class="kpi success">
+        <div class="label">Leagues in licensing</div>
+        <div class="value">5</div>
+        <div class="delta up">Across all capsules</div>
+      </div>
+      <div class="kpi alert">
+        <div class="label">Next deadline</div>
+        <div class="value">3<span class="unit">d</span></div>
+        <div class="delta">NBA Q2 FTF · portal upload</div>
+      </div>
+      <div class="kpi">
+        <div class="label">SLA compliance</div>
+        <div class="value">96<span class="unit">%</span></div>
+        <div class="delta up">YTD across all leagues</div>
+      </div>
+    </div>
+
+    <div class="capsule-grid">
+      <div class="capsule-card active" onclick="showLicLeagues('q2-2027-ftf')">
+        <div class="capsule-card-head">
+          <div>
+            <div class="capsule-card-name">Q2 2027 FTF</div>
+            <div style="font-size:12px;color:#6B7280">279 styles · 6 leagues · target rollout May 30</div>
+          </div>
+          <span class="capsule-card-status cs-active">Active</span>
+        </div>
+        <div class="capsule-card-stats">
+          <div class="cap-stat"><div class="v">86%</div><div class="l">SR approved</div></div>
+          <div class="cap-stat"><div class="v">2</div><div class="l">In licensing</div></div>
+          <div class="cap-stat" style="color:#DC2626"><div class="v">4</div><div class="l">Pending</div></div>
+        </div>
+        <div class="capsule-card-leagues">
+          <span class="league-chip lt-nba">NBA <span class="league-chip-status">100%</span></span>
+          <span class="league-chip lt-wnba">WNBA <span class="league-chip-status">100%</span></span>
+          <span class="league-chip lt-nfl">NFL <span class="league-chip-status">94%</span></span>
+          <span class="league-chip lt-mlb">MLB <span class="league-chip-status">78%</span></span>
+          <span class="league-chip lt-college">COLLEGE <span class="league-chip-status">73%</span></span>
+          <span class="league-chip lt-nhl">NHL <span class="league-chip-status">65%</span></span>
+        </div>
+      </div>
+
+      <div class="capsule-card" onclick="showLicLeagues('q2-2027-vanity')">
+        <div class="capsule-card-head">
+          <div>
+            <div class="capsule-card-name">Q2 2027 VANITY</div>
+            <div style="font-size:12px;color:#6B7280">312 styles · 6 leagues · target rollout Jun 15</div>
+          </div>
+          <span class="capsule-card-status cs-licensing">Licensing</span>
+        </div>
+        <div class="capsule-card-stats">
+          <div class="cap-stat"><div class="v">98%</div><div class="l">SR approved</div></div>
+          <div class="cap-stat"><div class="v">5</div><div class="l">In licensing</div></div>
+          <div class="cap-stat" style="color:#059669"><div class="v">1</div><div class="l">Pending</div></div>
+        </div>
+        <div class="capsule-card-leagues">
+          <span class="league-chip lt-nfl">NFL <span class="league-chip-status">In Lic.</span></span>
+          <span class="league-chip lt-mlb">MLB <span class="league-chip-status">In Lic.</span></span>
+          <span class="league-chip lt-nba">NBA <span class="league-chip-status">In Lic.</span></span>
+          <span class="league-chip lt-nhl">NHL <span class="league-chip-status">In Lic.</span></span>
+          <span class="league-chip lt-wnba">WNBA <span class="league-chip-status">In Lic.</span></span>
+          <span class="league-chip lt-college">COLLEGE <span class="league-chip-status">95%</span></span>
+        </div>
+      </div>
+
+      <div class="capsule-card" onclick="showLicLeagues('q2-2027-charm')">
+        <div class="capsule-card-head">
+          <div>
+            <div class="capsule-card-name">Q2 2027 CHARM</div>
+            <div style="font-size:12px;color:#6B7280">198 styles · 5 leagues · target rollout Jul 1</div>
+          </div>
+          <span class="capsule-card-status cs-active">Active</span>
+        </div>
+        <div class="capsule-card-stats">
+          <div class="cap-stat"><div class="v">62%</div><div class="l">SR approved</div></div>
+          <div class="cap-stat"><div class="v">0</div><div class="l">In licensing</div></div>
+          <div class="cap-stat" style="color:#DC2626"><div class="v">5</div><div class="l">Pending</div></div>
+        </div>
+        <div class="capsule-card-leagues">
+          <span class="league-chip lt-nfl">NFL <span class="league-chip-status">68%</span></span>
+          <span class="league-chip lt-mlb">MLB <span class="league-chip-status">55%</span></span>
+          <span class="league-chip lt-nba">NBA <span class="league-chip-status">71%</span></span>
+          <span class="league-chip lt-wnba">WNBA <span class="league-chip-status">82%</span></span>
+          <span class="league-chip lt-college">COLLEGE <span class="league-chip-status">42%</span></span>
+        </div>
+      </div>
+
+      <div class="capsule-card" style="opacity:0.6">
+        <div class="capsule-card-head">
+          <div>
+            <div class="capsule-card-name">Q3 2027</div>
+            <div style="font-size:12px;color:#6B7280">Planning phase · teams not yet assigned</div>
+          </div>
+          <span class="capsule-card-status cs-planning">Planning</span>
+        </div>
+        <div class="capsule-card-stats">
+          <div class="cap-stat"><div class="v">0%</div><div class="l">SR approved</div></div>
+          <div class="cap-stat"><div class="v">0</div><div class="l">In licensing</div></div>
+          <div class="cap-stat"><div class="v">—</div><div class="l">Pending</div></div>
+        </div>
+        <div class="capsule-card-leagues" style="opacity:0.5">
+          <span class="league-chip lt-nfl dim">NFL</span>
+          <span class="league-chip lt-mlb dim">MLB</span>
+          <span class="league-chip lt-nba dim">NBA</span>
+          <span class="league-chip lt-nhl dim">NHL</span>
+          <span class="league-chip lt-wnba dim">WNBA</span>
+          <span class="league-chip lt-college dim">COLLEGE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LICENSING: LEAGUES (within capsule) -->
+  <div class="screen" id="screen-lic-leagues">
+    <div class="breadcrumb">
+      <a onclick="showLicCapsules()">Capsules</a>
+      <span class="sep">›</span>
+      <span class="current" id="lic-leagues-cap-name">Q2 2027 FTF</span>
+    </div>
+
+    <div class="page-head">
+      <div class="page-title">Q2 2027 FTF · leagues breakdown</div>
+      <div class="page-sub">279 styles across 6 leagues · click a league to drill into its package or sub-report</div>
+    </div>
+
+    <div class="leagues-grid">
+      <div class="lg-card" onclick="showLicDetail('NBA')">
+        <div class="lg-card-head">
+          <span class="league-tag lt-nba">NBA</span>
+          <span class="badge b-licensing">In Licensing</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">Submission Sheet</div>
+          <div class="lg-progress-circle green">100%</div>
+          <div class="lg-card-stats">
+            <div><strong>50</strong>styles</div>
+            <div><strong>13</strong>teams</div>
+            <div><strong>3d</strong>to portal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-card" onclick="showLicDetail('WNBA')">
+        <div class="lg-card-head">
+          <span class="league-tag lt-wnba">WNBA</span>
+          <span class="badge b-licensing">In Licensing</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">League Response (28d)</div>
+          <div class="lg-progress-circle green">100%</div>
+          <div class="lg-card-stats">
+            <div><strong>12</strong>styles</div>
+            <div><strong>12</strong>teams</div>
+            <div><strong>23d</strong>in review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-card" style="opacity:0.7">
+        <div class="lg-card-head">
+          <span class="league-tag lt-nfl">NFL</span>
+          <span class="badge b-progress">Awaiting</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">SR approval pending</div>
+          <div class="lg-progress-circle amber">94%</div>
+          <div class="lg-card-stats">
+            <div><strong>90</strong>styles</div>
+            <div><strong>32</strong>teams</div>
+            <div><strong>6</strong>missing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-card" style="opacity:0.7">
+        <div class="lg-card-head">
+          <span class="league-tag lt-mlb">MLB</span>
+          <span class="badge b-progress">Awaiting</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">SR approval pending</div>
+          <div class="lg-progress-circle amber">78%</div>
+          <div class="lg-card-stats">
+            <div><strong>75</strong>styles</div>
+            <div><strong>30</strong>teams</div>
+            <div><strong>17</strong>missing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-card" style="opacity:0.7">
+        <div class="lg-card-head">
+          <span class="league-tag lt-college">COLLEGE</span>
+          <span class="badge b-progress">Awaiting</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">SR approval pending</div>
+          <div class="lg-progress-circle amber">73%</div>
+          <div class="lg-card-stats">
+            <div><strong>30</strong>styles</div>
+            <div><strong>12</strong>teams</div>
+            <div><strong>8</strong>missing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-card" style="opacity:0.7">
+        <div class="lg-card-head">
+          <span class="league-tag lt-nhl">NHL</span>
+          <span class="badge b-progress">Awaiting</span>
+        </div>
+        <div class="lg-card-body">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.4px;font-weight:600">SR approval pending</div>
+          <div class="lg-progress-circle red">65%</div>
+          <div class="lg-card-stats">
+            <div><strong>22</strong>styles</div>
+            <div><strong>16</strong>teams</div>
+            <div><strong>8</strong>missing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:12px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:13px;color:#1E40AF">
+      <strong>💡 Status note.</strong> Only NBA and WNBA have triggered the licensing batch. The other 4 leagues are waiting for design + SR completion. Strict completion rule means submissions are by full league only — no partial.
+    </div>
+  </div>
+
+  <!-- LICENSING: SUB-REPORT -->
+  <div class="screen" id="screen-lic-detail">
+    <div class="breadcrumb">
+      <a onclick="showLicCapsules()">Capsules</a>
+      <span class="sep">›</span>
+      <a onclick="showLicLeagues('q2-2027-ftf')">Q2 2027 FTF</a>
+      <span class="sep">›</span>
+      <span class="current" id="lic-detail-name">NBA package</span>
+    </div>
+
+    <div class="page-head">
+      <div class="page-title" id="lic-detail-title">NBA · Q2 2027 FTF · sub-report</div>
+      <div class="page-sub">50 styles · 13 teams · 3 days remaining for portal upload</div>
+    </div>
+
+    <div class="subreport-head">
+      <div class="subreport-head-top">
+        <div>
+          <div style="font-size:12px;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:6px">Package SLA</div>
+          <h3 style="font-size:18px;font-weight:700">NBA · Q2 2027 FTF · Submission Sheet</h3>
+          <div style="font-size:13px;color:#6B7280;margin-top:4px">Created Apr 22 · target portal Apr 25 · target league response May 25</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-ghost btn-sm">Download package PDF</button>
+          <button class="btn">Submit to NBA portal</button>
+        </div>
+      </div>
+      <div class="sla-progress">
+        <div class="sla-step done"><div class="num">✓</div><div class="lbl">SR Approved</div></div>
+        <div class="sla-step current"><div class="num">2</div><div class="lbl">Submission Sheet · 3d</div></div>
+        <div class="sla-step"><div class="num">3</div><div class="lbl">Portal Upload · +3d</div></div>
+        <div class="sla-step"><div class="num">4</div><div class="lbl">League Response · +30d</div></div>
+        <div class="sla-step"><div class="num">5</div><div class="lbl">Approved Lic.</div></div>
+      </div>
+    </div>
+
+    <div class="subreport-table">
+      <div class="subreport-row head">
+        <span>Style</span>
+        <span>Team</span>
+        <span>Original Designer</span>
+        <span>SR Approved</span>
+        <span>Cycle reworks</span>
+        <span>Status</span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_DET_VANITY_01</span>
+        <span>Detroit Pistons</span>
+        <span>Diana Adame</span>
+        <span style="color:#6B7280">Apr 18</span>
+        <span><span class="rework-pill rwp-peer">PEER 1</span></span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_DET_VANITY_02</span>
+        <span>Detroit Pistons</span>
+        <span>Diana Adame</span>
+        <span style="color:#6B7280">Apr 18</span>
+        <span style="color:#6B7280">—</span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_LAL_VANITY_01</span>
+        <span>LA Lakers</span>
+        <span>Andrea Cardenas</span>
+        <span style="color:#6B7280">Apr 19</span>
+        <span><span class="rework-pill rwp-peer">PEER 2</span></span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_LAL_VANITY_02</span>
+        <span>LA Lakers</span>
+        <span>Andrea Cardenas</span>
+        <span style="color:#6B7280">Apr 20</span>
+        <span><span class="rework-pill rwp-sr">SR 1</span></span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_GSW_VANITY_01</span>
+        <span>Golden State Warriors</span>
+        <span>Amanda Mireles</span>
+        <span style="color:#6B7280">Apr 21</span>
+        <span style="color:#6B7280">—</span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_BOS_VANITY_01</span>
+        <span>Boston Celtics</span>
+        <span>Omar Ruiz</span>
+        <span style="color:#6B7280">Apr 19</span>
+        <span><span class="rework-pill rwp-peer">PEER 1</span></span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_MIA_VANITY_01</span>
+        <span>Miami Heat</span>
+        <span>Amanda Mireles</span>
+        <span style="color:#6B7280">Apr 20</span>
+        <span style="color:#6B7280">—</span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row">
+        <span class="style-code">NBA_CHI_VANITY_01</span>
+        <span>Chicago Bulls</span>
+        <span>Amanda Mireles</span>
+        <span style="color:#6B7280">Apr 21</span>
+        <span><span class="rework-pill rwp-peer">PEER 1</span><span class="rework-pill rwp-sr">SR 1</span></span>
+        <span><span class="badge b-licensing">In package</span></span>
+      </div>
+      <div class="subreport-row" style="background:#F9FAFB;font-size:12px;color:#6B7280;text-align:center;padding:10px">
+        ... 42 more styles · scroll or filter to see all
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<!-- Microsoft Authentication Library (MSAL) — jsdelivr CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.4/lib/msal-browser.min.js"></script>
+<script>
+// =====================================================================
+// PAD · MMXO — Microsoft Graph + MSAL.js version
+// =====================================================================
+// Runs as a standalone HTML page (hosted on Netlify, Azure Static Web
+// Apps, or anywhere else). On first load, sends the user through a
+// Microsoft sign-in, caches the token, and uses Microsoft Graph to
+// read/write the SharePoint lists.
+//
+// CONFIGURE: see CONFIG block below.
+// =====================================================================
+
+// ----- DEMO MODE flag (?demo=1 skips Microsoft sign-in entirely) -----
+const DEMO_MODE = new URLSearchParams(window.location.search).get('demo') === '1';
+
+// ----- CONFIG (registered AAD app for maximaapparel.com tenant) -----
+const CONFIG = {
+  clientId:   'c4388355-3a0e-4e9f-9101-9d0d4ef8136e',
+  tenantId:   '1d0bb9e7-dde6-48b3-9acc-28f8d2c2e267',
+  // SharePoint site that hosts the three lists:
+  siteHost:   'maximaapparel.sharepoint.com',
+  sitePath:   '/sites/OMARTEST',
+  lists: {
+    capsules:   'PAD Capsules',
+    rework:     'Rework History',
+    handoff:    'Handoff Tracker',
+  },
+  scopes: ['Sites.ReadWrite.All', 'User.Read'],
+};
+
+// =====================================================================
+// MOCK DATA (only used when ?demo=1 — bypasses Microsoft entirely)
+// =====================================================================
+const MOCK = {
+  capsules: [
+    // ===== Capsule 1: Q2 2027 WMNS Summer League · NBA + NFL =====
+    { Id:1, Style_x0020_Num:'HVGU68851', Title:'Lakers · WMNS Tee · Court Classic', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Lakers', Status:'Pending', Peer_x0020_Status:'Rejected', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-1', Due_x0020_Date:'2027-04-18', Peer_x0020_Rework_x0020_Count:2, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:2, Style_x0020_Num:'HVGU68852', Title:'Lakers · WMNS Hoodie · Showtime', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Lakers', Status:'Peer Review', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-2', Due_x0020_Date:'2027-04-20', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:3, Style_x0020_Num:'HVGU68853', Title:'Lakers · WMNS Cap · Side Logo', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Lakers', Status:'SR Review', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-3', Due_x0020_Date:'2027-04-22', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:4, Style_x0020_Num:'HVGU68854', Title:'Lakers · WMNS Pullover · Throwback', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Lakers', Status:'Approved', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Approved', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-4', Due_x0020_Date:'2027-04-15', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:5, Style_x0020_Num:'HVGW68855', Title:'Warriors · WMNS Tee · Bay Area', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Warriors', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'', Due_x0020_Date:'2027-04-25', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:6, Style_x0020_Num:'HVGW68856', Title:'Warriors · WMNS Crop · Dub Nation', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Warriors', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-6', Due_x0020_Date:'2027-04-26', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:7, Style_x0020_Num:'HVGW68857', Title:'Warriors · WMNS Long Sleeve · Splash', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Team:'Warriors', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Rejected', Figma_x0020_Board_x0020_URL:'', Due_x0020_Date:'2027-04-28', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:1 },
+    { Id:8, Style_x0020_Num:'HEOC68870', Title:'Cowboys · WMNS Tee · Star Power', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Team:'Cowboys', Status:'SR Review', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-8', Due_x0020_Date:'2027-04-19', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:9, Style_x0020_Num:'HEOC68871', Title:'Cowboys · WMNS Jacket · Sideline', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Team:'Cowboys', Status:'Licensing', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-9', Due_x0020_Date:'2027-04-21', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:10, Style_x0020_Num:'HEOC68872', Title:'Cowboys · WMNS Cap · America\'s Team', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Team:'Cowboys', Status:'Approved', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Approved', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-10', Due_x0020_Date:'2027-04-14', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:11, Style_x0020_Num:'HEOE68873', Title:'Eagles · WMNS Tee · Fly High', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Team:'Eagles', Status:'Peer Review', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-11', Due_x0020_Date:'2027-04-23', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:12, Style_x0020_Num:'HEOE68874', Title:'Eagles · WMNS Hoodie · Brotherly Love', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Team:'Eagles', Status:'Pending', Peer_x0020_Status:'Rejected', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-12', Due_x0020_Date:'2027-04-24', Peer_x0020_Rework_x0020_Count:1, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    // ===== Capsule 2: Q3 2027 MENS Premier =====
+    { Id:13, Style_x0020_Num:'HMBY78901', Title:'Yankees · MENS Tee · Bronx Bombers', Capsule:'Q3 2027 MENS Premier', Brand:'MLB', Team:'Yankees', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'', Due_x0020_Date:'2027-06-10', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:14, Style_x0020_Num:'HMBY78902', Title:'Yankees · MENS Polo · Pinstripe', Capsule:'Q3 2027 MENS Premier', Brand:'MLB', Team:'Yankees', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-14', Due_x0020_Date:'2027-06-11', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:15, Style_x0020_Num:'HMBY78903', Title:'Yankees · MENS Jacket · Subway Series', Capsule:'Q3 2027 MENS Premier', Brand:'MLB', Team:'Yankees', Status:'Peer Review', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-15', Due_x0020_Date:'2027-06-13', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:16, Style_x0020_Num:'HMBY78904', Title:'Yankees · MENS Crew · 27 Rings', Capsule:'Q3 2027 MENS Premier', Brand:'MLB', Team:'Yankees', Status:'SR Review', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Rejected', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-16', Due_x0020_Date:'2027-06-14', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:1, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:17, Style_x0020_Num:'HMLLA78910', Title:'LAFC · MENS Tee · Black & Gold', Capsule:'Q3 2027 MENS Premier', Brand:'MLS', Team:'LAFC', Status:'Approved', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Approved', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-17', Due_x0020_Date:'2027-06-08', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:18, Style_x0020_Num:'HMLLA78911', Title:'LAFC · MENS Scarf · 3252', Capsule:'Q3 2027 MENS Premier', Brand:'MLS', Team:'LAFC', Status:'Licensing', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-18', Due_x0020_Date:'2027-06-12', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:19, Style_x0020_Num:'HLMC78920', Title:'Chivas · MENS Tee · Rebaño', Capsule:'Q3 2027 MENS Premier', Brand:'Liga MX', Team:'Chivas', Status:'SR Review', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-19', Due_x0020_Date:'2027-06-15', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:20, Style_x0020_Num:'HLMC78921', Title:'Chivas · MENS Hoodie · Guadalajara', Capsule:'Q3 2027 MENS Premier', Brand:'Liga MX', Team:'Chivas', Status:'Pending', Peer_x0020_Status:'Rejected', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-20', Due_x0020_Date:'2027-06-16', Peer_x0020_Rework_x0020_Count:1, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    // ===== Capsule 3: Q4 2027 KIDS Holiday =====
+    { Id:21, Style_x0020_Num:'HNBKID68930', Title:'Bruins · KIDS Tee · Spoked B', Capsule:'Q4 2027 KIDS Holiday', Brand:'NHL', Team:'Bruins', Status:'Pending', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-21', Due_x0020_Date:'2027-09-20', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:22, Style_x0020_Num:'HNBKID68931', Title:'Bruins · KIDS Hoodie · Big Bad', Capsule:'Q4 2027 KIDS Holiday', Brand:'NHL', Team:'Bruins', Status:'Approved', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Approved', Licensing_x0020_Review:'Approved', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-22', Due_x0020_Date:'2027-09-18', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:23, Style_x0020_Num:'HUSWNT68940', Title:'USWNT · KIDS Tee · 4 Stars', Capsule:'Q4 2027 KIDS Holiday', Brand:'U.S. Soccer', Team:'USWNT', Status:'Peer Review', Peer_x0020_Status:'Pending', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-23', Due_x0020_Date:'2027-09-22', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+    { Id:24, Style_x0020_Num:'HUSWNT68941', Title:'USWNT · KIDS Crew · Champions', Capsule:'Q4 2027 KIDS Holiday', Brand:'U.S. Soccer', Team:'USWNT', Status:'SR Review', Peer_x0020_Status:'Approved', SR_x0020_Review_x0020_Status:'Pending', Licensing_x0020_Review:'Pending', Figma_x0020_Board_x0020_URL:'https://figma.com/board/demo-24', Due_x0020_Date:'2027-09-24', Peer_x0020_Rework_x0020_Count:0, SR_x0020_Rework_x0020_Count:0, Licensing_x0020_Comment_x0020_Co:0 },
+  ],
+  reworkHistory: [
+    { Id:101, Title:'HVGU68851', Style_x0020_Num:'HVGU68851', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Designer:'Ana Rivera', Reviewer:'Sam Chen', Rejection_x0020_Type:'Peer', Comment:'Logo proportions off — needs to be 12% smaller and shifted left.', Created:'2026-04-08T14:22:00Z' },
+    { Id:102, Title:'HVGU68851', Style_x0020_Num:'HVGU68851', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Designer:'Ana Rivera', Reviewer:'Sam Chen', Rejection_x0020_Type:'Peer', Comment:'Color palette doesn\'t match capsule guide — yellow #FCD34D not #FBBF24.', Created:'2026-04-12T10:08:00Z' },
+    { Id:103, Title:'HVGW68857', Style_x0020_Num:'HVGW68857', Capsule:'Q2 2027 WMNS Summer League', Brand:'NBA', Designer:'Jordan Park', Reviewer:'Licensing Dept', Rejection_x0020_Type:'Licensing', Comment:'NBA usage rights for the secondary mark expired Q1. Use updated mark.', Created:'2026-04-15T16:45:00Z' },
+    { Id:104, Title:'HEOE68874', Style_x0020_Num:'HEOE68874', Capsule:'Q2 2027 WMNS Summer League', Brand:'NFL', Designer:'Priya Shah', Reviewer:'Mike Torres', Rejection_x0020_Type:'Peer', Comment:'Sleeve treatment inconsistent with brand pillar — see Eagles ref board.', Created:'2026-04-18T09:30:00Z' },
+    { Id:105, Title:'HMBY78904', Style_x0020_Num:'HMBY78904', Capsule:'Q3 2027 MENS Premier', Brand:'MLB', Designer:'Devon Walker', Reviewer:'Lauren Kim', Rejection_x0020_Type:'SR', Comment:'Type hierarchy needs work — secondary line dominates the lockup.', Created:'2026-05-02T11:15:00Z' },
+    { Id:106, Title:'HLMC78921', Style_x0020_Num:'HLMC78921', Capsule:'Q3 2027 MENS Premier', Brand:'Liga MX', Designer:'Carlos Mendoza', Reviewer:'Sam Chen', Rejection_x0020_Type:'Peer', Comment:'Chivas crest aspect ratio is off — see brand guide page 14.', Created:'2026-05-05T13:00:00Z' },
+  ],
+};
+
+// In demo mode, every PATCH updates the in-memory MOCK so the UI feels real.
+function mockPatch(listDisplayName, itemId, fields) {
+  const list = listDisplayName === CONFIG.lists.capsules ? MOCK.capsules
+             : listDisplayName === CONFIG.lists.rework   ? MOCK.reworkHistory
+             : null;
+  if (!list) return;
+  const row = list.find(r => r.Id === itemId);
+  if (row) Object.assign(row, fields);
+}
+
+// ----- MSAL.js: auth -----
+const MSAL_CONFIG = {
+  auth: {
+    clientId: CONFIG.clientId,
+    authority: `https://login.microsoftonline.com/${CONFIG.tenantId}`,
+    redirectUri: window.location.origin + window.location.pathname,
+  },
+  cache: {
+    cacheLocation: 'sessionStorage',
+    storeAuthStateInCookie: false,
+  },
+};
+
+let msalInstance, accessToken, siteId;
+const listIdCache = {};
+
+async function initAuth() {
+  if (DEMO_MODE) {
+    accessToken = 'demo-token';
+    return;
+  }
+  msalInstance = new msal.PublicClientApplication(MSAL_CONFIG);
+  await msalInstance.initialize();
+
+  // Was this load triggered by a redirect from Microsoft login?
+  const response = await msalInstance.handleRedirectPromise();
+  if (response && response.accessToken) {
+    accessToken = response.accessToken;
+    msalInstance.setActiveAccount(response.account);
+    return;
+  }
+
+  // Already signed in this session?
+  const accounts = msalInstance.getAllAccounts();
+  if (accounts.length > 0) {
+    msalInstance.setActiveAccount(accounts[0]);
+    try {
+      const result = await msalInstance.acquireTokenSilent({
+        scopes: CONFIG.scopes,
+        account: accounts[0],
+      });
+      accessToken = result.accessToken;
+      return;
+    } catch (e) {
+      // fall through to login
+    }
+  }
+
+  // First time → trigger sign-in via redirect.
+  await msalInstance.loginRedirect({ scopes: CONFIG.scopes });
+}
+
+// ----- Graph calls -----
+async function graph(path, opts = {}) {
+  const url = path.startsWith('http') ? path : `https://graph.microsoft.com/v1.0${path}`;
+  const resp = await fetch(url, {
+    ...opts,
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      ...(opts.headers || {}),
+    },
+  });
+  if (!resp.ok) {
+    const body = await resp.text().catch(() => '');
+    throw new Error(`Graph ${resp.status}: ${body.slice(0, 300)}`);
+  }
+  if (resp.status === 204) return null;
+  return resp.json();
+}
+
+async function resolveSite() {
+  if (siteId) return siteId;
+  const j = await graph(`/sites/${CONFIG.siteHost}:${CONFIG.sitePath}`);
+  siteId = j.id;
+  return siteId;
+}
+
+async function getListId(displayName) {
+  if (listIdCache[displayName]) return listIdCache[displayName];
+  await resolveSite();
+  const j = await graph(`/sites/${siteId}/lists?$filter=${encodeURIComponent(`displayName eq '${displayName}'`)}`);
+  if (!j.value || j.value.length === 0) throw new Error(`List "${displayName}" not found on site ${CONFIG.sitePath}`);
+  listIdCache[displayName] = j.value[0].id;
+  return listIdCache[displayName];
+}
+
+function flattenItem(item) {
+  // Graph returns { id, fields: {...} }. Flatten so downstream code sees a
+  // single-level record with Id (number) and field names at the top level.
+  return Object.assign({ Id: parseInt(item.id, 10) }, item.fields || {});
+}
+
+async function fetchAllItems(listDisplayName) {
+  if (DEMO_MODE) {
+    if (listDisplayName === CONFIG.lists.capsules) return JSON.parse(JSON.stringify(MOCK.capsules));
+    if (listDisplayName === CONFIG.lists.rework)   return JSON.parse(JSON.stringify(MOCK.reworkHistory));
+    if (listDisplayName === CONFIG.lists.handoff)  return [];
+    return [];
+  }
+  await resolveSite();
+  const listId = await getListId(listDisplayName);
+  const out = [];
+  let url = `/sites/${siteId}/lists/${listId}/items?$expand=fields&$top=999`;
+  while (url) {
+    const j = await graph(url);
+    for (const it of j.value) out.push(flattenItem(it));
+    url = j['@odata.nextLink'] || null;
+  }
+  return out;
+}
+
+async function fetchCapsules() { return fetchAllItems(CONFIG.lists.capsules); }
+async function fetchReworkHistory() { return fetchAllItems(CONFIG.lists.rework); }
+
+async function patchItem(listDisplayName, itemId, fields) {
+  if (DEMO_MODE) { mockPatch(listDisplayName, itemId, fields); return; }
+  await resolveSite();
+  const listId = await getListId(listDisplayName);
+  await graph(`/sites/${siteId}/lists/${listId}/items/${itemId}/fields`, {
+    method: 'PATCH',
+    body: JSON.stringify(fields),
+  });
+}
+
+async function fetchCurrentUser() {
+  if (DEMO_MODE) return { id: 'demo-user', displayName: 'Demo User', mail: 'demo@maximaapparel.com' };
+  const u = await graph('/me');
+  return { id: u.id, displayName: u.displayName, mail: u.mail || u.userPrincipalName };
+}
+
+// =====================================================================
+// Mapping: SharePoint rows → mockup display
+// =====================================================================
+const STAGE_BADGE = {
+  "Sketch Needed": "b-needed", "In Progress": "b-progress",
+  "Ready for Peer": "b-peer", "In Peer Review": "b-peer",
+  "Ready for SR": "b-sr", "In SR Review": "b-sr",
+  "SR Approved": "b-approved", "In Licensing": "b-licensing",
+  "Approved Licensing": "b-complete",
+};
+const STAGE_DOT = {
+  "Sketch Needed": "dot-needed", "In Progress": "dot-progress",
+  "Ready for Peer": "dot-peer", "In Peer Review": "dot-peer",
+  "Ready for SR": "dot-sr", "In SR Review": "dot-sr",
+  "SR Approved": "dot-approved", "In Licensing": "dot-licensing",
+};
+const REWORK_PILL_CLASS = { "Peer": "rwp-peer", "SR": "rwp-sr", "Licensing": "rwp-lic" };
+const BRAND_TO_CLASS = {
+  'NHL':'lt-nhl','NFL':'lt-nfl','NBA':'lt-nba','MLB':'lt-mlb','WNBA':'lt-wnba',
+  'Liga MX':'lt-college','U.S. Soccer':'lt-mlb',
+};
+const BRAND_TO_COLOR = {
+  'NHL':'#1E293B','NFL':'#1E40AF','NBA':'#EA580C','MLB':'#DC2626','WNBA':'#DB2777',
+  'Liga MX':'#059669','U.S. Soccer':'#BF0A30',
+};
+const ROLE_TABS = {
+  designer:  [{id:"inbox", label:"Your Inbox", icon:"📥"}, {id:"detail", label:"Item detail", icon:"📋"}],
+  sr:        [{id:"queue", label:"My Approval Queue", icon:"✓"}, {id:"leagues", label:"League Completion Dashboard", icon:"📊"}, {id:"kanban", label:"Reassignment Kanban", icon:"🔁"}],
+  licensing: [{id:"lic-capsules", label:"Capsules overview", icon:"📦"}, {id:"lic-leagues", label:"Leagues", icon:"🏆"}],
+};
+
+const state = {
+  role: 'designer', screen: 'inbox',
+  rows: [], reworkHistory: [], capsules: [],
+  selectedCapsule: null, selectedRow: null, licCapsule: null,
+  currentUser: null,
+};
+
+function getStatus(r){return r.Status||null;}
+function getPeerStatus(r){return r.Peer_x0020_Status||null;}
+function getSRStatus(r){return r.SR_x0020_Review_x0020_Status||null;}
+function getLicStatus(r){return r.Licensing_x0020_Review||null;}
+
+function rowToStage(row) {
+  const status = getStatus(row);
+  const peer = getPeerStatus(row);
+  const sr = getSRStatus(row);
+  const lic = getLicStatus(row);
+  if (status === 'Approved') return 'Approved Licensing';
+  if (status === 'Licensing') return lic === 'Approved' ? 'Approved Licensing' : 'In Licensing';
+  if (status === 'SR Review') return sr === 'Approved' ? 'SR Approved' : 'In SR Review';
+  if (status === 'Peer Review') return peer === 'Approved' ? 'Ready for SR' : 'In Peer Review';
+  if (status === 'Pending') {
+    if (peer === 'Rejected' || sr === 'Rejected' || lic === 'Rejected') return 'Sketch Needed';
+    if (row.Figma_x0020_Board_x0020_URL) return 'In Progress';
+    return 'Sketch Needed';
+  }
+  return 'In Progress';
+}
+
+function rowToRework(row) {
+  if (getLicStatus(row) === 'Rejected') return { type: 'Licensing', count: row.Licensing_x0020_Comment_x0020_Co || 1 };
+  if (getSRStatus(row) === 'Rejected')  return { type: 'SR', count: row.SR_x0020_Rework_x0020_Count || 1 };
+  if (getPeerStatus(row) === 'Rejected')return { type: 'Peer', count: row.Peer_x0020_Rework_x0020_Count || 1 };
+  return null;
+}
+
+function formatDue(iso){if(!iso)return'—';try{return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric'});}catch(e){return'—';}}
+function shortName(n){if(!n)return'—';return n.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function escapeAttr(s){return escapeHtml(s);}
+
+function groupByTeam(rows) {
+  const byKey = new Map();
+  for (const r of rows) {
+    const team = r.Team || 'Unassigned';
+    const brand = r.Brand || 'OTHER';
+    const key = `${brand}|${team}`;
+    if (!byKey.has(key)) {
+      byKey.set(key, {
+        name: team, league: brand,
+        leagueClass: BRAND_TO_CLASS[brand] || 'lt-college',
+        color: BRAND_TO_COLOR[brand] || '#6B7280',
+        styles: [],
+      });
+    }
+    const stage = rowToStage(r);
+    const rework = rowToRework(r);
+    byKey.get(key).styles.push({
+      id: r.Id, code: r.Style_x0020_Num, title: r.Title, stage,
+      reworkType: rework ? rework.type : null,
+      reworkCount: rework ? rework.count : 0,
+      due: formatDue(r.Due_x0020_Date), raw: r,
+    });
+  }
+  const teams = Array.from(byKey.values()).map(t => {
+    let needed=0,review=0,rework=0,approved=0;
+    for (const s of t.styles) {
+      if (s.reworkType) rework++;
+      else if (s.stage === 'Sketch Needed' || s.stage === 'In Progress') needed++;
+      else if (s.stage === 'Approved Licensing') approved++;
+      else review++;
+    }
+    t.statusCounts = {needed, review, rework, approved};
+    t.progress = t.styles.length === 0 ? 0 : Math.round((approved / t.styles.length) * 100);
+    return t;
+  });
+  teams.sort((a,b)=>{if(a.league!==b.league)return a.league.localeCompare(b.league);return a.name.localeCompare(b.name);});
+  return teams;
+}
+
+// =====================================================================
+// Render functions (UI is identical to v1; only data source moved)
+// =====================================================================
+function renderTeamGroups() {
+  const filtered = state.rows.filter(r => r.Capsule === state.selectedCapsule);
+  const teams = groupByTeam(filtered);
+  const container = document.getElementById('teamGroupsContainer');
+  if (!container) return;
+  if (teams.length === 0) {
+    container.innerHTML = `<div style="padding:32px;text-align:center;color:#6B7280;background:white;border-radius:12px;border:1px solid #E5E7EB">No teams found for this capsule.</div>`;
+    return;
+  }
+  container.innerHTML = teams.map((team, idx) => {
+    const sc = team.statusCounts;
+    const statusPills = `
+      <span class="team-status-pill tsp-needed ${sc.needed===0?'zero':''}">📝 ${sc.needed} to do</span>
+      <span class="team-status-pill tsp-review ${sc.review===0?'zero':''}">🔍 ${sc.review} in review</span>
+      <span class="team-status-pill tsp-rework ${sc.rework===0?'zero':''}">↺ ${sc.rework} rework</span>
+      <span class="team-status-pill tsp-approved ${sc.approved===0?'zero':''}">✓ ${sc.approved} approved</span>`;
+    return `
+    <div class="team-group" id="team-${idx}">
+      <div class="team-head" onclick="toggleTeam(${idx})">
+        <div class="team-meta">
+          <div class="team-logo" style="background:${team.color}">${shortName(team.name)}</div>
+          <div class="team-info">
+            <h3>${escapeHtml(team.name)} <span class="league-tag ${team.leagueClass}" style="font-size:9px;padding:1px 6px">${escapeHtml(team.league)}</span></h3>
+            <span>${team.styles.length} styles</span>
+          </div>
+        </div>
+        <div class="team-status-row">${statusPills}</div>
+        <div class="team-progress">
+          <div class="progress-bar"><div class="progress-fill" style="width:${team.progress}%"></div></div>
+          <span><strong>${team.progress}%</strong></span>
+        </div>
+        <button class="team-expand-toggle" id="toggle-${idx}">▼</button>
+      </div>
+      <div class="styles-list" id="styles-${idx}">
+        ${team.styles.map(s => {
+          const reworkDisplay = s.reworkType
+            ? `<span class="rework-pill ${REWORK_PILL_CLASS[s.reworkType]}">${s.reworkType.toUpperCase()} ${s.reworkCount}</span>`
+            : '<span style="color:#9CA3AF;font-size:11px">—</span>';
+          const fromText = s.reworkType ? `↺ from ${s.reworkType}` : '—';
+          return `
+          <div class="style-row" data-id="${s.id}">
+            <div>
+              <div class="style-code">${escapeHtml(s.code||'')}</div>
+              <div class="style-due">Due ${escapeHtml(s.due)}</div>
+            </div>
+            <span class="badge ${STAGE_BADGE[s.stage]||'b-needed'}">
+              <span class="dot ${STAGE_DOT[s.stage]||'dot-needed'}"></span>${s.stage}
+            </span>
+            ${reworkDisplay}
+            <span style="color:#6B7280;font-size:11px">${fromText}</span>
+            <button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();openDetail(${s.id})">Open →</button>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleTeam(idx){const l=document.getElementById('styles-'+idx),t=document.getElementById('toggle-'+idx);if(!l)return;if(l.style.display==='none'){l.style.display='';if(t)t.textContent='▼';}else{l.style.display='none';if(t)t.textContent='▶';}}
+
+function updateCapsuleBanner() {
+  const filtered = state.rows.filter(r => r.Capsule === state.selectedCapsule);
+  let toDo=0,review=0,rework=0,approved=0;
+  const teamSet = new Set();
+  for (const r of filtered) {
+    teamSet.add(r.Team || 'Unassigned');
+    const stage = rowToStage(r); const rw = rowToRework(r);
+    if (rw) rework++;
+    else if (stage === 'Sketch Needed' || stage === 'In Progress') toDo++;
+    else if (stage === 'Approved Licensing') approved++;
+    else review++;
+  }
+  const banner = document.querySelector('#screen-inbox .capsule-banner');
+  if (banner) {
+    const n = banner.querySelector('.capsule-name'); if (n) n.textContent = state.selectedCapsule || '—';
+    const yh = banner.querySelector('.you-have'); if (yh) yh.innerHTML = `In this capsule you have <strong>${teamSet.size} teams · ${filtered.length} styles</strong>`;
+    const v = banner.querySelectorAll('.cb-stat .v');
+    if (v[0]) v[0].textContent = String(toDo);
+    if (v[1]) v[1].textContent = String(rework);
+    if (v[2]) v[2].textContent = String(review);
+    if (v[3]) v[3].textContent = String(approved);
+  }
+  const sh = document.querySelector('.teams-section-head h3');
+  if (sh) sh.textContent = `Your teams in this capsule (${teamSet.size})`;
+}
+
+function populateCapsuleSelector() {
+  const sel = document.getElementById('capsuleSelect');
+  if (!sel) return;
+  sel.innerHTML = state.capsules.map(c => `<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`).join('');
+  sel.value = state.selectedCapsule || '';
+}
+
+function openDetail(itemId){state.selectedRow = state.rows.find(r => r.Id === itemId); renderDetail(); showScreen('detail');}
+
+function renderDetail() {
+  const row = state.selectedRow;
+  if (!row) return;
+  const titleEl = document.querySelector('#screen-detail .page-title');
+  if (titleEl) titleEl.textContent = row.Title || row.Style_x0020_Num || '—';
+  const subEl = document.querySelector('#screen-detail .page-sub');
+  if (subEl) {
+    const stage = rowToStage(row);
+    subEl.innerHTML = `
+      <span class="badge ${STAGE_BADGE[stage]||'b-needed'}"><span class="dot ${STAGE_DOT[stage]||'dot-needed'}"></span>${stage}</span>
+      <span style="margin-left:8px;color:#6B7280">${escapeHtml(row.Brand||'')} · ${escapeHtml(row.Team||'')} · ${escapeHtml(row.Style_x0020_Num||'')}</span>`;
+  }
+  // Inject action buttons at the bottom of the detail screen if not already there
+  let actionRow = document.getElementById('detail-actions');
+  if (!actionRow) {
+    actionRow = document.createElement('div');
+    actionRow.id = 'detail-actions';
+    actionRow.style.cssText = 'padding: 16px 24px; display: flex; gap: 8px; border-top: 1px solid #E5E7EB; background: white;';
+    actionRow.innerHTML = `
+      <button class="btn btn-sm" style="background:#107c10;color:white" onclick="approveCurrent()">✓ Approve</button>
+      <button class="btn btn-sm" style="background:#a4262c;color:white" onclick="rejectCurrent()">✗ Reject / Send back</button>`;
+    document.getElementById('screen-detail').appendChild(actionRow);
+  }
+  const status = getStatus(row);
+  const canAct = (state.role === 'sr' && (status === 'Peer Review' || status === 'SR Review'))
+              || (state.role === 'licensing' && status === 'Licensing');
+  actionRow.style.display = canAct ? '' : 'none';
+}
+
+async function approveCurrent() {
+  const row = state.selectedRow; if (!row) return;
+  const status = getStatus(row);
+  try {
+    if (status === 'Peer Review') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { Peer_x0020_Status: 'Approved', Status: 'SR Review', SR_x0020_Review_x0020_Status: 'Submitted' });
+    } else if (status === 'SR Review') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { SR_x0020_Review_x0020_Status: 'Approved', Status: 'Licensing', Licensing_x0020_Review: 'Submitted' });
+    } else if (status === 'Licensing') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { Licensing_x0020_Review: 'Approved', Status: 'Approved' });
+    }
+    await refresh(); showScreen('inbox');
+  } catch (e) { alert('Approve failed: ' + e.message); }
+}
+
+async function rejectCurrent() {
+  const row = state.selectedRow; if (!row) return;
+  const comment = prompt('Reason for rework / rejection?');
+  if (!comment) return;
+  const status = getStatus(row);
+  try {
+    if (status === 'Peer Review') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { Peer_x0020_Status: 'Rejected', Peer_x0020_Comments: comment, Status: 'Pending', Peer_x0020_Rework_x0020_Count: (row.Peer_x0020_Rework_x0020_Count||0)+1 });
+    } else if (status === 'SR Review') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { SR_x0020_Review_x0020_Status: 'Rejected', SR_x0020_Comments: comment, Status: 'Pending', SR_x0020_Rework_x0020_Count: (row.SR_x0020_Rework_x0020_Count||0)+1 });
+    } else if (status === 'Licensing') {
+      await patchItem(CONFIG.lists.capsules, row.Id, { Licensing_x0020_Review: 'Rejected', Licensing_x0020_Comments: comment, Status: 'Pending', SR_x0020_Review_x0020_Status: null, Figma_x0020_Board_x0020_URL: null, Licensing_x0020_Comment_x0020_Co: (row.Licensing_x0020_Comment_x0020_Co||0)+1 });
+    }
+    await refresh(); showScreen('inbox');
+  } catch (e) { alert('Reject failed: ' + e.message); }
+}
+
+function renderTabs() {
+  const tabs = ROLE_TABS[state.role] || ROLE_TABS.designer;
+  const nav = document.getElementById('tabsNav'); if (!nav) return;
+  nav.innerHTML = tabs.map(t => `<div class="tab ${state.screen===t.id?'active':''}" data-screen="${t.id}"><span class="tab-icon">${t.icon}</span>${t.label}</div>`).join('');
+  nav.querySelectorAll('.tab').forEach(el => el.addEventListener('click', () => showScreen(el.dataset.screen)));
+}
+
+function showScreen(screenId) {
+  state.screen = screenId;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const t = document.getElementById('screen-' + screenId);
+  if (t) t.classList.add('active');
+  renderTabs();
+  if (screenId === 'inbox') renderTeamGroups();
+  if (screenId === 'detail') renderDetail();
+  if (screenId === 'queue') renderSRQueue();
+  if (screenId === 'leagues') renderLeagueDashboard();
+  if (screenId === 'kanban') renderKanban();
+  if (screenId === 'lic-capsules') renderLicCapsules();
+  if (screenId === 'lic-leagues') renderLicLeagues();
+}
+
+function changeRole(newRole) {
+  state.role = newRole;
+  const t = (ROLE_TABS[newRole] || ROLE_TABS.designer)[0];
+  state.screen = t.id;
+  const avatars = {
+    designer: { initials: 'YOU', bg: 'linear-gradient(135deg, #F59E0B, #EC4899)' },
+    sr:       { initials: 'SR',  bg: 'linear-gradient(135deg, #2563EB, #7C3AED)' },
+    licensing:{ initials: 'LIC', bg: 'linear-gradient(135deg, #059669, #06B6D4)' },
+  };
+  const av = document.getElementById('userAvatar');
+  if (av) { av.textContent = avatars[newRole].initials; av.style.background = avatars[newRole].bg; }
+  showScreen(state.screen);
+}
+
+function renderSRQueue() {
+  const filtered = state.rows.filter(r => r.Capsule === state.selectedCapsule);
+  const queue = filtered.filter(r => { const s = getStatus(r); return s === 'Peer Review' || s === 'SR Review'; });
+  const screen = document.getElementById('screen-queue'); if (!screen) return;
+  screen.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">SR Approval Queue · ${escapeHtml(state.selectedCapsule||'')}</div>
+      <div class="page-sub">${queue.length} styles awaiting your review</div>
+    </div>
+    <div style="display:grid;gap:8px;padding:0 24px 24px 24px">
+      ${queue.map(r => {
+        const stage = rowToStage(r);
+        return `<div onclick="openDetail(${r.Id})" style="display:grid;grid-template-columns:120px 1fr 160px;gap:12px;padding:12px;background:white;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;align-items:center">
+          <span class="league-tag ${BRAND_TO_CLASS[r.Brand]||'lt-college'}">${escapeHtml(r.Brand||'')}</span>
+          <div><div style="font-weight:600">${escapeHtml(r.Title||'')}</div><div style="font-size:12px;color:#6B7280">${escapeHtml(r.Style_x0020_Num||'')} · ${escapeHtml(r.Team||'')}</div></div>
+          <span class="badge ${STAGE_BADGE[stage]||'b-needed'}"><span class="dot ${STAGE_DOT[stage]||'dot-needed'}"></span>${stage}</span>
+        </div>`;
+      }).join('') || '<div style="text-align:center;color:#6B7280;padding:32px">Queue is empty. 🎉</div>'}
+    </div>`;
+}
+
+function renderLeagueDashboard() {
+  const filtered = state.rows.filter(r => r.Capsule === state.selectedCapsule);
+  const byBrand = new Map();
+  for (const r of filtered) { if (!byBrand.has(r.Brand)) byBrand.set(r.Brand, []); byBrand.get(r.Brand).push(r); }
+  const screen = document.getElementById('screen-leagues'); if (!screen) return;
+  const cards = Array.from(byBrand.entries()).map(([brand, rows]) => {
+    let approved=0,rework=0,review=0,todo=0;
+    for (const r of rows) {
+      const stage = rowToStage(r); const rw = rowToRework(r);
+      if (rw) rework++; else if (stage === 'Sketch Needed' || stage === 'In Progress') todo++;
+      else if (stage === 'Approved Licensing') approved++; else review++;
+    }
+    const pct = rows.length === 0 ? 0 : Math.round((approved / rows.length) * 100);
+    return `<div style="background:white;border:1px solid #E5E7EB;border-radius:12px;padding:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span class="league-tag ${BRAND_TO_CLASS[brand]||'lt-college'}" style="font-size:13px;padding:4px 10px">${escapeHtml(brand)}</span>
+        <span style="font-size:24px;font-weight:800;color:#1F2937">${rows.length}</span>
+      </div>
+      <div style="font-size:12px;color:#6B7280;margin-bottom:12px">styles in this league</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid #F3F4F6"><span>To do</span><strong>${todo}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid #F3F4F6;color:#991B1B"><span>In rework</span><strong>${rework}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid #F3F4F6"><span>In review</span><strong>${review}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid #F3F4F6;color:#065F46"><span>Approved</span><strong>${approved}</strong></div>
+      <div style="margin-top:12px"><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div style="font-size:11px;color:#6B7280;margin-top:4px">${pct}% complete</div></div>
+    </div>`;
+  }).join('');
+  screen.innerHTML = `<div class="page-head"><div class="page-title">League Completion · ${escapeHtml(state.selectedCapsule||'')}</div><div class="page-sub">${byBrand.size} leagues in this capsule</div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:0 24px 24px 24px">${cards}</div>`;
+}
+
+function renderKanban() {
+  const filtered = state.rows.filter(r => r.Capsule === state.selectedCapsule);
+  const byDesigner = new Map();
+  for (const r of filtered) {
+    const key = String(r.Designer_x0020_AssignedLookupId || '— Unassigned —');
+    if (!byDesigner.has(key)) byDesigner.set(key, []);
+    byDesigner.get(key).push(r);
+  }
+  const screen = document.getElementById('screen-kanban'); if (!screen) return;
+  const cols = Array.from(byDesigner.entries()).map(([d, rs]) => `
+    <div style="min-width:280px;background:#F3F4F6;border-radius:12px;padding:12px;flex-shrink:0">
+      <header style="font-weight:700;padding-bottom:8px;border-bottom:1px solid #E5E7EB;margin-bottom:8px">${escapeHtml(d==='— Unassigned —'?d:'Designer #'+d)} <span style="color:#6B7280;font-weight:400">(${rs.length})</span></header>
+      ${rs.map(r=>`<div style="background:white;border-radius:6px;padding:10px;margin-bottom:6px;font-size:12px;cursor:pointer" onclick="openDetail(${r.Id})">
+        <div style="font-weight:600;margin-bottom:2px">${escapeHtml(r.Style_x0020_Num||'')}</div>
+        <div style="color:#6B7280;font-size:11px;margin-bottom:6px">${escapeHtml(r.Team||'')}</div>
+        <span class="badge ${STAGE_BADGE[rowToStage(r)]||'b-needed'}" style="font-size:10px;padding:2px 6px">${rowToStage(r)}</span>
+      </div>`).join('')}
+    </div>`).join('');
+  screen.innerHTML = `<div class="page-head"><div class="page-title">Reassignment · ${escapeHtml(state.selectedCapsule||'')}</div><div class="page-sub">Tap a card to open the style</div></div>
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:0 24px 24px 24px;overflow-x:auto">${cols}</div>`;
+}
+
+function renderLicCapsules() {
+  const byCapsule = new Map();
+  for (const r of state.rows) { const c = r.Capsule || '—'; if (!byCapsule.has(c)) byCapsule.set(c, []); byCapsule.get(c).push(r); }
+  const screen = document.getElementById('screen-lic-capsules'); if (!screen) return;
+  const cards = Array.from(byCapsule.entries()).map(([c, rs]) => {
+    const inLic = rs.filter(r => getStatus(r) === 'Licensing' && getLicStatus(r) === 'Submitted').length;
+    const approved = rs.filter(r => getStatus(r) === 'Approved').length;
+    return `<div class="capsule-card ${c===state.licCapsule?'active':''}" onclick="showLicLeagues('${escapeAttr(c)}')">
+      <div class="capsule-card-head">
+        <div><div class="capsule-card-name">${escapeHtml(c)}</div></div>
+        <span class="capsule-card-status cs-active">${rs.length}</span>
+      </div>
+      <div class="capsule-card-stats">
+        <div><span style="color:#6B7280">Awaiting licensing</span><strong style="color:#5B21B6">${inLic}</strong></div>
+        <div><span style="color:#6B7280">Approved</span><strong style="color:#065F46">${approved}</strong></div>
+      </div>
+    </div>`;
+  }).join('');
+  screen.innerHTML = `<div class="page-head"><div class="page-title">Capsules overview</div><div class="page-sub">Click a capsule for its licensing queue</div></div>
+    <div class="capsule-grid" style="padding:0 24px 24px 24px">${cards}</div>`;
+}
+
+function showLicLeagues(c) { state.licCapsule = c; showScreen('lic-leagues'); }
+
+function renderLicLeagues() {
+  const cap = state.licCapsule || state.selectedCapsule;
+  const filtered = state.rows.filter(r => r.Capsule === cap && getStatus(r) === 'Licensing');
+  const screen = document.getElementById('screen-lic-leagues'); if (!screen) return;
+  screen.innerHTML = `<div class="page-head"><div class="page-title">Licensing queue · ${escapeHtml(cap||'')}</div><div class="page-sub">${filtered.length} styles awaiting your decision</div></div>
+    <div style="display:grid;gap:8px;padding:0 24px 24px 24px">
+      ${filtered.map(r=>`<div onclick="openDetail(${r.Id})" style="display:grid;grid-template-columns:120px 1fr 160px;gap:12px;padding:12px;background:white;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;align-items:center">
+        <span class="league-tag ${BRAND_TO_CLASS[r.Brand]||'lt-college'}">${escapeHtml(r.Brand||'')}</span>
+        <div><div style="font-weight:600">${escapeHtml(r.Title||'')}</div><div style="font-size:12px;color:#6B7280">${escapeHtml(r.Style_x0020_Num||'')} · ${escapeHtml(r.Team||'')}</div></div>
+        <span class="badge ${STAGE_BADGE[rowToStage(r)]||'b-needed'}">${rowToStage(r)}</span>
+      </div>`).join('') || '<div style="text-align:center;color:#6B7280;padding:32px">Nothing in licensing queue.</div>'}
+    </div>`;
+}
+
+function showLoading(msg) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const inbox = document.getElementById('screen-inbox');
+  if (inbox) { inbox.classList.add('active'); inbox.innerHTML = `<div style="padding:48px;text-align:center;color:#6B7280">${escapeHtml(msg||'Loading…')}</div>`; }
+}
+
+function showError(msg) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const inbox = document.getElementById('screen-inbox');
+  if (inbox) { inbox.classList.add('active'); inbox.innerHTML = `
+    <div style="padding:48px;max-width:600px;margin:0 auto">
+      <h2 style="color:#991B1B;margin-bottom:12px">Couldn't load data</h2>
+      <p style="color:#6B7280;margin-bottom:16px">${escapeHtml(msg)}</p>
+      <p style="color:#6B7280;font-size:13px">If this says "Insufficient privileges" or "Forbidden", the user needs to consent to the app's SharePoint permissions on first sign-in. Sign out and back in to retry.</p>
+    </div>`; }
+}
+
+async function refresh() {
+  state.rows = await fetchCapsules();
+  showScreen(state.screen);
+  updateCapsuleBanner();
+}
+
+function injectDemoBanner() {
+  if (!DEMO_MODE) return;
+  if (document.getElementById('demoBanner')) return;
+  const b = document.createElement('div');
+  b.id = 'demoBanner';
+  b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#f5a623,#dc6464);color:#0f172a;font-family:Inter,system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-align:center;padding:8px 12px;box-shadow:0 2px 6px rgba(0,0,0,.25);';
+  b.innerHTML = 'DEMO MODE · MOCK DATA · NO MICROSOFT SIGN-IN · Edits are visible to you only and reset on refresh';
+  document.body.appendChild(b);
+  document.body.style.paddingTop = '36px';
+}
+
+async function init() {
+  try {
+    injectDemoBanner();
+    showLoading(DEMO_MODE ? 'Loading demo data…' : 'Signing you in to Microsoft 365…');
+    await initAuth();
+    if (!accessToken) return; // login redirect in flight
+    showLoading('Loading capsule data from SharePoint…');
+    const [rows, user] = await Promise.all([fetchCapsules(), fetchCurrentUser().catch(()=>null)]);
+    state.rows = rows;
+    state.currentUser = user;
+    state.capsules = Array.from(new Set(rows.map(r => r.Capsule).filter(Boolean))).sort();
+    state.selectedCapsule = state.capsules[0] || null;
+    state.licCapsule = state.selectedCapsule;
+
+    const roleEl = document.getElementById('roleSelect');
+    if (roleEl) roleEl.addEventListener('change', e => changeRole(e.target.value));
+    const capEl = document.getElementById('capsuleSelect');
+    if (capEl) capEl.addEventListener('change', e => { state.selectedCapsule = e.target.value; showScreen(state.screen); updateCapsuleBanner(); });
+
+    populateCapsuleSelector();
+    updateCapsuleBanner();
+    renderTabs();
+    showScreen('inbox');
+  } catch (e) {
+    console.error('PAD init failed:', e);
+    showError(e.message);
+  }
+}
+
+window.toggleTeam = toggleTeam;
+window.openDetail = openDetail;
+window.approveCurrent = approveCurrent;
+window.rejectCurrent = rejectCurrent;
+window.showLicLeagues = showLicLeagues;
+window.changeRole = changeRole;
+
+if (!DEMO_MODE && typeof msal === 'undefined') {
+  showError('MSAL.js script failed to load. Check your internet connection or that the CDN is reachable from your tenant network.');
+} else {
+  document.addEventListener('DOMContentLoaded', init);
+}
+</script>
+</body>
+</html>
