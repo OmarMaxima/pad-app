@@ -1,0 +1,85 @@
+{
+  "name": "PAD-04-Deadline-Alert",
+  "description": "Runs every weekday at 8:00 AM ET. Queries PAD Capsules for styles that are overdue or due within 3 days and not yet Approved. Posts a digest card to the Managers channel so the team starts the day knowing what's at risk.",
+  "trigger": {
+    "type": "Recurrence",
+    "schedule": {
+      "frequency": "Week",
+      "interval": 1,
+      "weekDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "hours": ["8"],
+      "minutes": ["0"],
+      "timeZone": "Eastern Standard Time"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Calculate alert window",
+      "action": "Initialize variable",
+      "variable": "AlertCutoff",
+      "value": "@addDays(utcNow(), 3)"
+    },
+    {
+      "step": 2,
+      "name": "Get overdue and near-due styles",
+      "action": "SharePoint - Get items",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "PAD Capsules",
+        "filterQuery": "Due_x0020_Date le '@{variables('AlertCutoff')}' and Status ne 'Approved'",
+        "orderBy": "Due_x0020_Date asc",
+        "top": 50
+      }
+    },
+    {
+      "step": 3,
+      "name": "Check if any at-risk styles exist",
+      "action": "Condition",
+      "expression": {
+        "greater": ["@length(body('Get_overdue_and_near-due_styles')?['value'])", 0]
+      },
+      "if_true": [
+        {
+          "step": "3a",
+          "name": "Build digest table rows",
+          "action": "Apply to each",
+          "foreach": "@body('Get_overdue_and_near-due_styles')?['value']",
+          "actions": [
+            {
+              "action": "Append to string variable",
+              "variable": "DigestRows",
+              "value": "• @{items()?['Style_x0020_Num']} — @{items()?['Title']} · @{items()?['Capsule']} · Due @{formatDateTime(items()?['Due_x0020_Date'],'MMM dd')} · Status: @{items()?['Status']}\n"
+            }
+          ]
+        },
+        {
+          "step": "3b",
+          "name": "Post daily digest to Managers channel",
+          "action": "Teams - Post adaptive card in a chat or channel",
+          "channel": "Pro Standard > PAD Notifications",
+          "card": {
+            "type": "AdaptiveCard",
+            "version": "1.4",
+            "body": [
+              { "type": "TextBlock", "size": "Large", "weight": "Bolder", "text": "⏰ PAD Daily Deadline Alert — @{formatDateTime(utcNow(),'MMM dd, yyyy')}" },
+              { "type": "TextBlock", "text": "@{length(body('Get_overdue_and_near-due_styles')?['value'])} style(s) overdue or due within 3 days:", "wrap": true, "color": "Attention" },
+              { "type": "TextBlock", "text": "@{variables('DigestRows')}", "wrap": true, "fontType": "Monospace", "size": "Small" }
+            ],
+            "actions": [
+              { "type": "Action.OpenUrl", "title": "Open Manager Dashboard", "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=manager" }
+            ]
+          }
+        }
+      ],
+      "if_false": [
+        {
+          "step": "3c",
+          "name": "No at-risk styles — skip notification",
+          "action": "Terminate",
+          "status": "Succeeded"
+        }
+      ]
+    }
+  ]
+}

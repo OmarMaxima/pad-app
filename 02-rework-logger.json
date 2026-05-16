@@ -1,0 +1,96 @@
+{
+  "name": "PAD-02-Rework-Logger",
+  "description": "Fires when any review field on PAD Capsules is set to Rejected. Creates a Rework History record, resets Status to Pending so the designer sees it in their inbox, and sends a Teams message with the rejection comment.",
+  "trigger": {
+    "type": "SharePoint - When an item is modified",
+    "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+    "list": "PAD Capsules"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Get full item",
+      "action": "SharePoint - Get item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "PAD Capsules",
+        "id": "@triggerBody()?['ID']"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Check if any review is Rejected",
+      "action": "Condition",
+      "expression": {
+        "or": [
+          { "equals": ["@body('Get_full_item')?['Peer_x0020_Status']", "Rejected"] },
+          { "equals": ["@body('Get_full_item')?['SR_x0020_Review_x0020_Status']", "Rejected"] },
+          { "equals": ["@body('Get_full_item')?['Licensing_x0020_Review']", "Rejected"] }
+        ]
+      },
+      "if_true": [
+        {
+          "step": "2a",
+          "name": "Determine rejection type",
+          "action": "Initialize variable",
+          "variable": "RejectionType",
+          "value": "@if(equals(body('Get_full_item')?['Licensing_x0020_Review'],'Rejected'),'Licensing',if(equals(body('Get_full_item')?['SR_x0020_Review_x0020_Status'],'Rejected'),'SR','Peer'))"
+        },
+        {
+          "step": "2b",
+          "name": "Log to Rework History",
+          "action": "SharePoint - Create item",
+          "inputs": {
+            "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+            "list": "Rework History",
+            "fields": {
+              "Title": "@body('Get_full_item')?['Style_x0020_Num']",
+              "Style_x0020_Num": "@body('Get_full_item')?['Style_x0020_Num']",
+              "Capsule": "@body('Get_full_item')?['Capsule']",
+              "Brand": "@body('Get_full_item')?['Brand']",
+              "Rejection_x0020_Type": "@variables('RejectionType')",
+              "Comment": "@body('Get_full_item')?['Licensing_x0020_Comment']",
+              "Designer": "@body('Get_full_item')?['AssignedTo']",
+              "Reviewer": "@body('Get_full_item')?['LastReviewedBy']"
+            }
+          }
+        },
+        {
+          "step": "2c",
+          "name": "Reset Status to Pending so designer sees it",
+          "action": "SharePoint - Update item",
+          "inputs": {
+            "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+            "list": "PAD Capsules",
+            "id": "@body('Get_full_item')?['ID']",
+            "fields": {
+              "Status": "Pending"
+            }
+          }
+        },
+        {
+          "step": "2d",
+          "name": "Notify designer via Teams",
+          "action": "Teams - Post adaptive card in a chat or channel",
+          "channel": "Pro Standard > PAD Notifications",
+          "card": {
+            "type": "AdaptiveCard",
+            "body": [
+              { "type": "TextBlock", "size": "Medium", "weight": "Bolder", "text": "⚠️ Rework Required — @{variables('RejectionType')} Review", "color": "Attention" },
+              { "type": "FactSet", "facts": [
+                { "title": "Style #", "value": "@{body('Get_full_item')?['Style_x0020_Num']}" },
+                { "title": "Title", "value": "@{body('Get_full_item')?['Title']}" },
+                { "title": "Capsule", "value": "@{body('Get_full_item')?['Capsule']}" },
+                { "title": "Comment", "value": "@{body('Get_full_item')?['Licensing_x0020_Comment']}" }
+              ]},
+              { "type": "ActionSet", "actions": [
+                { "type": "Action.OpenUrl", "title": "Open Rework in PAD", "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html" }
+              ]}
+            ]
+          }
+        }
+      ],
+      "if_false": []
+    }
+  ]
+}

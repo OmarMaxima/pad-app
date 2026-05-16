@@ -1,0 +1,83 @@
+{
+  "name": "PAD-03-Merch-Task-Notifier",
+  "description": "Fires when a new item is created in the Merch Tasks list (triggered by the PAD app when a Merch member submits a task via Create Merch Task modal). Sends a Teams adaptive card to the assigned Manager or Sr. Designer with a link to the SharePoint file and a direct link to their PAD dashboard.",
+  "trigger": {
+    "type": "SharePoint - When an item is created",
+    "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+    "list": "Merch Tasks"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Get new task details",
+      "action": "SharePoint - Get item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "Merch Tasks",
+        "id": "@triggerBody()?['ID']"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Determine dashboard URL based on Route",
+      "action": "Initialize variable",
+      "variable": "DashboardUrl",
+      "value": "@if(equals(body('Get_new_task_details')?['Route'],'Manager'),'https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=manager','https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=sr')"
+    },
+    {
+      "step": 3,
+      "name": "Post to Merch Teams channel",
+      "action": "Teams - Post adaptive card in a chat or channel",
+      "channel": "Pro Standard > Merch",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.4",
+        "body": [
+          {
+            "type": "Container",
+            "style": "emphasis",
+            "items": [
+              { "type": "TextBlock", "size": "Large", "weight": "Bolder", "text": "🏷️ New Merch Task Assigned" }
+            ]
+          },
+          {
+            "type": "FactSet",
+            "facts": [
+              { "title": "Team", "value": "@{body('Get_new_task_details')?['Team']}" },
+              { "title": "Route", "value": "@{body('Get_new_task_details')?['Route']}" },
+              { "title": "Assigned To", "value": "@{body('Get_new_task_details')?['Assignee']}" },
+              { "title": "Description", "value": "@{body('Get_new_task_details')?['Description']}" },
+              { "title": "File", "value": "@{body('Get_new_task_details')?['FileName']}" }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.OpenUrl",
+            "title": "Open in PAD Dashboard",
+            "url": "@{variables('DashboardUrl')}"
+          },
+          {
+            "type": "Action.OpenUrl",
+            "title": "View Capsule File in SharePoint",
+            "url": "@{body('Get_new_task_details')?['FileURL']}"
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "name": "Update task status to Notified",
+      "action": "SharePoint - Update item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "Merch Tasks",
+        "id": "@triggerBody()?['ID']",
+        "fields": {
+          "Status": "Notified",
+          "NotifiedDate": "@utcNow()"
+        }
+      }
+    }
+  ]
+}

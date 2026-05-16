@@ -1,0 +1,111 @@
+{
+  "name": "PAD-06-Style-Number-Unblock",
+  "description": "Fires when a Merch Tasks item is modified and the NewStyleNum field is populated (Licensing assigned a new style number). Finds the blocked PAD Capsules row by OldStyleNum, updates its Style_x0020_Num to the new number, clears the block flag, and notifies both the designer and the Merch team that the pipeline is unblocked.",
+  "trigger": {
+    "type": "SharePoint - When an item is modified",
+    "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+    "list": "Merch Tasks"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Get modified Merch Task",
+      "action": "SharePoint - Get item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "Merch Tasks",
+        "id": "@triggerBody()?['ID']"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Check if NewStyleNum was just set",
+      "action": "Condition",
+      "expression": {
+        "and": [
+          { "not": { "equals": ["@body('Get_modified_Merch_Task')?['NewStyleNum']", null] } },
+          { "not": { "equals": ["@body('Get_modified_Merch_Task')?['NewStyleNum']", ""] } },
+          { "equals": ["@body('Get_modified_Merch_Task')?['Status']", "Style # Assigned"] }
+        ]
+      },
+      "if_true": [
+        {
+          "step": "2a",
+          "name": "Find blocked PAD Capsules row by old style number",
+          "action": "SharePoint - Get items",
+          "inputs": {
+            "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+            "list": "PAD Capsules",
+            "filterQuery": "Style_x0020_Num eq '@{body('Get_modified_Merch_Task')?['OldStyleNum']}'",
+            "top": 1
+          }
+        },
+        {
+          "step": "2b",
+          "name": "Check style was found",
+          "action": "Condition",
+          "expression": {
+            "greater": ["@length(body('Find_blocked_PAD_Capsules_row_by_old_style_number')?['value'])", 0]
+          },
+          "if_true": [
+            {
+              "step": "2b-i",
+              "name": "Update style number and clear block",
+              "action": "SharePoint - Update item",
+              "inputs": {
+                "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+                "list": "PAD Capsules",
+                "id": "@first(body('Find_blocked_PAD_Capsules_row_by_old_style_number')?['value'])?['ID']",
+                "fields": {
+                  "Style_x0020_Num": "@body('Get_modified_Merch_Task')?['NewStyleNum']",
+                  "Pipeline_x0020_Blocked": false,
+                  "Block_x0020_Reason": ""
+                }
+              }
+            },
+            {
+              "step": "2b-ii",
+              "name": "Notify designer + Merch in Teams",
+              "action": "Teams - Post adaptive card in a chat or channel",
+              "channel": "Pro Standard > Merch",
+              "card": {
+                "type": "AdaptiveCard",
+                "version": "1.4",
+                "body": [
+                  { "type": "TextBlock", "size": "Medium", "weight": "Bolder", "text": "🔓 Pipeline Unblocked — New Style # Assigned", "color": "Good" },
+                  { "type": "FactSet", "facts": [
+                    { "title": "Old Style #", "value": "@{body('Get_modified_Merch_Task')?['OldStyleNum']}" },
+                    { "title": "New Style #", "value": "@{body('Get_modified_Merch_Task')?['NewStyleNum']}" },
+                    { "title": "Team", "value": "@{body('Get_modified_Merch_Task')?['Team']}" },
+                    { "title": "Assigned by", "value": "@{body('Get_modified_Merch_Task')?['Assignee']}" }
+                  ]},
+                  { "type": "TextBlock", "text": "PAD Capsules has been updated. The style can now proceed through the pipeline under the new number.", "wrap": true, "color": "Good" }
+                ],
+                "actions": [
+                  { "type": "Action.OpenUrl", "title": "Open Merch Dashboard", "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=merch" }
+                ]
+              }
+            },
+            {
+              "step": "2b-iii",
+              "name": "Also notify Licensing channel",
+              "action": "Teams - Post message in channel",
+              "channel": "Pro Standard > Licensing",
+              "message": "✅ Style # updated: @{body('Get_modified_Merch_Task')?['OldStyleNum']} → @{body('Get_modified_Merch_Task')?['NewStyleNum']} · @{body('Get_modified_Merch_Task')?['Team']} · Pipeline unblocked."
+            }
+          ],
+          "if_false": [
+            {
+              "step": "2b-miss",
+              "name": "Style not found — post warning",
+              "action": "Teams - Post message in channel",
+              "channel": "Pro Standard > PAD Notifications",
+              "message": "⚠️ PAD Flow 06: Could not find style @{body('Get_modified_Merch_Task')?['OldStyleNum']} in PAD Capsules to unblock. Please update manually."
+            }
+          ]
+        }
+      ],
+      "if_false": []
+    }
+  ]
+}

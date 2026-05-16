@@ -1,0 +1,100 @@
+{
+  "name": "PAD-05-Licensing-Gate",
+  "description": "Fires when SR_Review_Status on a PAD Capsules item changes to Approved. Automatically advances Status to 'Licensing', notifies the Licensing team with an adaptive card, and logs the transition timestamp. This is the final automated gate before human Licensing review.",
+  "trigger": {
+    "type": "SharePoint - When an item is modified",
+    "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+    "list": "PAD Capsules"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Get full item",
+      "action": "SharePoint - Get item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "PAD Capsules",
+        "id": "@triggerBody()?['ID']"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Check SR approved + not yet in Licensing",
+      "action": "Condition",
+      "expression": {
+        "and": [
+          { "equals": ["@body('Get_full_item')?['SR_x0020_Review_x0020_Status']", "Approved"] },
+          { "not": { "equals": ["@body('Get_full_item')?['Status']", "Licensing"] } },
+          { "not": { "equals": ["@body('Get_full_item')?['Status']", "Approved"] } }
+        ]
+      },
+      "if_true": [
+        {
+          "step": "2a",
+          "name": "Advance status to Licensing",
+          "action": "SharePoint - Update item",
+          "inputs": {
+            "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+            "list": "PAD Capsules",
+            "id": "@body('Get_full_item')?['ID']",
+            "fields": {
+              "Status": "Licensing",
+              "SR_x0020_Approval_x0020_Date": "@utcNow()"
+            }
+          }
+        },
+        {
+          "step": "2b",
+          "name": "Notify Licensing team via Teams adaptive card",
+          "action": "Teams - Post adaptive card in a chat or channel",
+          "channel": "Pro Standard > Licensing",
+          "card": {
+            "type": "AdaptiveCard",
+            "version": "1.4",
+            "body": [
+              {
+                "type": "Container",
+                "style": "good",
+                "items": [
+                  { "type": "TextBlock", "size": "Large", "weight": "Bolder", "text": "✅ SR Approved — Ready for Licensing" }
+                ]
+              },
+              {
+                "type": "FactSet",
+                "facts": [
+                  { "title": "Style #", "value": "@{body('Get_full_item')?['Style_x0020_Num']}" },
+                  { "title": "Title", "value": "@{body('Get_full_item')?['Title']}" },
+                  { "title": "Brand", "value": "@{body('Get_full_item')?['Brand']}" },
+                  { "title": "Team", "value": "@{body('Get_full_item')?['Team']}" },
+                  { "title": "Capsule", "value": "@{body('Get_full_item')?['Capsule']}" },
+                  { "title": "Due Date", "value": "@{formatDateTime(body('Get_full_item')?['Due_x0020_Date'],'MMM dd, yyyy')}" },
+                  { "title": "Figma Board", "value": "@{body('Get_full_item')?['Figma_x0020_Board_x0020_URL']}" }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.OpenUrl",
+                "title": "Open Licensing Queue in PAD",
+                "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=licensing"
+              },
+              {
+                "type": "Action.OpenUrl",
+                "title": "View Figma Board",
+                "url": "@{body('Get_full_item')?['Figma_x0020_Board_x0020_URL']}"
+              }
+            ]
+          }
+        },
+        {
+          "step": "2c",
+          "name": "Post to PAD Notifications channel",
+          "action": "Teams - Post message in channel",
+          "channel": "Pro Standard > PAD Notifications",
+          "message": "🏆 @{body('Get_full_item')?['Style_x0020_Num']} · @{body('Get_full_item')?['Title']} passed SR Review and is now in Licensing queue."
+        }
+      ],
+      "if_false": []
+    }
+  ]
+}
