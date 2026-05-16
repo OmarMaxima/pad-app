@@ -1,0 +1,112 @@
+{
+  "name": "PAD-01-Status-Router",
+  "description": "Watches PAD Capsules for status changes and routes the style to the correct next stage. Handles Pending→Peer Review, Peer Review→SR Review, and SR Review→Licensing transitions triggered by the app or by direct list edits.",
+  "trigger": {
+    "type": "SharePoint - When an item is modified",
+    "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+    "list": "PAD Capsules"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "Get modified item details",
+      "action": "SharePoint - Get item",
+      "inputs": {
+        "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+        "list": "PAD Capsules",
+        "id": "@triggerBody()?['ID']"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Branch on Status",
+      "action": "Switch",
+      "expression": "@body('Get_modified_item_details')?['Status']",
+      "cases": {
+        "Peer Review": {
+          "description": "Style moved to Peer Review — find the assigned Sr. Designer and notify via Teams",
+          "actions": [
+            {
+              "action": "Teams - Post adaptive card in a chat or channel",
+              "channel": "Pro Standard > PAD Notifications",
+              "card": {
+                "type": "AdaptiveCard",
+                "body": [
+                  { "type": "TextBlock", "size": "Medium", "weight": "Bolder", "text": "🔍 Peer Review Ready" },
+                  { "type": "FactSet", "facts": [
+                    { "title": "Style #", "value": "@{body('Get_modified_item_details')?['Style_x0020_Num']}" },
+                    { "title": "Title", "value": "@{body('Get_modified_item_details')?['Title']}" },
+                    { "title": "Capsule", "value": "@{body('Get_modified_item_details')?['Capsule']}" },
+                    { "title": "Due", "value": "@{body('Get_modified_item_details')?['Due_x0020_Date']}" }
+                  ]},
+                  { "type": "ActionSet", "actions": [
+                    { "type": "Action.OpenUrl", "title": "Open in PAD", "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html" }
+                  ]}
+                ]
+              }
+            }
+          ]
+        },
+        "SR Review": {
+          "description": "Peer approved — notify Sr. Designer that style is ready for their review",
+          "actions": [
+            {
+              "action": "Teams - Post message in channel",
+              "channel": "Pro Standard > PAD Notifications",
+              "message": "✅ SR Review needed: @{body('Get_modified_item_details')?['Style_x0020_Num']} — @{body('Get_modified_item_details')?['Title']} · @{body('Get_modified_item_details')?['Capsule']}"
+            }
+          ]
+        },
+        "Licensing": {
+          "description": "SR approved — notify Licensing team",
+          "actions": [
+            {
+              "action": "Teams - Post adaptive card in a chat or channel",
+              "channel": "Pro Standard > Licensing",
+              "card": {
+                "type": "AdaptiveCard",
+                "body": [
+                  { "type": "TextBlock", "size": "Medium", "weight": "Bolder", "text": "🏆 Ready for Licensing Submission" },
+                  { "type": "FactSet", "facts": [
+                    { "title": "Style #", "value": "@{body('Get_modified_item_details')?['Style_x0020_Num']}" },
+                    { "title": "Title", "value": "@{body('Get_modified_item_details')?['Title']}" },
+                    { "title": "Brand", "value": "@{body('Get_modified_item_details')?['Brand']}" },
+                    { "title": "Capsule", "value": "@{body('Get_modified_item_details')?['Capsule']}" }
+                  ]},
+                  { "type": "ActionSet", "actions": [
+                    { "type": "Action.OpenUrl", "title": "Open Licensing Queue", "url": "https://omarmaxima.github.io/pad-app/PAD-App-V2.html?role=licensing" }
+                  ]}
+                ]
+              }
+            }
+          ]
+        },
+        "Approved": {
+          "description": "Licensing approved — create Handoff Tracker record",
+          "actions": [
+            {
+              "action": "SharePoint - Create item",
+              "site": "https://maximaapparel.sharepoint.com/sites/OMARTEST",
+              "list": "Handoff Tracker",
+              "fields": {
+                "Title": "@body('Get_modified_item_details')?['Style_x0020_Num']",
+                "StyleNum": "@body('Get_modified_item_details')?['Style_x0020_Num']",
+                "StyleTitle": "@body('Get_modified_item_details')?['Title']",
+                "Capsule": "@body('Get_modified_item_details')?['Capsule']",
+                "Brand": "@body('Get_modified_item_details')?['Brand']",
+                "Team": "@body('Get_modified_item_details')?['Team']",
+                "ApprovedDate": "@utcNow()",
+                "Status": "Ready for Production"
+              }
+            },
+            {
+              "action": "Teams - Post message in channel",
+              "channel": "Pro Standard > PAD Notifications",
+              "message": "🎉 APPROVED: @{body('Get_modified_item_details')?['Style_x0020_Num']} — @{body('Get_modified_item_details')?['Title']} added to Handoff Tracker."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
