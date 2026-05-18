@@ -2275,7 +2275,7 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       </button>
       <button class="rd-item" data-role="associate">
         <div class="rd-num">2</div>
-        <div class="rd-text"><div class="rd-label">Associate Designer</div><div class="rd-desc">Same view as Assistant · peer review pending</div></div>
+        <div class="rd-text"><div class="rd-label">Associate Designer</div><div class="rd-desc">Own work · peer review · licensing rework visibility</div></div>
         <div class="rd-check">✓</div>
       </button>
       <button class="rd-item" data-role="designer">
@@ -3022,6 +3022,356 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ====================================================
+     DASHBOARD 1b · ASSOCIATE DESIGNER
+     (Separate from Assistant — Associate CAN do peer reviews)
+     ==================================================== -->
+<div class="dashboard layout" data-dash="associate" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Your work</div>
+      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="inbox"><ph-tray></ph-tray><span class="si-label">My Inbox</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="review"><ph-eye></ph-eye><span class="si-label">In Review</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="rework"><ph-arrow-counter-clockwise></ph-arrow-counter-clockwise><span class="si-label">Rework</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="approved"><ph-check-circle></ph-check-circle><span class="si-label">Approved</span><span class="count">7</span></div>
+      <div class="sidebar-item" data-view="peer-pending"><ph-users></ph-users><span class="si-label">Peer Review Pending</span><span class="count">2</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Feedback</div>
+      <div class="sidebar-item" data-view="peer-comments"><ph-chat-circle-text></ph-chat-circle-text><span class="si-label">Peer Comments</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="sr-comments"><ph-chat-square-text></ph-chat-square-text><span class="si-label">SR Comments</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="lic-comments"><ph-file-text></ph-file-text><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Merch</div>
+      <div class="sidebar-item" data-view="assoc-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Handoffs</div>
+      <div class="sidebar-item" data-view="assoc-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">My Handoffs</span><span class="count">3</span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- HOME -->
+    <div class="view active" data-view="home">
+      <div class="page-head">
+        <div><div class="eyebrow-tag et-live">Associate Designer · Q2 2026</div><h1 class="page-title home-greeting">Good morning, Omar 👋</h1><div class="page-sub">My styles · Q2 production</div></div>
+        <div class="period-toggle"><button class="period-btn active">Day</button><button class="period-btn">Week</button><button class="period-btn">Month</button><button class="period-btn">Q</button></div>
+      </div>
+      <div class="todo-card reveal-up">
+        <div class="todo-card-head">
+          <h2 class="todo-card-title">Today's Tasks</h2>
+          <span class="todo-sync-badge"><span class="todo-sync-dot"></span>Synced from SharePoint · 4 open</span>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('rework','HVGU68851')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Peer rework — HVGU68851 · WMNS Tee Court Classic · Lakers</div>
+            <div class="todo-subtitle"><span class="rework-pill rw-peer">PEER ×2</span><span class="due-tag dt-urgent">Due Apr 18 · OVERDUE</span></div>
+          </div>
+          <div class="todo-actions"><button class="btn-todo-open urgent">Open Rework →</button></div>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('rework','HVGW68857')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Licensing rework — HVGW68857 · WMNS Long Sleeve Splash · Warriors</div>
+            <div class="todo-subtitle"><span class="rework-pill rw-lic">LIC ×1</span><span class="due-tag dt-urgent">Due Apr 16 · OVERDUE</span></div>
+          </div>
+          <div class="todo-actions"><button class="btn-todo-open urgent">Open Rework →</button></div>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('peer-pending','HEOE68873')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Peer review due — HEOE68873 · WMNS Tee Fly High · Eagles</div>
+            <div class="todo-subtitle"><span class="due-tag dt-warn">Due Apr 22</span><span class="muted">You're the reviewer</span></div>
+          </div>
+          <div class="todo-actions"><button class="btn-todo-open urgent">Open Review →</button></div>
+        </div>
+        <div class="todo-item" onclick="navigateToView('inbox','HVGU68863')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Upload Figma — HVGU68863 · WMNS Crew Vintage Type</div>
+            <div class="todo-subtitle"><span class="muted">Pending upload · Due Apr 26</span></div>
+          </div>
+          <div class="todo-actions"><button class="btn-todo-open">Open →</button></div>
+        </div>
+      </div>
+      <div class="bento-home reveal-up" data-delay="1">
+        <div class="gen-stat bento-featured"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Peer reviews due</div><div class="gen-stat-value stat-value" style="color:#f59e0b">2</div><div class="gen-stat-sub">You're the reviewer</div></div>
+        <div class="gen-stat" style="cursor:pointer" onclick="navigateToView('assoc-handoffs')"><div class="gen-stat-label">Handoffs</div><div class="gen-stat-value stat-value" style="color:#f59e0b">3</div><div class="gen-stat-sub">1 pending · 2 done</div></div>
+      </div>
+      <div class="pill-stat reveal-up" data-delay="2" onclick="togglePillStat(this)" style="margin-bottom:16px">
+        <div class="pill-stat-head">
+          <span class="pill-stat-label">Your EP Score &middot; Q2 2026</span>
+          <span style="font-size:11px;color:var(--text-dim)">&#9662; details</span>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:8px;margin:6px 0 2px">
+          <div class="pill-stat-pct">75%</div>
+          <span class="ep-status-label ep-on-track" style="margin-bottom:5px">on track</span>
+        </div>
+        <div class="pill-stat-sub">Efficiency &amp; productivity &middot; this quarter</div>
+        <div class="pill-stat-expand">
+          <div class="ep-sub-row">
+            <div class="ep-sub-label">Efficiency<span class="ep-sub-score">75%</span></div>
+            <div class="ep-bar-track"><div class="ep-bar-fill" style="width:75%;background:#10b981"></div></div>
+            <div class="ep-sub-data">12 boards &nbsp;&middot;&nbsp; 3 reworks &nbsp;&middot;&nbsp; 9 clean</div>
+          </div>
+          <div class="ep-sub-row">
+            <div class="ep-sub-label">Productivity<span class="ep-sub-score">76%</span></div>
+            <div class="ep-bar-track"><div class="ep-bar-fill" style="width:76%;background:#10b981"></div></div>
+            <div class="ep-sub-data">12&thinsp;/&thinsp;12 target &nbsp;&middot;&nbsp; +2 tasks &nbsp;&middot;&nbsp; 1 capsule</div>
+          </div>
+          <div class="ep-threshold-legend">71&ndash;100 on track &nbsp;&middot;&nbsp; 51&ndash;70 attention &nbsp;&middot;&nbsp; &le;50 intervention</div>
+        </div>
+      </div>
+      <div class="home-2col reveal-up" data-delay="3">
+        <div class="card mb-0">
+          <div class="card-head"><h2 class="card-title">Overall pipeline · all capsules</h2></div>
+          <div style="padding:16px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span>All active styles</span><span class="muted">12 styles</span></div>
+            <div class="flow-bar"><div class="flow-seg-p" style="width:17%"></div><div class="flow-seg-rv" style="width:16%"></div><div class="flow-seg-rw" style="width:25%"></div><div class="flow-seg-ap" style="width:42%"></div></div>
+            <div style="display:flex;gap:12px;font-size:10px;color:#b0b4ba;margin-top:8px">
+              <span>■ Pending 17%</span><span style="color:#8b5cf6">■ In review 16%</span><span style="color:#dc2626">■ Rework 25%</span><span style="color:#065f46">■ Approved 42%</span>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-0">
+          <div class="card-head"><h2 class="card-title">Avg. cycle time · all work</h2></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px;font-size:13px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Peer review avg</span><strong>2.1 days</strong></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">SR review avg</span><strong>3.4 days</strong></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Licensing avg</span><strong>4.8 days</strong></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:8px"><span class="muted">End-to-end avg</span><strong style="color:#1c2024">10.3 days</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">10:00</div><div class="meeting-time-end">10:30 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content"><div class="meeting-title">Q2 Capsule Kick-off<span class="meeting-now-badge">Now</span></div><div class="meeting-meta">Ana Avelino · Classic Chenille · Teams call</div></div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">2:45 PM</div></div>
+          <div class="meeting-bar"></div>
+          <div class="meeting-content"><div class="meeting-title">Design Review — Summer League Styles</div><div class="meeting-meta">Diana Adame, Andrea Cardenas · Conference Room B</div></div>
+          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">2 meetings · ~1h 15m today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INBOX -->
+    <div class="view" data-view="inbox">
+      <div class="page-head">
+        <div><h1 class="page-title">My Inbox</h1><div class="page-sub">12 styles across 2 teams · Q2 2027 WMNS Summer League</div></div>
+        <div class="flex"><button class="btn btn-ghost">Export</button></div>
+      </div>
+      <div class="role-context"><strong>Associate Designer view.</strong> You see only your assigned styles. Respond to rework comments, edit Figma URLs. Can perform peer reviews. <strong>Cannot</strong> reassign work.</div>
+      <div class="stats-grid reveal-up">
+        <div class="stat-card"><div class="stat-label">Assigned</div><div class="stat-value">12</div></div>
+        <div class="stat-card"><div class="stat-label">In rework</div><div class="stat-value">3</div></div>
+        <div class="stat-card"><div class="stat-label">Waiting for approval</div><div class="stat-value">4</div></div>
+        <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value">7</div></div>
+        <div class="stat-card"><div class="stat-label">Peer review pending</div><div class="stat-value">2</div><div class="stat-delta">You're the reviewer</div></div>
+      </div>
+      <div class="team-section">
+        <div class="team-head">
+          <div class="flex"><div class="team-logo" style="background:#552583">LAL</div><div class="team-info"><h4>Lakers <span class="league-tag lt-nba">NBA</span></h4><div class="team-meta">6 styles · 50% approved</div></div></div>
+          <div class="team-stats"><span class="pill pill-progress pill-dot">2 in review</span><span class="pill pill-rejected pill-dot">2 rework</span><span class="pill pill-approved pill-dot">3 approved</span></div>
+        </div>
+        <div class="team-body">
+          <div class="table-wrap">
+          <table class="styles-table">
+            <thead>
+              <tr><th class="sortable col-pin">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th><th></th></tr>
+              <tr class="tbl-filter-row"><td><input placeholder="Style #…"></td><td><input placeholder="Title…"></td><td><input placeholder="Brand…"></td><td><select><option>All</option><option>SS27</option><option>FW26</option></select></td><td><input placeholder="Capsule…"></td><td><select><option>All</option><option>Tee</option><option>Hoodie</option><option>Cap</option><option>Pullover</option><option>Long Sleeve</option><option>Crew</option><option>Polo</option></select></td><td><select><option>All</option><option>WMNS</option><option>MENS</option><option>UNISEX</option></select></td><td><input placeholder="Dept…"></td><td><input placeholder="Class…"></td><td><input placeholder="Name…"></td><td><input placeholder="mm/dd…"></td><td><input placeholder="Ticker…"></td><td><input placeholder="SMU…"></td><td><select><option>All</option><option>Standard</option><option>SMU</option><option>Rework</option></select></td><td><input placeholder="mm/dd…"></td><td><select><option>All</option><option>Overdue</option><option>≤2d</option><option>≤7d</option></select></td><td><select><option>All</option><option>Pending</option><option>Peer Review</option><option>SR Review</option><option>Lic Review</option><option>Approved</option></select></td><td></td></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td>WMNS Tee · Court Classic</td><td>Pro Standard</td><td>SS27</td><td>Q2 WMNS Summer League</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic Tee</td><td>PST-8851</td><td>—</td><td>Standard</td><td>Apr 01</td><td><span class="due-urgent">Apr 18</span></td><td><span class="pill pill-pending pill-dot">Pending</span></td><td><button class="btn btn-sm">Open</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68852</div></td><td>WMNS Hoodie · Showtime</td><td>Pro Standard</td><td>SS27</td><td>Q2 WMNS Summer League</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Showtime Hoodie</td><td>Jan 20</td><td>PST-8852</td><td>—</td><td>Standard</td><td>Apr 03</td><td><span class="due-warn">Apr 20</span></td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td><button class="btn btn-sm">Open</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68853</div></td><td>WMNS Cap · Side Logo</td><td>Pro Standard</td><td>SS27</td><td>Q2 WMNS Summer League</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Caps</td><td>Side Logo Cap</td><td>Jan 22</td><td>PST-8853</td><td>—</td><td>Standard</td><td>Apr 05</td><td><span class="due-warn">Apr 22</span></td><td><span class="pill pill-sr pill-dot">SR Review</span></td><td><button class="btn btn-sm">Open</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td>WMNS Pullover · Throwback</td><td>Pro Standard</td><td>SS27</td><td>Q2 WMNS Summer League</td><td>Pullover</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Throwback Pullover</td><td>Jan 10</td><td>PST-8854</td><td>—</td><td>Standard</td><td>Mar 20</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><button class="btn btn-sm">View</button></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PEER REVIEW PENDING -->
+    <div class="view" data-view="peer-pending">
+      <div class="page-head"><div><h1 class="page-title">Peer Review Pending</h1><div class="page-sub">Styles you're assigned to peer-review for other designers</div></div></div>
+      <div class="role-context">These styles belong to other designers. You've been assigned as their peer reviewer. Review the Figma board and approve or reject.</div>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="styles-table">
+            <thead>
+              <tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th><th>Figma Board</th><th style="white-space:nowrap">Actions</th></tr>
+              <tr class="tbl-filter-row"><td><input placeholder="Style #…"></td><td><input placeholder="Title…"></td><td><select><option value="">All Brands</option><option>Pro Standard</option></select></td><td><select><option value="">All Seasons</option><option>SS27</option><option>FW26</option></select></td><td><select><option value="">All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option></select></td><td><select><option value="">All Types</option><option>Tee</option><option>Hoodie</option></select></td><td><select><option value="">All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td><td><select><option value="">All Depts</option><option>Apparel</option></select></td><td><select><option value="">All Classes</option><option>Tops</option><option>Bottoms</option></select></td><td><input placeholder="Name…"></td><td><input placeholder="Ticker…"></td><td><input placeholder="SMU…"></td><td><select><option value="">All Types</option><option>Standard</option><option>SMU</option></select></td><td><input placeholder="Assigned…"></td><td><input placeholder="Due…"></td><td><select><option value="">All</option><option>Peer Review</option></select></td><td></td><td></td></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-pin"><div class="style-code">HCB04725</div></td><td><div class="style-title">Chicago Bulls · MENS Tee · Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Q1 MENS</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Sideline</td><td>—</td><td>—</td><td>Standard</td><td>Dante Meneses</td><td><span class="due-warn">May 22</span></td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td class="figma-cell"><a class="btn-figma-open" href="https://www.figma.com/design/mock-board" target="_blank" onclick="onFigmaOpened(this)">Open Figma Board →</a><div class="figma-required-tip" style="margin-top:4px">⚠ Open the Figma link to enable review</div></td><td style="white-space:nowrap"><button class="btn-peer-action btn-peer-approve" disabled onclick="peerDecision(this,'approve')">Approve</button> <button class="btn-peer-action btn-peer-reject" disabled onclick="peerDecision(this,'reject')" style="margin-left:4px">Reject</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HMG91727</div></td><td><div class="style-title">Memphis Grizzlies · MENS Hoodie · Grit &amp; Grind</div></td><td>Pro Standard</td><td>SS27</td><td>Q1 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Grit &amp; Grind</td><td>—</td><td>—</td><td>Standard</td><td>Diana Adame</td><td><span class="due-warn">May 24</span></td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td class="figma-cell"><a class="btn-figma-open" href="https://www.figma.com/design/mock-board" target="_blank" onclick="onFigmaOpened(this)">Open Figma Board →</a><div class="figma-required-tip" style="margin-top:4px">⚠ Open the Figma link to enable review</div></td><td style="white-space:nowrap"><button class="btn-peer-action btn-peer-approve" disabled onclick="peerDecision(this,'approve')">Approve</button> <button class="btn-peer-action btn-peer-reject" disabled onclick="peerDecision(this,'reject')" style="margin-left:4px">Reject</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- IN REVIEW -->
+    <div class="view" data-view="review">
+      <div class="page-head"><div><h1 class="page-title">In Review</h1><div class="page-sub">Your styles currently being reviewed</div></div></div>
+      <div class="card"><div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th><th>Figma Board</th><th>Submit</th></tr></thead><tbody>
+        <tr><td class="col-pin"><div class="style-code">HVGU68852</div></td><td><div class="style-title">WMNS Hoodie · Showtime</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Showtime</td><td>—</td><td>—</td><td>Standard</td><td>Ana Avelino</td><td>—</td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td></td></tr>
+        <tr><td class="col-pin"><div class="style-code">HVGU68853</div></td><td><div class="style-title">WMNS Cap · Side Logo</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Tops</td><td>Side Logo</td><td>—</td><td>—</td><td>Standard</td><td>Ana Avelino</td><td>—</td><td><span class="pill pill-sr pill-dot">SR Review</span></td><td></td></tr>
+        <tr><td class="col-pin"><div class="style-code">HVGU68866</div></td><td><div class="style-title">WMNS Crew · 17 Banners</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>17 Banners</td><td>—</td><td>—</td><td>Standard</td><td>Licensing Dept</td><td>—</td><td><span class="pill pill-licensing pill-dot">Licensing</span></td><td></td></tr>
+      </tbody></table></div></div>
+    </div>
+
+    <!-- REWORK -->
+    <div class="view" data-view="rework">
+      <div class="page-head"><div><h1 class="page-title">Rework</h1><div class="page-sub">3 styles sent back — fix and resubmit</div></div></div>
+      <div class="rework-chart-grid reveal-up">
+        <div class="rework-chart-card rc-peer"><div class="rework-chart-count" style="color:#7c3aed">1</div><div class="rework-chart-label">Peer Rework</div><div class="rework-chart-sub">Sent back by peer reviewer</div><div class="rework-chart-bar"><div class="rework-chart-fill" style="width:33%;background:#8b5cf6"></div></div></div>
+        <div class="rework-chart-card rc-sr"><div class="rework-chart-count" style="color:#0e7490">1</div><div class="rework-chart-label">SR Rework</div><div class="rework-chart-sub">Sent back by Sr. Designer</div><div class="rework-chart-bar"><div class="rework-chart-fill" style="width:33%;background:#06b6d4"></div></div></div>
+        <div class="rework-chart-card rc-lic"><div class="rework-chart-count" style="color:#b45309">1</div><div class="rework-chart-label">Licensing Rework</div><div class="rework-chart-sub">Rejected by Licensing</div><div class="rework-chart-bar"><div class="rework-chart-fill" style="width:33%;background:#f59e0b"></div></div></div>
+      </div>
+      <div class="card"><div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Source</th><th>Figma / Action</th><th>Submit</th></tr></thead><tbody>
+        <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew · Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Vintage Type</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">Apr 14</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <tr><td class="col-pin"><div class="style-code">HVGU68864</div></td><td><div class="style-title">WMNS Polo · 16-time Champs</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>16-time Champs</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+      </tbody></table></div></div>
+    </div>
+
+    <!-- APPROVED -->
+    <div class="view" data-view="approved">
+      <div class="page-head"><div><h1 class="page-title">Approved</h1><div class="page-sub">Your styles that cleared Licensing</div></div></div>
+      <div class="card"><div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th><th>Figma Board</th><th>Submit</th></tr></thead><tbody>
+        <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td><div class="style-title">WMNS Pullover · Throwback</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Throwback</td><td>—</td><td>—</td><td>Standard</td><td>Lakers</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2701</span></td></tr>
+        <tr><td class="col-pin"><div class="style-code">HEOC68872</div></td><td><div class="style-title">WMNS Cap · America's Team</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Tops</td><td>America's Team</td><td>—</td><td>—</td><td>Standard</td><td>Cowboys</td><td><span class="due-ok">Apr 14</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2702</span></td></tr>
+      </tbody></table></div></div>
+    </div>
+
+    <!-- PEER COMMENTS -->
+    <div class="view" data-view="peer-comments">
+      <div class="page-head"><div><h1 class="page-title">Peer Comments</h1><div class="page-sub">Comments from your peer reviewer across all rounds</div></div></div>
+      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Logo proportions off — 12% smaller, shifted left.</span></td><td>1</td><td>Apr 08</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Color palette mismatch — #FCD34D not #FBBF24.</span></td><td>2</td><td>Apr 12</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <!-- SR COMMENTS -->
+    <div class="view" data-view="sr-comments">
+      <div class="page-head"><div><h1 class="page-title">SR Comments</h1><div class="page-sub">Senior Designer feedback on your peer-approved styles</div></div></div>
+      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
+        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Type hierarchy — secondary line dominates lockup.</span></td><td>1</td><td>Apr 14</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <!-- LIC COMMENTS -->
+    <div class="view" data-view="lic-comments">
+      <div class="page-head"><div><h1 class="page-title">Licensing Comments</h1><div class="page-sub">Licensing dept feedback — visible to you, actioned by Sr/Lic teams</div></div></div>
+      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Capsule</th><th>Comment</th><th>Date</th></tr></thead><tbody>
+        <tr><td><div class="style-code">HVGW68857</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">NBA secondary mark usage rights expired Q1.</span></td><td>Apr 15</td></tr>
+        <tr><td><div class="style-code">HVGU68864</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">"16x Champs" — needs trophy count verified.</span></td><td>Apr 12</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <!-- MERCH TASKS -->
+    <div class="view" data-view="assoc-merch-tasks">
+      <div class="page-head"><div><h1 class="page-title">Merch Tasks</h1><div class="page-sub">Logo update styles assigned to you by Sr. Designer</div></div></div>
+      <div class="merch-notify-pill" style="margin-bottom:18px;">
+        <span class="mnp-dot"></span>
+        <span>1 Logo Update task assigned — CLSC Wingspan · Cleveland Browns · 2 styles to review</span>
+      </div>
+      <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+        <strong>⚠ Open Order at DSG:</strong> FCB5410428-EGG — 60 units · $3,240 · ETD LATE. Prioritize this style.
+      </div>
+      <div class="merch-lu-card">
+        <div class="merch-lu-head" onclick="toggleMerchCard('assoc-mlu-browns')">
+          <span class="league-tag lt-nfl">NFL</span>
+          <div class="lic-league-meta">
+            <div class="lic-league-title">CLSC · Wingspan · Cleveland Browns · Logo Recon</div>
+            <div class="lic-league-sub">Assigned by Ana Avelino (Sr.) · 2 styles · Due Jun 15</div>
+          </div>
+          <div class="merch-lu-progress-wrap"><div class="merch-lu-progress-bar"><div class="merch-lu-progress-fill" style="width:0%"></div></div><span class="merch-lu-progress-label">0 / 2 reviewed</span></div>
+          <span class="lic-league-badge llb-awaiting">New</span>
+          <span class="lic-league-chevron">▲</span>
+        </div>
+        <div class="lic-league-body open" id="assoc-mlu-browns-body">
+          <div style="overflow-x:auto;padding:4px 0;">
+            <table class="merch-style-table" style="width:100%;border-collapse:collapse;">
+              <thead><tr><th>Style #</th><th>Title</th><th>League</th><th>Team</th><th>Season</th><th>Capsule</th><th>Gender</th><th>Garment</th><th>Color</th><th>Update Needed?</th><th>New Style # Needed?</th><th>Figma Link</th><th>NY Server Link</th></tr></thead>
+              <tbody>
+                <tr id="assoc-mstyle-1">
+                  <td><div class="style-code">FCB5410428-EGG</div></td>
+                  <td>Wingspan M Drop Shoulder FLC PO Hoodie <span style="font-size:10px;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:4px;padding:1px 5px;margin-left:4px;">⚠ DSG Open Order</span></td>
+                  <td>NFL</td><td>CLE Browns</td><td>CLSC</td><td>Wingspan</td><td>MENS</td><td>Hoodie</td><td>EGG</td>
+                  <td><div style="display:flex;gap:4px;"><button class="update-btn-yes" onclick="merchStyleUpdateNeeded('assoc-mstyle-1',true,this)">✓ Yes</button><button class="update-btn-no" onclick="merchStyleUpdateNeeded('assoc-mstyle-1',false,this)">✗ No</button></div></td>
+                  <td id="assoc-mstyle-1-sn" style="color:#b0b4ba;font-size:11px;">—</td>
+                  <td>—</td><td>—</td>
+                </tr>
+                <tr id="assoc-mstyle-2">
+                  <td><div class="style-code">FCBB1411406-EGG</div></td>
+                  <td>Wingspan BB Drop Shoulder SS Tee</td>
+                  <td>NFL</td><td>CLE Browns</td><td>CLSC</td><td>Wingspan</td><td>BOY'S</td><td>Tee</td><td>EGG</td>
+                  <td><div style="display:flex;gap:4px;"><button class="update-btn-yes" onclick="merchStyleUpdateNeeded('assoc-mstyle-2',true,this)">✓ Yes</button><button class="update-btn-no" onclick="merchStyleUpdateNeeded('assoc-mstyle-2',false,this)">✗ No</button></div></td>
+                  <td id="assoc-mstyle-2-sn" style="color:#b0b4ba;font-size:11px;">—</td>
+                  <td>—</td><td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="lic-review-footer">
+            <span style="font-size:12px;color:#60646c;" id="assoc-mlu-browns-count">0 / 2 styles reviewed</span>
+            <button class="btn-lic-submit-decision" disabled id="assoc-mlu-browns-btn" style="opacity:.4;cursor:not-allowed;">Mark Capsule Complete →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HANDOFFS -->
+    <div class="view" data-view="assoc-handoffs">
+      <div class="page-head"><div><h1 class="page-title">My Handoffs</h1><div class="page-sub">Handoff tasks assigned to you · Q2 2026</div></div></div>
+      <div class="stats-grid reveal-up">
+        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value">3</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" style="color:#f59e0b">1</div></div>
+        <div class="stat-card"><div class="stat-label">In Progress</div><div class="stat-value" style="color:#8b5cf6">0</div></div>
+        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" style="color:#065f46">2</div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-head">Pending &amp; In Progress</div>
+        <div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned by</th><th>Due Date</th><th>Status</th></tr></thead><tbody>
+          <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Crew</td><td>WMNS</td><td>Apparel</td><td>Sweatshirts</td><td>Vintage Type Crew</td><td>CW-SS26-LAL</td><td>SMU-1024</td><td>Handoff Request</td><td>Ana Avelino (Sr.)</td><td><span class="due-warn">May 20</span></td><td><span class="pill pill-pending pill-dot">Pending</span></td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <div class="card-head">Completed</div>
+        <div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned by</th><th>Due Date</th><th>Status</th></tr></thead><tbody>
+          <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Court Classic Tee</td><td>T-SS26-LAL</td><td>SMU-1021</td><td>Handoff Request</td><td>Ana Avelino (Sr.)</td><td><span class="due-ok">May 14</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Long Sleeve</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash Long Sleeve</td><td>LS-SS26-GSW</td><td>SMU-1022</td><td>Handoff Request</td><td>Anthony Valtierra (Sr.)</td><td><span class="due-ok">May 16</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+        </tbody></table></div>
       </div>
     </div>
   </main>
@@ -7877,7 +8227,7 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
 <script>
 // ── Role map ────────────────────────────────────────────────────────────────
 const ROLE_DASH_MAP = {
-  assistant:'assistant', associate:'assistant', designer:'designer',
+  assistant:'assistant', associate:'associate', designer:'designer',
   sr:'sr', licensing:'licensing', manager:'manager', admin:'admin', merch:'merch'
 };
 
@@ -8772,7 +9122,8 @@ function remindDesigner(styleCode, styleName) {
   showToast('Reminder sent to designer for ' + styleCode + '.', 'success');
   // Add notification to designer + assistant home todo lists
   ['[data-dash="designer"] [data-view="home"] .todo-card',
-   '[data-dash="assistant"] [data-view="home"] .todo-card'].forEach(function(sel) {
+   '[data-dash="assistant"] [data-view="home"] .todo-card',
+   '[data-dash="associate"] [data-view="home"] .todo-card'].forEach(function(sel) {
     var card = document.querySelector(sel);
     if (!card) return;
     var item = document.createElement('div');
