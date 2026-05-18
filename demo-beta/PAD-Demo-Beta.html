@@ -2379,6 +2379,87 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
 </div>
 
 <!-- ====================================================
+     HANDOFF REQUEST MODAL
+     ==================================================== -->
+<div class="task-modal-overlay" id="handoffModalOverlay" onclick="if(event.target===this)closeHandoffModal()">
+  <div class="task-modal">
+    <div class="task-modal-head">
+      <h2>New Handoff Request</h2>
+      <button class="modal-close" onclick="closeHandoffModal()">✕</button>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Style Number <span style="color:#dc2626">*</span></label>
+      <input type="text" class="form-input" id="hoStyleNum" placeholder="e.g. HVGU68851" required>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label class="form-label">Season</label>
+        <select class="form-mselect" id="hoSeason">
+          <option value="">— Select season —</option>
+          <option>SS27</option><option>FW26</option><option>SS26</option><option>FW25</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">League</label>
+        <select class="form-mselect" id="hoLeague">
+          <option value="">— Select league —</option>
+          <option>NBA</option><option>NFL</option><option>MLB</option><option>NHL</option><option>WNBA</option><option>MLS</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Team Name</label>
+      <input type="text" class="form-input" id="hoTeamName" placeholder="e.g. Los Angeles Lakers">
+    </div>
+    <div class="form-row">
+      <label class="form-label">Style Name</label>
+      <input type="text" class="form-input" id="hoStyleName" placeholder="e.g. WMNS Tee Court Classic">
+    </div>
+    <div class="form-row">
+      <label class="form-label">PLM Link</label>
+      <input type="url" class="form-input" id="hoPLMLink" placeholder="https://plm.example.com/style/…">
+    </div>
+    <div class="form-row">
+      <label class="form-label">Assign to</label>
+      <select class="form-mselect" id="hoAssignee">
+        <option value="">— Select member —</option>
+        <optgroup label="Sr. Designers">
+          <option>Ana Avelino (Sr.)</option><option>Arantxa Denegri (Sr.)</option><option>Anthony Valtierra (Sr.)</option>
+        </optgroup>
+        <optgroup label="Team A — Designers">
+          <option>Dante Meneses</option><option>Diana Adame</option><option>Andrea Cardenas</option>
+        </optgroup>
+        <optgroup label="Team B — Designers">
+          <option>Amanda Mireles</option><option>Arantxa Denegri</option><option>Melissa Diaz</option>
+        </optgroup>
+        <optgroup label="Team C — Designers">
+          <option>Omar Ruiz</option><option>Brisa Aguirre</option><option>Ana Rivera</option>
+        </optgroup>
+        <optgroup label="Licensing Team">
+          <option>Licensing Dept</option><option>Lic. Reviewer 1</option><option>Lic. Reviewer 2</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label class="form-label">Due Date</label>
+        <input type="date" class="form-input" id="hoDueDate">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Priority</label>
+        <select class="form-mselect" id="hoPriority">
+          <option>Normal</option><option>High</option><option>Urgent</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeHandoffModal()">Cancel</button>
+      <button class="btn btn-primary has-arrow" data-magnetic onclick="submitHandoffRequest()">Create Handoff <span class="btn-arrow-circle">↗</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================
      DASHBOARD 1 · ASSISTANT / ASSOCIATE DESIGNER
      (Associate role maps here via JS — same interface)
      ==================================================== -->
@@ -2391,7 +2472,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       <div class="sidebar-item" data-view="review"><ph-eye></ph-eye><span class="si-label">In Review</span><span class="count">4</span></div>
       <div class="sidebar-item" data-view="rework"><ph-arrow-counter-clockwise></ph-arrow-counter-clockwise><span class="si-label">Rework</span><span class="count">3</span></div>
       <div class="sidebar-item" data-view="approved"><ph-check-circle></ph-check-circle><span class="si-label">Approved</span><span class="count">7</span></div>
-      <div class="sidebar-item" data-view="peer-pending"><ph-users></ph-users><span class="si-label">Peer Review Pending</span><span class="count">2</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Feedback</div>
@@ -2459,7 +2539,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         <div class="gen-stat"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div></div>
         <div class="gen-stat"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div></div>
         <div class="gen-stat"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Peer reviews due</div><div class="gen-stat-value stat-value" style="color:#f59e0b">2</div><div class="gen-stat-sub">You're the reviewer</div></div>
       </div>
 
       <div class="pill-stat reveal-up" data-delay="2" onclick="togglePillStat(this)" style="margin-bottom:16px">
@@ -2556,13 +2635,12 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         <div><h1 class="page-title">My Inbox</h1><div class="page-sub">12 styles across 2 teams · Q2 2027 WMNS Summer League</div></div>
         <div class="flex"><button class="btn btn-ghost">Export</button></div>
       </div>
-      <div class="role-context"><strong>Assistant / Associate Designer view.</strong> You see only your assigned styles. Respond to rework comments, edit Figma URLs. <strong>Cannot</strong> reassign work or approve peer reviews.</div>
+      <div class="role-context"><strong>Assistant Designer view.</strong> You see only your assigned styles. Respond to rework comments, edit Figma URLs. <strong>Cannot</strong> reassign work or perform peer reviews.</div>
       <div class="stats-grid reveal-up">
         <div class="stat-card"><div class="stat-label">Assigned</div><div class="stat-value">12</div></div>
         <div class="stat-card"><div class="stat-label">In rework</div><div class="stat-value">3</div></div>
         <div class="stat-card"><div class="stat-label">Waiting for approval</div><div class="stat-value">4</div></div>
         <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value">7</div></div>
-        <div class="stat-card"><div class="stat-label">Peer review pending</div><div class="stat-value">2</div><div class="stat-delta">You're the reviewer</div></div>
       </div>
       <div class="team-section">
         <div class="team-head">
@@ -3643,8 +3721,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
       <div class="sidebar-item" data-view="style-num-requests"><ph-hash></ph-hash><span class="si-label">New Style # Requests</span><span class="count">2</span></div>
       <div class="sidebar-item" data-view="sr-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="sr-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">4</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('sr')">+ Assign Task</button>
+    <button class="sidebar-btn" style="margin-top:6px;background:var(--surface);border:1px solid var(--border);color:var(--text)" data-magnetic onclick="openHandoffModal()">+ Handoff Request</button>
   </aside>
   <main class="main">
     <!-- HOME -->
@@ -4532,12 +4612,12 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
               </div>
             </div>
           </div>
-          <!-- Expandable per designer -->
+          <!-- Per designer metrics — always visible -->
           <div class="card" style="margin-top:12px">
             <div class="card-head">Per Designer — Expanded Metrics</div>
-            <div class="card-head expand-toggle" onclick="toggleExpand(this)" style="font-weight:500;font-size:13px;cursor:pointer">Dante Meneses</div>
-            <div class="expand-body">
-              <div style="display:flex;gap:16px;flex-wrap:wrap;padding:8px 0;font-size:12px">
+            <div style="border-bottom:1px solid var(--border);padding:10px 16px;">
+              <div style="font-weight:600;font-size:13px;margin-bottom:6px">Dante Meneses</div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px">
                 <div><span class="due-tag dt-ok">Peer approved 80%</span></div>
                 <div><span class="due-tag dt-urgent">Peer rejected 20%</span></div>
                 <div>Peer reworks: 3</div>
@@ -4546,9 +4626,9 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
                 <div>Lic rejects: 1 · Rejection rate: 7%</div>
               </div>
             </div>
-            <div class="card-head expand-toggle" onclick="toggleExpand(this)" style="font-weight:500;font-size:13px;cursor:pointer">Diana Adame</div>
-            <div class="expand-body">
-              <div style="display:flex;gap:16px;flex-wrap:wrap;padding:8px 0;font-size:12px">
+            <div style="border-bottom:1px solid var(--border);padding:10px 16px;">
+              <div style="font-weight:600;font-size:13px;margin-bottom:6px">Diana Adame</div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px">
                 <div><span class="due-tag dt-ok">Peer approved 75%</span></div>
                 <div><span class="due-tag dt-urgent">Peer rejected 25%</span></div>
                 <div>Peer reworks: 2</div>
@@ -4557,9 +4637,9 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
                 <div>Lic rejects: 2 · Rejection rate: 18%</div>
               </div>
             </div>
-            <div class="card-head expand-toggle" onclick="toggleExpand(this)" style="font-weight:500;font-size:13px;cursor:pointer">Andrea Cardenas</div>
-            <div class="expand-body">
-              <div style="display:flex;gap:16px;flex-wrap:wrap;padding:8px 0;font-size:12px">
+            <div style="padding:10px 16px;">
+              <div style="font-weight:600;font-size:13px;margin-bottom:6px">Andrea Cardenas</div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px">
                 <div><span class="due-tag dt-ok">Peer approved 100%</span></div>
                 <div>Peer reworks: 1</div>
                 <div><span class="due-tag dt-warn">SR approval 78%</span></div>
@@ -4946,6 +5026,56 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
               ✓ Send to Merch &amp; Trigger Licensing Resubmission →
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HANDOFFS -->
+    <div class="view" data-view="sr-handoffs">
+      <div class="page-head">
+        <div><h1 class="page-title">Handoffs</h1><div class="page-sub">Handoff requests created by you · track completion status</div></div>
+        <button class="btn" onclick="openHandoffModal()">+ Handoff Request</button>
+      </div>
+      <div class="stats-grid reveal-up">
+        <div class="stat-card"><div class="stat-label">Total Handoffs</div><div class="stat-value">4</div><div class="stat-delta">Q2 2026</div></div>
+        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" style="color:#065f46">2</div><div class="stat-delta">50% completion</div></div>
+        <div class="stat-card"><div class="stat-label">In Progress</div><div class="stat-value" style="color:#8b5cf6">1</div></div>
+        <div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" style="color:#dc2626">1</div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="table-wrap">
+          <table class="styles-table">
+            <thead>
+              <tr>
+                <th class="col-pin sortable">Style #</th>
+                <th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th>
+              </tr>
+              <tr class="tbl-filter-row">
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Pro Standard</option></select></td>
+                <td><select><option>All</option><option>SS27</option><option>FW26</option><option>SS26</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Tee</option><option>Hoodie</option><option>Shorts</option></select></td>
+                <td><select><option>All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Handoff Request</option></select></td>
+                <td><select><option>All</option><option>Dante Meneses</option><option>Diana Adame</option><option>Andrea Cardenas</option></select></td>
+                <td></td>
+                <td><select><option>All</option><option>Pending</option><option>In Progress</option><option>Completed</option><option>Overdue</option></select></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Court Classic Tee</td><td>T-SS26-LAL</td><td>SMU-1021</td><td>Handoff Request</td><td>Dante Meneses</td><td><span class="due-ok">May 22</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Long Sleeve</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash Long Sleeve</td><td>LS-SS26-GSW</td><td>SMU-1022</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-ok">May 24</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68853</div></td><td><div class="style-title">WMNS Cap Side Logo</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Caps</td><td>Side Logo Cap</td><td>CP-SS26-LAL</td><td>SMU-1023</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-warn">May 17</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Crew</td><td>WMNS</td><td>Apparel</td><td>Sweatshirts</td><td>Vintage Type Crew</td><td>CW-SS26-LAL</td><td>SMU-1024</td><td>Handoff Request</td><td>Andrea Cardenas</td><td><span class="due-urgent">May 12</span></td><td><span class="pill pill-rejected pill-dot">Overdue</span></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -5614,8 +5744,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       <div class="sidebar-item" data-view="mgr-task-queue"><ph-list-checks></ph-list-checks><span class="si-label">Task Queue</span><span class="count">3</span></div>
       <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
       <div class="sidebar-item" data-view="mgr-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="mgr-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">7</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('manager')">+ Assign Task</button>
+    <button class="sidebar-btn" style="margin-top:6px;background:var(--surface);border:1px solid var(--border);color:var(--text)" data-magnetic onclick="openHandoffModal()">+ Handoff Request</button>
   </aside>
   <main class="main">
     <!-- HOME -->
@@ -6421,6 +6553,59 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </table>
       </div>
     </div>
+
+    <!-- HANDOFFS -->
+    <div class="view" data-view="mgr-handoffs">
+      <div class="page-head">
+        <div><h1 class="page-title">Handoffs</h1><div class="page-sub">All handoff requests across teams · Q2 2026</div></div>
+        <button class="btn" onclick="openHandoffModal()">+ Handoff Request</button>
+      </div>
+      <div class="stats-grid reveal-up">
+        <div class="stat-card"><div class="stat-label">Total Handoffs</div><div class="stat-value">7</div><div class="stat-delta">Q2 2026 · All Teams</div></div>
+        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" style="color:#065f46">4</div><div class="stat-delta">57% completion rate</div></div>
+        <div class="stat-card"><div class="stat-label">In Progress</div><div class="stat-value" style="color:#8b5cf6">2</div></div>
+        <div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" style="color:#dc2626">1</div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="table-wrap">
+          <table class="styles-table">
+            <thead>
+              <tr>
+                <th class="col-pin sortable">Style #</th>
+                <th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th>
+              </tr>
+              <tr class="tbl-filter-row">
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Pro Standard</option></select></td>
+                <td><select><option>All</option><option>SS27</option><option>FW26</option><option>SS26</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Tee</option><option>Hoodie</option><option>Shorts</option></select></td>
+                <td><select><option>All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Handoff Request</option></select></td>
+                <td><select><option>All</option><option>Dante Meneses</option><option>Diana Adame</option><option>Andrea Cardenas</option><option>Amanda Mireles</option><option>Omar Ruiz</option></select></td>
+                <td></td>
+                <td><select><option>All</option><option>Pending</option><option>In Progress</option><option>Completed</option><option>Overdue</option></select></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Court Classic Tee</td><td>T-SS26-LAL</td><td>SMU-1021</td><td>Handoff Request</td><td>Dante Meneses</td><td><span class="due-ok">May 22</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Long Sleeve</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash Long Sleeve</td><td>LS-SS26-GSW</td><td>SMU-1022</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-ok">May 24</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68853</div></td><td><div class="style-title">WMNS Cap Side Logo</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Caps</td><td>Side Logo Cap</td><td>CP-SS26-LAL</td><td>SMU-1023</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-warn">May 17</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HBSC88110</div></td><td><div class="style-title">Bulls MENS Tee Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Classic Chenille</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>T-Shirts</td><td>Sideline Tee</td><td>T-SS27-CHI</td><td>SMU-1025</td><td>Handoff Request</td><td>Amanda Mireles</td><td><span class="due-ok">May 28</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HBSC88111</div></td><td><div class="style-title">Bulls MENS Hoodie Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Fleece</td><td>Sideline Hoodie</td><td>H-SS27-CHI</td><td>SMU-1026</td><td>Handoff Request</td><td>Amanda Mireles</td><td><span class="due-ok">May 28</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HLAK99201</div></td><td><div class="style-title">Lakers WMNS Tee Showtime</div></td><td>Pro Standard</td><td>SS27</td><td>Retro Classics</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Showtime Tee</td><td>T-SS27-LAL</td><td>SMU-1027</td><td>Handoff Request</td><td>Omar Ruiz</td><td><span class="due-warn">May 19</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Crew</td><td>WMNS</td><td>Apparel</td><td>Sweatshirts</td><td>Vintage Type Crew</td><td>CW-SS26-LAL</td><td>SMU-1024</td><td>Handoff Request</td><td>Andrea Cardenas</td><td><span class="due-urgent">May 12</span></td><td><span class="pill pill-rejected pill-dot">Overdue</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -6446,8 +6631,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       <div class="sidebar-label">Tasks</div>
       <div class="sidebar-item" data-view="daily-progress"><ph-calendar-check></ph-calendar-check><span class="si-label">Daily Progress</span></div>
       <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="admin-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">11</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('admin')">+ Assign Task</button>
+    <button class="sidebar-btn" style="margin-top:6px;background:var(--surface);border:1px solid var(--border);color:var(--text)" data-magnetic onclick="openHandoffModal()">+ Handoff Request</button>
   </aside>
   <main class="main">
     <!-- HOME -->
@@ -7186,6 +7373,63 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><span>Entra App Registration</span><span class="due-ok">● Active</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><span>Admin Consent (Sites.ReadWrite.All)</span><span class="due-urgent">● Pending IT approval</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0"><span>Demo Mode</span><span><button class="btn btn-sm">Toggle</button></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HANDOFFS -->
+    <div class="view" data-view="admin-handoffs">
+      <div class="page-head">
+        <div><h1 class="page-title">Handoffs</h1><div class="page-sub">All handoff requests system-wide · Q2 2026</div></div>
+        <button class="btn" onclick="openHandoffModal()">+ Handoff Request</button>
+      </div>
+      <div class="stats-grid reveal-up">
+        <div class="stat-card"><div class="stat-label">Total Handoffs</div><div class="stat-value">11</div><div class="stat-delta">Q2 2026 · All Teams</div></div>
+        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" style="color:#065f46">7</div><div class="stat-delta">64% completion rate</div></div>
+        <div class="stat-card"><div class="stat-label">In Progress</div><div class="stat-value" style="color:#8b5cf6">3</div></div>
+        <div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" style="color:#dc2626">1</div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="table-wrap">
+          <table class="styles-table">
+            <thead>
+              <tr>
+                <th class="col-pin sortable">Style #</th>
+                <th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th>
+              </tr>
+              <tr class="tbl-filter-row">
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Pro Standard</option></select></td>
+                <td><select><option>All</option><option>SS27</option><option>FW26</option><option>SS26</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Tee</option><option>Hoodie</option><option>Shorts</option><option>Cap</option></select></td>
+                <td><select><option>All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td><select><option>All</option><option>Handoff Request</option></select></td>
+                <td><input type="text" placeholder="Filter…"></td>
+                <td></td>
+                <td><select><option>All</option><option>Pending</option><option>In Progress</option><option>Completed</option><option>Overdue</option></select></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Court Classic Tee</td><td>T-SS26-LAL</td><td>SMU-1021</td><td>Handoff Request</td><td>Dante Meneses</td><td><span class="due-ok">May 22</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Long Sleeve</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash Long Sleeve</td><td>LS-SS26-GSW</td><td>SMU-1022</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-ok">May 24</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68853</div></td><td><div class="style-title">WMNS Cap Side Logo</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Caps</td><td>Side Logo Cap</td><td>CP-SS26-LAL</td><td>SMU-1023</td><td>Handoff Request</td><td>Diana Adame</td><td><span class="due-warn">May 17</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HBSC88110</div></td><td><div class="style-title">Bulls MENS Tee Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Classic Chenille</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>T-Shirts</td><td>Sideline Tee</td><td>T-SS27-CHI</td><td>SMU-1025</td><td>Handoff Request</td><td>Amanda Mireles</td><td><span class="due-ok">May 28</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HBSC88111</div></td><td><div class="style-title">Bulls MENS Hoodie Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Fleece</td><td>Sideline Hoodie</td><td>H-SS27-CHI</td><td>SMU-1026</td><td>Handoff Request</td><td>Amanda Mireles</td><td><span class="due-ok">May 28</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HLAK99201</div></td><td><div class="style-title">Lakers WMNS Tee Showtime</div></td><td>Pro Standard</td><td>SS27</td><td>Retro Classics</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Showtime Tee</td><td>T-SS27-LAL</td><td>SMU-1027</td><td>Handoff Request</td><td>Omar Ruiz</td><td><span class="due-warn">May 19</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS Summer League</td><td>Crew</td><td>WMNS</td><td>Apparel</td><td>Sweatshirts</td><td>Vintage Type Crew</td><td>CW-SS26-LAL</td><td>SMU-1024</td><td>Handoff Request</td><td>Andrea Cardenas</td><td><span class="due-urgent">May 12</span></td><td><span class="pill pill-rejected pill-dot">Overdue</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HLAK99202</div></td><td><div class="style-title">Lakers MENS Shorts Showtime</div></td><td>Pro Standard</td><td>SS27</td><td>Retro Classics</td><td>Shorts</td><td>MENS</td><td>Apparel</td><td>Bottoms</td><td>Showtime Shorts</td><td>SH-SS27-LAL</td><td>SMU-1028</td><td>Handoff Request</td><td>Omar Ruiz</td><td><span class="due-ok">May 30</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HCEL77301</div></td><td><div class="style-title">Celtics KIDS Hoodie Banner</div></td><td>Pro Standard</td><td>FW26</td><td>Heritage Drop</td><td>Hoodie</td><td>UNISEX</td><td>Apparel</td><td>Fleece</td><td>Banner Hoodie</td><td>H-FW26-BOS</td><td>SMU-1029</td><td>Handoff Request</td><td>Brisa Aguirre</td><td><span class="due-ok">Jun 2</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HCEL77302</div></td><td><div class="style-title">Celtics MENS Tee Banner</div></td><td>Pro Standard</td><td>FW26</td><td>Heritage Drop</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>T-Shirts</td><td>Banner Tee</td><td>T-FW26-BOS</td><td>SMU-1030</td><td>Handoff Request</td><td>Brisa Aguirre</td><td><span class="due-warn">May 21</span></td><td><span class="pill pill-peer pill-dot">In Progress</span></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HBSC88112</div></td><td><div class="style-title">Bulls WMNS Tee Sideline</div></td><td>Pro Standard</td><td>SS27</td><td>Classic Chenille</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>T-Shirts</td><td>Sideline Tee WMNS</td><td>T-SS27-CHI-W</td><td>SMU-1031</td><td>Handoff Request</td><td>Ana Rivera</td><td><span class="due-ok">May 29</span></td><td><span class="pill pill-approved pill-dot">Completed</span></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -8748,6 +8992,37 @@ function openTaskModal(roleCtx) {
 
 function closeTaskModal() {
   document.getElementById('taskModalOverlay').classList.remove('open');
+}
+
+function openHandoffModal() {
+  // Reset fields
+  ['hoStyleNum','hoTeamName','hoStyleName','hoPLMLink'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['hoSeason','hoLeague','hoAssignee','hoPriority'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.selectedIndex = 0;
+  });
+  const due = document.getElementById('hoDueDate');
+  if (due) due.value = '';
+  document.getElementById('handoffModalOverlay').classList.add('open');
+}
+
+function closeHandoffModal() {
+  document.getElementById('handoffModalOverlay').classList.remove('open');
+}
+
+function submitHandoffRequest() {
+  const styleNum = document.getElementById('hoStyleNum');
+  if (!styleNum || !styleNum.value.trim()) {
+    styleNum && (styleNum.style.borderColor = '#dc2626');
+    showToast('Style Number is required.', 'warn');
+    return;
+  }
+  if (styleNum) styleNum.style.borderColor = '';
+  closeHandoffModal();
+  showToast('Handoff Request created and assigned successfully.', 'success');
 }
 
 function updateTaskExtras() {
