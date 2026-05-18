@@ -2235,11 +2235,186 @@ html[data-theme="dark"] .presence-status-label.available   { color: #34d399 !imp
 html[data-theme="dark"] .presence-status-label.in-meeting  { color: #fbbf24 !important; }
 html[data-theme="dark"] .presence-status-label.busy        { color: #f87171 !important; }
 html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   BETA LOGIN SCREEN
+   ═══════════════════════════════════════════════════════════════ */
+#beta-login-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #090d18;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 32px 24px;
+  overflow-y: auto;
+}
+.beta-login-logo {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.beta-login-logo .brand { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #f1f5f9; }
+.beta-login-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  background: rgba(74,200,220,0.15); color: #4ac8dc; border: 1px solid rgba(74,200,220,0.25);
+  padding: 3px 8px; border-radius: 99px;
+}
+.beta-login-headline {
+  font-size: 26px; font-weight: 900; letter-spacing: -0.8px; color: #f1f5f9;
+  margin-bottom: 6px; text-align: center;
+}
+.beta-login-sub {
+  font-size: 13px; color: #64748b; margin-bottom: 40px; text-align: center;
+}
+.beta-login-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 900px;
+  width: 100%;
+}
+@media (max-width: 800px) { .beta-login-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .beta-login-grid { grid-template-columns: 1fr; } }
+.beta-user-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 22px 18px 18px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s cubic-bezier(0.23,1,0.32,1);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  position: relative;
+}
+.beta-user-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(74,200,220,0.3);
+  transform: translateY(-2px);
+}
+.beta-user-card:active { transform: translateY(0); }
+.beta-user-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, #4ac8dc, #7c3aed);
+  flex-shrink: 0;
+}
+.beta-user-card[data-role="assistant"]   .beta-user-avatar { background: linear-gradient(135deg,#0891b2,#0e7490); }
+.beta-user-card[data-role="associate"]   .beta-user-avatar { background: linear-gradient(135deg,#0284c7,#1d4ed8); }
+.beta-user-card[data-role="designer"]    .beta-user-avatar { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+.beta-user-card[data-role="sr"]          .beta-user-avatar { background: linear-gradient(135deg,#059669,#10b981); }
+.beta-user-card[data-role="licensing"]   .beta-user-avatar { background: linear-gradient(135deg,#d97706,#f59e0b); }
+.beta-user-card[data-role="manager"]     .beta-user-avatar { background: linear-gradient(135deg,#dc2626,#ef4444); }
+.beta-user-card[data-role="admin"]       .beta-user-avatar { background: linear-gradient(135deg,#1c2024,#374151); }
+.beta-user-card[data-role="merch"]       .beta-user-avatar { background: linear-gradient(135deg,#be185d,#ec4899); }
+.beta-user-name { font-size: 13px; font-weight: 700; color: #f1f5f9; text-align: center; }
+.beta-user-role { font-size: 11px; color: #64748b; text-align: center; font-weight: 500; }
+.beta-user-email { font-size: 10px; color: #475569; text-align: center; margin-top: -4px; }
+.beta-signin-btn {
+  margin-top: 4px; width: 100%;
+  padding: 9px 0; border-radius: 8px; border: none;
+  background: rgba(74,200,220,0.1); color: #4ac8dc;
+  font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+  transition: background 0.15s;
+}
+.beta-signin-btn:hover { background: rgba(74,200,220,0.2); }
+.beta-login-footer {
+  margin-top: 32px; font-size: 11px; color: #334155; text-align: center;
+}
+/* Beta sign-out button in nav */
+.beta-signout-btn {
+  margin-left: 6px; padding: 4px 10px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12); background: transparent;
+  color: #94a3b8; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+.beta-signout-btn:hover { background: rgba(255,255,255,0.08); color: #f1f5f9; }
+html[data-theme="light"] #beta-login-screen { background: #f8fafc; }
+html[data-theme="light"] .beta-user-card { background: #fff; border-color: #e2e8f0; }
+html[data-theme="light"] .beta-user-card:hover { border-color: #4ac8dc; background: #f0fdfe; }
+html[data-theme="light"] .beta-login-headline { color: #0f172a; }
+html[data-theme="light"] .beta-login-sub { color: #64748b; }
+html[data-theme="light"] .beta-login-footer { color: #94a3b8; }
+html[data-theme="light"] .beta-user-name { color: #0f172a; }
+html[data-theme="light"] .beta-login-logo .brand { color: #0f172a; }
+html[data-theme="light"] #beta-login-screen { background: #f8fafc; }
 </style>
 </head>
 <body>
 
-<div class="wireframe-banner">WIREFRAME · PAD Role Dashboards · Use the role selector ↗ to switch dashboards</div>
+<div id="beta-login-screen">
+  <div class="beta-login-logo">
+    <span class="brand">PAD</span>
+    <span class="beta-login-badge">BETA TEST</span>
+  </div>
+  <div class="beta-login-headline">Sign in to your dashboard</div>
+  <div class="beta-login-sub">Select your account to continue. Each role sees only its own view.</div>
+  <div class="beta-login-grid">
+
+    <div class="beta-user-card" data-role="assistant" onclick="betaLogin('assistant','Jasmine Carter','JC','jcarter@maximaapparel.com','Assistant Designer')">
+      <div class="beta-user-avatar">JC</div>
+      <div class="beta-user-name">Jasmine Carter</div>
+      <div class="beta-user-role">Assistant Designer</div>
+      <div class="beta-user-email">jcarter@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="associate" onclick="betaLogin('associate','Marcus Torres','MT','mtorres@maximaapparel.com','Associate Designer')">
+      <div class="beta-user-avatar">MT</div>
+      <div class="beta-user-name">Marcus Torres</div>
+      <div class="beta-user-role">Associate Designer</div>
+      <div class="beta-user-email">mtorres@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="designer" onclick="betaLogin('designer','Sofia Reyes','SR','sreyes@maximaapparel.com','Designer')">
+      <div class="beta-user-avatar">SR</div>
+      <div class="beta-user-name">Sofia Reyes</div>
+      <div class="beta-user-role">Designer</div>
+      <div class="beta-user-email">sreyes@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="sr" onclick="betaLogin('sr','Ana Valerio','AV','avalerio@maximaapparel.com','Sr. Designer')">
+      <div class="beta-user-avatar">AV</div>
+      <div class="beta-user-name">Ana Valerio</div>
+      <div class="beta-user-role">Sr. Designer</div>
+      <div class="beta-user-email">avalerio@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="licensing" onclick="betaLogin('licensing','Priya Patel','PP','ppatel@maximaapparel.com','Licensing')">
+      <div class="beta-user-avatar">PP</div>
+      <div class="beta-user-name">Priya Patel</div>
+      <div class="beta-user-role">Licensing</div>
+      <div class="beta-user-email">ppatel@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="manager" onclick="betaLogin('manager','David Kim','DK','dkim@maximaapparel.com','Manager')">
+      <div class="beta-user-avatar">DK</div>
+      <div class="beta-user-name">David Kim</div>
+      <div class="beta-user-role">Manager</div>
+      <div class="beta-user-email">dkim@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="admin" onclick="betaLogin('admin','Omar Ruiz','OR','oruiz@maximaapparel.com','Admin')">
+      <div class="beta-user-avatar">OR</div>
+      <div class="beta-user-name">Omar Ruiz</div>
+      <div class="beta-user-role">Admin</div>
+      <div class="beta-user-email">oruiz@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+    <div class="beta-user-card" data-role="merch" onclick="betaLogin('merch','Carlos Lopez','CL','clopez@maximaapparel.com','Merch Team')">
+      <div class="beta-user-avatar">CL</div>
+      <div class="beta-user-name">Carlos Lopez</div>
+      <div class="beta-user-role">Merch Team</div>
+      <div class="beta-user-email">clopez@maximaapparel.com</div>
+      <button class="beta-signin-btn">Sign in →</button>
+    </div>
+
+  </div>
+  <div class="beta-login-footer">PAD Beta · Maxima Apparel / Pro Standard · Simulated environment — no real data is modified</div>
+</div>
+
+
 
 <header class="topbar">
   <div class="topbar-left">
@@ -2255,60 +2430,12 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   </div>
   <div class="topbar-right">
     <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()" title="Toggle dark mode" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:6px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background 0.15s;">🌙</button>
-    <div class="user-chip" id="userChip" onclick="toggleRoleDropdown(event)">
-      <div class="avatar">OR</div>
-      <span class="user-name">Omar Ruiz</span>
-      <span class="role-badge" id="currentRoleBadge">ADMIN</span>
-      <span class="hbg" id="userChipHbg"><span class="hbg-line"></span><span class="hbg-line"></span><span class="hbg-line"></span></span>
+    <div class="user-chip beta-chip" id="userChip" style="cursor:default;">
+      <div class="avatar" id="betaAvatar">--</div>
+      <span class="user-name" id="betaUserName">–</span>
+      <span class="role-badge" id="currentRoleBadge" style="display:none"></span>
+      <button class="beta-signout-btn" onclick="betaSignOut()">Sign out</button>
     </div>
-    <div class="role-dropdown" id="roleDropdown">
-      <div class="rd-header">
-        <div class="rd-h-label">Signed in as</div>
-        <div class="rd-h-name">Omar Ruiz</div>
-        <div class="rd-h-sub">oruiz@maximaapparel.com · ADMIN</div>
-      </div>
-      <div class="rd-section-label">View dashboard as</div>
-      <button class="rd-item" data-role="assistant">
-        <div class="rd-num">1</div>
-        <div class="rd-text"><div class="rd-label">Assistant Designer</div><div class="rd-desc">Own work · licensing rework visibility</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="associate">
-        <div class="rd-num">2</div>
-        <div class="rd-text"><div class="rd-label">Associate Designer</div><div class="rd-desc">Same view as Assistant · peer review pending</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="designer">
-        <div class="rd-num">3</div>
-        <div class="rd-text"><div class="rd-label">Designer</div><div class="rd-desc">+ Art &amp; Template trackers · peer review duties</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="sr">
-        <div class="rd-num">4</div>
-        <div class="rd-text"><div class="rd-label">Sr. Designer</div><div class="rd-desc">+ Peer queue · Team metrics · Task assignment</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="licensing">
-        <div class="rd-num">5</div>
-        <div class="rd-text"><div class="rd-label">Licensing</div><div class="rd-desc">SR-approved queue · final compliance gate</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="manager">
-        <div class="rd-num">6</div>
-        <div class="rd-text"><div class="rd-label">Manager</div><div class="rd-desc">All teams · cross-team metrics · task assignment</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item active" data-role="admin">
-        <div class="rd-num">7</div>
-        <div class="rd-text"><div class="rd-label">Admin</div><div class="rd-desc">System config · Entra mapping · task assignment</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <button class="rd-item" data-role="merch">
-        <div class="rd-num">8</div>
-        <div class="rd-text"><div class="rd-label">Merch Team</div><div class="rd-desc">Logo updates · New style # requests · task assignment</div></div>
-        <div class="rd-check">✓</div>
-      </button>
-      <div class="rd-footer">Admin impersonation · audit-logged in Entra</div>
     </div>
   </div>
 </header>
@@ -9562,5 +9689,39 @@ if (initHome) animateCounters(initHome);
     </div>
   </div>
 </div>
+
+<script>
+// ── BETA LOGIN ────────────────────────────────────────────────────────────────
+function betaLogin(role, name, initials, email, roleTitle) {
+  document.getElementById('betaAvatar').textContent = initials;
+  document.getElementById('betaUserName').textContent = name;
+  var roleMap = {
+    assistant:'assistant', associate:'associate', designer:'designer',
+    sr:'sr', licensing:'licensing', manager:'manager', admin:'admin', merch:'merch'
+  };
+  showDash(roleMap[role] || 'assistant');
+  var screen = document.getElementById('beta-login-screen');
+  screen.style.transition = 'opacity 0.35s ease';
+  screen.style.opacity = '0';
+  screen.style.pointerEvents = 'none';
+  setTimeout(function() { screen.style.display = 'none'; }, 360);
+}
+
+function betaSignOut() {
+  var screen = document.getElementById('beta-login-screen');
+  screen.style.display = 'flex';
+  screen.style.opacity = '0';
+  screen.style.pointerEvents = '';
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      screen.style.transition = 'opacity 0.25s ease';
+      screen.style.opacity = '1';
+    });
+  });
+  document.getElementById('betaAvatar').textContent = '--';
+  document.getElementById('betaUserName').textContent = '–';
+}
+</script>
+
 </body>
 </html>
