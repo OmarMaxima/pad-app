@@ -730,6 +730,15 @@ html[data-theme="dark"] .presence-status-dot { border-color:var(--surface); }
 .btn-rework-submit { width:100%; padding:5px 0; border-radius:6px; border:none; background:#1c2024; color:#fff; font-size:11px; font-weight:600; cursor:pointer; margin-top:5px; transition:background 0.15s; }
 .btn-rework-submit:disabled { opacity:0.35; cursor:not-allowed; }
 .btn-rework-submit:not(:disabled):hover { background:#000; }
+.rw-expand-btn { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; padding:7px 14px; margin-top:8px; border-radius:8px; border:1.5px solid var(--border); background:var(--surface); cursor:pointer; font-size:12px; font-weight:600; color:var(--text); transition:all 0.15s; white-space:nowrap; }
+.rw-expand-btn:hover { border-color:#6366f1; color:#6366f1; background:#f5f3ff; }
+.rw-expand-btn.open { background:#1c2024; color:#fff; border-color:#1c2024; }
+html[data-theme="dark"] .rw-expand-btn.open { background:#e2e8f0; color:#0f172a; border-color:#e2e8f0; }
+.rw-expand-btn .rw-chev { font-size:11px; transition:transform 0.15s; }
+.rw-expand-btn.open .rw-chev { transform:rotate(180deg); }
+.rw-row.expanded { background:oklch(97% 0.004 260); }
+html[data-theme="dark"] .rw-row.expanded { background:oklch(18% 0.01 260); }
+.rework-detail-row td { border-bottom:2px solid var(--border); }
 .btn-peer-approve { background:#10b981; color:#fff; }
 .btn-peer-approve:not(:disabled):hover { background:#059669; }
 .btn-peer-reject  { background:#dc2626; color:#fff; }
@@ -2446,7 +2455,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
 <header class="topbar">
   <div class="topbar-left">
     <span class="brand">PAD</span>
-    <span class="brand-sub">Product Approval Document</span>
+    <span class="brand-sub">Plan Assign Deliver</span>
   </div>
   <div class="filter-bar" id="globalFilterBar">
     <select class="filter-select"><option>All Years</option><option>2025</option><option>2026</option><option selected>2027</option></select>
@@ -2593,13 +2602,6 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
       <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">12</span></div>
       <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">4</span></div>
       <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">7</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
@@ -2700,7 +2702,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
 
       <!-- General production stats (all capsules) -->
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
+        <div class="gen-stat bento-featured" style="position:relative;cursor:pointer" onclick="openApprovedModal('assistant')"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-total-styles"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
@@ -3038,119 +3040,18 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
             </thead>
             <tbody>
               <!-- LICENSING REWORK ROW -->
-              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span></td><td class="figma-cell" style="min-width:220px;vertical-align:top;padding:6px 8px;"><div class="lic-rejection-note"><strong>Rejected:</strong> Logo proportions off — 12% smaller, shifted left</div><button class="btn-pushback" onclick="openPushbackJustify(this)">↩ Design Pushback — already addressed</button><div class="pb-justify-wrap"><textarea class="pb-justify-textarea" placeholder="Explain why this is already addressed or compliant with current specs…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-pb-submit" onclick="submitPushback(this)" style="margin-top:6px;">Send Pushback to Licensing →</button></div><button class="btn-clarify" onclick="openClarifyJustify(this)" style="margin-top:4px;">? Need Clarification — comment unclear</button><div class="cl-justify-wrap"><textarea class="cl-justify-textarea" placeholder="Describe what's unclear or what specific info you need from licensing…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-cl-submit" onclick="submitClarify(this)" style="margin-top:6px;">Send Clarification Request →</button></div><div class="lic-rework-divider">— or submit updated version —</div><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste Figma link to enable submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-HVGU68851"><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-HVGU68851', this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:220px;vertical-align:top;padding:6px 8px;"><div class="lic-rejection-note"><strong>Rejected:</strong> Logo proportions off — 12% smaller, shifted left</div><button class="btn-pushback" onclick="openPushbackJustify(this)">↩ Design Pushback — already addressed</button><div class="pb-justify-wrap"><textarea class="pb-justify-textarea" placeholder="Explain why this is already addressed or compliant with current specs…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-pb-submit" onclick="submitPushback(this)" style="margin-top:6px;">Send Pushback to Licensing →</button></div><button class="btn-clarify" onclick="openClarifyJustify(this)" style="margin-top:4px;">? Need Clarification — comment unclear</button><div class="cl-justify-wrap"><textarea class="cl-justify-textarea" placeholder="Describe what's unclear or what specific info you need from licensing…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-cl-submit" onclick="submitClarify(this)" style="margin-top:6px;">Send Clarification Request →</button></div><div class="lic-rework-divider">— or submit updated version —</div><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste Figma link to enable submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-HVGU68851" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #f59e0b;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;font-weight:700;font-size:12px;padding:4px 10px;">Licensing Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Licensing</span></div><div style="font-size:13px;color:var(--text);margin-bottom:16px;line-height:1.5"><strong>Comment:</strong> Logo proportions off — 12% smaller, shifted left. Verify against current NBA brand guide v4.2 spec sheet before resubmitting.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px">Rework History</div><div style="display:flex;flex-direction:column;gap:0"><div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:12px"><div style="width:30px;height:30px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 08</div></div></div><div style="width:2px;height:18px;background:#e0e1e6;margin-left:14px;margin-bottom:0"></div><div style="display:flex;gap:14px;align-items:flex-start;padding:12px 0"><div style="width:30px;height:30px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">SR Review — Approved</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 10</div></div></div><div style="width:2px;height:18px;background:#e0e1e6;margin-left:14px"></div><div style="display:flex;gap:14px;align-items:flex-start;padding-top:12px"><div style="width:30px;height:30px;border-radius:50%;background:#fde68a;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#b45309;flex-shrink:0">✕</div><div><div style="font-size:13px;font-weight:600;color:#b45309">Licensing — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 12 — this rework</div></div></div></div></div></td></tr>
               <!-- PEER REWORK ROW -->
-              <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew · Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Vintage Type</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">Apr 14</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-HVGU68863"><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew · Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Vintage Type</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">Apr 14</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-HVGU68863', this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-HVGU68863" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #8b5cf6;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;font-weight:700;font-size:12px;padding:4px 10px;">Peer Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Peer Reviewer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:16px;line-height:1.5"><strong>Comment:</strong> Type hierarchy inconsistent with template spec — "Vintage" word mark needs 15% size increase and secondary text tracking adjusted to +40.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px">Rework History</div><div style="display:flex;flex-direction:column;gap:0"><div style="display:flex;gap:14px;align-items:flex-start;padding-top:4px"><div style="width:30px;height:30px;border-radius:50%;background:#ddd6fe;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#7c3aed;flex-shrink:0">✕</div><div><div style="font-size:13px;font-weight:600;color:#7c3aed">Peer Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 14 — this rework</div></div></div></div></div></td></tr>
               <!-- SR REWORK ROW -->
-              <tr><td class="col-pin"><div class="style-code">HVGU68864</div></td><td><div class="style-title">WMNS Polo · 16-time Champs</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>16-time Champs</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-HVGU68864"><td class="col-pin"><div class="style-code">HVGU68864</div></td><td><div class="style-title">WMNS Polo · 16-time Champs</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>16-time Champs</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-HVGU68864', this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-HVGU68864" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #06b6d4;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;font-weight:700;font-size:12px;padding:4px 10px;">SR Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Sr. Designer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:16px;line-height:1.5"><strong>Comment:</strong> "16-time Champs" copy needs legal sign-off confirmation. Confirm trophy icon is from approved asset library — do not use web-sourced art. Resubmit with asset IDs documented.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px">Rework History</div><div style="display:flex;flex-direction:column;gap:0"><div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:12px"><div style="width:30px;height:30px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 11</div></div></div><div style="width:2px;height:18px;background:#e0e1e6;margin-left:14px"></div><div style="display:flex;gap:14px;align-items:flex-start;padding-top:12px"><div style="width:30px;height:30px;border-radius:50%;background:#a5f3fc;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#0e7490;flex-shrink:0">✕</div><div><div style="font-size:13px;font-weight:600;color:#0e7490">SR Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Apr 13 — this rework</div></div></div></div></div></td></tr>
             </tbody>
           </table>
         </div>
       </div>
-    </div>
-
-    <!-- APPROVED -->
-    <div class="view" data-view="approved">
-      <div class="page-head"><div><h1 class="page-title">Approved</h1><div class="page-sub">Your styles that cleared Licensing</div></div></div>
-      <div class="card">
-        <div class="table-wrap">
-          <table class="styles-table">
-            <thead>
-              <tr>
-                <th class="col-pin sortable">Style #</th>
-                <th>Title</th>
-                <th>Brand</th>
-                <th>Season</th>
-                <th>Capsule</th>
-                <th>Garment</th>
-                <th>Gender</th>
-                <th>Dept</th>
-                <th>Class</th>
-                <th>Style Name</th>
-                                <th>Ticker #</th>
-                <th>SMU ID</th>
-                <th>Ticket Type</th>
-                <th>Assigned</th>
-                <th>Due Date</th>
-                <th>Status</th>
-                <th>Figma Board</th>
-                <th>Submit</th>
-              </tr>
-              <tr class="tbl-filter-row">
-                <td><input placeholder="Style #…"></td>
-                <td><input placeholder="Title…"></td>
-                <td><select><option value="">All Brands</option><option>Pro Standard</option><option>NBA</option><option>NHL</option></select></td>
-                <td><select><option value="">All Seasons</option><option>SS27</option><option>FW26</option><option>SS26</option></select></td>
-                <td><select><option value="">All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option><option>Q2 WMNS Summer League</option></select></td>
-                <td><select><option value="">All Types</option><option>Tee</option><option>Hoodie</option><option>Shorts</option><option>Jacket</option></select></td>
-                <td><select><option value="">All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td>
-                <td><select><option value="">All Depts</option><option>Apparel</option><option>Headwear</option><option>Accessories</option></select></td>
-                <td><select><option value="">All Classes</option><option>Tops</option><option>Bottoms</option><option>Outerwear</option></select></td>
-                <td><input placeholder="Name…"></td>
-                                <td><input placeholder="Ticker…"></td>
-                <td><input placeholder="SMU…"></td>
-                <td><select><option value="">All Types</option><option>Standard</option><option>SMU</option><option>Collab</option></select></td>
-                <td><input placeholder="Assigned…"></td>
-                <td><input placeholder="Due…"></td>
-                <td><select><option value="">All Statuses</option><option>Pending</option><option>In Review</option><option>Rework</option><option>Approved</option></select></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td><div class="style-title">WMNS Pullover · Throwback</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Throwback</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Lakers</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2701</span></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HEOC68872</div></td><td><div class="style-title">WMNS Cap · America's Team</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Jacket</td><td>WMNS</td><td>Headwear</td><td>Tops</td><td>America's Team</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Cowboys</td><td><span class="due-ok">Apr 14</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2702</span></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HMLLA78910</div></td><td><div class="style-title">MENS Tee · Black &amp; Gold</div></td><td>Pro Standard</td><td>SS26</td><td>Q3 MENS</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Black &amp; Gold</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>LAFC</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2703</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- PEER COMMENTS -->
-    <div class="view" data-view="peer-comments">
-      <div class="page-head"><div><h1 class="page-title">Peer Comments</h1><div class="page-sub">Comments from your peer reviewer across all rounds</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><input placeholder="Reviewer…"></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
-      </tbody></table></div>
-    </div>
-
-    <!-- SR COMMENTS -->
-    <div class="view" data-view="sr-comments">
-      <div class="page-head"><div><h1 class="page-title">SR Comments</h1><div class="page-sub">Senior Designer feedback on your peer-approved styles</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><input placeholder="Reviewer…"></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
-      </tbody></table></div>
-    </div>
-
-    <!-- LIC COMMENTS -->
-    <div class="view" data-view="lic-comments">
-      <div class="page-head"><div><h1 class="page-title">Licensing Comments</h1><div class="page-sub">Licensing dept feedback — visible to you, actioned by Sr/Lic teams</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Capsule</th><th>Comment</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><select><option value="">All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option><option>Q2 WMNS</option></select></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGW68857</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">NBA secondary mark usage rights expired Q1.</span></td><td>Apr 15</td></tr>
-        <tr><td><div class="style-code">HVGU68864</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">"16x Champs" — needs trophy count verified.</span></td><td>Apr 12</td></tr>
-      </tbody></table></div>
     </div>
 
     <!-- MERCH TASKS (assigned capsule styles to review) -->
@@ -3270,14 +3171,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
       <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">12</span></div>
       <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">4</span></div>
       <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">7</span></div>
       <div class="sidebar-item" data-view="peer-pending"><i class="ph ph-users"></i><span class="si-label">Peer Review Pending</span><span class="count">2</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
@@ -3357,7 +3251,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         </div>
       </div>
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div></div>
+        <div class="gen-stat" style="position:relative;cursor:pointer" onclick="openApprovedModal('associate')"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div></div>
         <div class="gen-stat"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div></div>
         <div class="gen-stat"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div></div>
         <div class="gen-stat"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div></div>
@@ -3509,45 +3403,16 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         <div class="rework-chart-card rc-lic"><div class="rework-chart-count" style="color:#b45309">1</div><div class="rework-chart-label">Licensing Rework</div><div class="rework-chart-sub">Rejected by Licensing</div><div class="rework-chart-bar"><div class="rework-chart-fill" style="width:33%;background:#f59e0b"></div></div></div>
       </div>
       <div class="card"><div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Source</th><th>Figma / Action</th><th>Submit</th></tr></thead><tbody>
-        <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
-        <tr><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew · Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Vintage Type</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">Apr 14</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
-        <tr><td class="col-pin"><div class="style-code">HVGU68864</div></td><td><div class="style-title">WMNS Polo · 16-time Champs</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>16-time Champs</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <!-- LIC REWORK ROW -->
+        <tr class="rw-row" id="rw-row-assoc-HVGU68851"><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-assoc-HVGU68851',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <tr class="rework-detail-row" id="rw-detail-assoc-HVGU68851" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #f59e0b;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;font-weight:700">Licensing Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Licensing</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> Logo proportions off — 12% smaller, shifted left. Verify against current NBA brand guide v4.2 spec sheet.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 08</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">SR Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 10</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#fde68a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#b45309;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#b45309">Licensing — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">Apr 12 — this rework</div></div></div></div></div></td></tr>
+        <!-- PEER REWORK ROW -->
+        <tr class="rw-row" id="rw-row-assoc-HVGU68863"><td class="col-pin"><div class="style-code">HVGU68863</div></td><td><div class="style-title">WMNS Crew · Vintage Type</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Vintage Type</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">Apr 14</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-assoc-HVGU68863',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <tr class="rework-detail-row" id="rw-detail-assoc-HVGU68863" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #8b5cf6;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;font-weight:700">Peer Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Peer Reviewer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> Type hierarchy inconsistent — "Vintage" word mark needs 15% size increase and secondary tracking +40.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#ddd6fe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#7c3aed;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#7c3aed">Peer Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">Apr 14 — this rework</div></div></div></div></div></td></tr>
+        <!-- SR REWORK ROW -->
+        <tr class="rw-row" id="rw-row-assoc-HVGU68864"><td class="col-pin"><div class="style-code">HVGU68864</div></td><td><div class="style-title">WMNS Polo · 16-time Champs</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>16-time Champs</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-assoc-HVGU68864',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+        <tr class="rework-detail-row" id="rw-detail-assoc-HVGU68864" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #06b6d4;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;font-weight:700">SR Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Sr. Designer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> "16-time Champs" copy needs legal sign-off. Confirm trophy icon is from approved asset library — resubmit with asset IDs.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 11</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#a5f3fc;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0e7490;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#0e7490">SR Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">Apr 13 — this rework</div></div></div></div></div></td></tr>
       </tbody></table></div></div>
-    </div>
-
-    <!-- APPROVED -->
-    <div class="view" data-view="approved">
-      <div class="page-head"><div><h1 class="page-title">Approved</h1><div class="page-sub">Your styles that cleared Licensing</div></div></div>
-      <div class="card"><div class="table-wrap"><table class="styles-table"><thead><tr><th class="col-pin sortable">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Dept</th><th>Class</th><th>Style Name</th><th>Ticker #</th><th>SMU ID</th><th>Ticket Type</th><th>Assigned</th><th>Due Date</th><th>Status</th><th>Figma Board</th><th>Submit</th></tr></thead><tbody>
-        <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td><div class="style-title">WMNS Pullover · Throwback</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Throwback</td><td>—</td><td>—</td><td>Standard</td><td>Lakers</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2701</span></td></tr>
-        <tr><td class="col-pin"><div class="style-code">HEOC68872</div></td><td><div class="style-title">WMNS Cap · America's Team</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Cap</td><td>WMNS</td><td>Headwear</td><td>Tops</td><td>America's Team</td><td>—</td><td>—</td><td>Standard</td><td>Cowboys</td><td><span class="due-ok">Apr 14</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2702</span></td></tr>
-      </tbody></table></div></div>
-    </div>
-
-    <!-- PEER COMMENTS -->
-    <div class="view" data-view="peer-comments">
-      <div class="page-head"><div><h1 class="page-title">Peer Comments</h1><div class="page-sub">Comments from your peer reviewer across all rounds</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
-      </tbody></table></div>
-    </div>
-
-    <!-- SR COMMENTS -->
-    <div class="view" data-view="sr-comments">
-      <div class="page-head"><div><h1 class="page-title">SR Comments</h1><div class="page-sub">Senior Designer feedback on your peer-approved styles</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
-      </tbody></table></div>
-    </div>
-
-    <!-- LIC COMMENTS -->
-    <div class="view" data-view="lic-comments">
-      <div class="page-head"><div><h1 class="page-title">Licensing Comments</h1><div class="page-sub">Licensing dept feedback — visible to you, actioned by Sr/Lic teams</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Capsule</th><th>Comment</th><th>Date</th></tr></thead><tbody>
-        <tr><td><div class="style-code">HVGW68857</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">NBA secondary mark usage rights expired Q1.</span></td><td>Apr 15</td></tr>
-        <tr><td><div class="style-code">HVGU68864</div></td><td>Q2 WMNS</td><td class="lic-status"><span class="ev-rework">"16x Champs" — needs trophy count verified.</span></td><td>Apr 12</td></tr>
-      </tbody></table></div>
     </div>
 
     <!-- MERCH TASKS -->
@@ -3640,19 +3505,12 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
       <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">18</span></div>
       <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">6</span></div>
       <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">11</span></div>
       <div class="sidebar-item" data-view="peer-pending"><i class="ph ph-users"></i><span class="si-label">Peer Review Pending</span><span class="count">3</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Trackers</div>
       <div class="sidebar-item" data-view="art"><i class="ph ph-palette"></i><span class="si-label">Art Creation</span><span class="count">23</span></div>
       <div class="sidebar-item" data-view="templates"><i class="ph ph-layout"></i><span class="si-label">Template Creation</span><span class="count">7</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">2</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
@@ -3718,7 +3576,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         </div>
       </div>
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">61% overall</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
+        <div class="gen-stat" style="position:relative;cursor:pointer" onclick="openApprovedModal('designer')"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">61% overall</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Styles assigned</div><div class="gen-stat-value stat-value">18</div><div class="gen-stat-sub">All active capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-total-styles"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">4</div><div class="gen-stat-sub">Peer + Licensing</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
         <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Arts in progress</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">23</div><div class="gen-stat-sub">14 approved all-time</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
@@ -3998,72 +3856,17 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
             </thead>
             <tbody>
               <!-- LICENSING REWORK -->
-              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span></td><td class="figma-cell" style="min-width:220px;vertical-align:top;padding:6px 8px;"><div class="lic-rejection-note"><strong>Rejected:</strong> Logo proportions off — 12% smaller, shifted left</div><button class="btn-pushback" onclick="openPushbackJustify(this)">↩ Design Pushback — already addressed</button><div class="pb-justify-wrap"><textarea class="pb-justify-textarea" placeholder="Explain why this is already addressed or compliant with current specs…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-pb-submit" onclick="submitPushback(this)" style="margin-top:6px;">Send Pushback to Licensing →</button></div><button class="btn-clarify" onclick="openClarifyJustify(this)" style="margin-top:4px;">? Need Clarification — comment unclear</button><div class="cl-justify-wrap"><textarea class="cl-justify-textarea" placeholder="Describe what's unclear or what specific info you need from licensing…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-cl-submit" onclick="submitClarify(this)" style="margin-top:6px;">Send Clarification Request →</button></div><div class="lic-rework-divider">— or submit updated version —</div><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste Figma link to enable submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-dsgn-HVGU68851"><td class="col-pin"><div class="style-code">HVGU68851</div></td><td><div class="style-title">WMNS Tee · Court Classic</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Court Classic</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 12</span></td><td><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">Lic. Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-dsgn-HVGU68851',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:220px;vertical-align:top;padding:6px 8px;"><div class="lic-rejection-note"><strong>Rejected:</strong> Logo proportions off — 12% smaller, shifted left</div><button class="btn-pushback" onclick="openPushbackJustify(this)">↩ Design Pushback — already addressed</button><div class="pb-justify-wrap"><textarea class="pb-justify-textarea" placeholder="Explain why this is already addressed or compliant with current specs…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-pb-submit" onclick="submitPushback(this)" style="margin-top:6px;">Send Pushback to Licensing →</button></div><button class="btn-clarify" onclick="openClarifyJustify(this)" style="margin-top:4px;">? Need Clarification — comment unclear</button><div class="cl-justify-wrap"><textarea class="cl-justify-textarea" placeholder="Describe what's unclear or what specific info you need from licensing…"></textarea><div class="rework-attach-wrap" style="margin-top:6px;"><label class="rework-attach-label" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);cursor:pointer;padding:6px 10px;border:1px dashed var(--border);border-radius:7px;width:fit-content;transition:border-color 0.15s;"><ph-paperclip style="font-size:14px;"></ph-paperclip><span>Attach reference image</span><input type="file" accept="image/*" style="display:none;" onchange="handleReworkAttach(this)"></label><div class="rework-attach-preview" style="display:none;margin-top:4px;font-size:11px;color:var(--text-muted);"></div></div><button class="btn-cl-submit" onclick="submitClarify(this)" style="margin-top:6px;">Send Clarification Request →</button></div><div class="lic-rework-divider">— or submit updated version —</div><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste Figma link to enable submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-dsgn-HVGU68851" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #f59e0b;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;font-weight:700">Licensing Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Licensing</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> Logo proportions off — 12% smaller, shifted left. Verify against NBA brand guide v4.2.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 08</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">SR Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 10</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#fde68a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#b45309;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#b45309">Licensing — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">Apr 12 — this rework</div></div></div></div></div></td></tr>
               <!-- PEER REWORK 1 -->
-              <tr><td class="col-pin"><div class="style-code">HMBY78904</div></td><td><div class="style-title">MENS Crew · 27 Rings</div></td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>27 Rings</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">May 02</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-dsgn-HMBY78904"><td class="col-pin"><div class="style-code">HMBY78904</div></td><td><div class="style-title">MENS Crew · 27 Rings</div></td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>27 Rings</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">May 02</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-dsgn-HMBY78904',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-dsgn-HMBY78904" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #8b5cf6;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;font-weight:700">Peer Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Peer Reviewer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> "27 Rings" copy — ring count graphic needs to match actual championship count. Also confirm ring icon is from the Pro Standard approved asset library.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#ddd6fe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#7c3aed;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#7c3aed">Peer Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">May 02 — this rework</div></div></div></div></div></td></tr>
               <!-- SR REWORK -->
-              <tr><td class="col-pin"><div class="style-code">HLMC78921</div></td><td><div class="style-title">MENS Hoodie · Guadalajara</div></td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Guadalajara</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">May 05</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rw-row" id="rw-row-dsgn-HLMC78921"><td class="col-pin"><div class="style-code">HLMC78921</div></td><td><div class="style-title">MENS Hoodie · Guadalajara</div></td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Guadalajara</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-warn">May 05</span></td><td><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;">SR Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-dsgn-HLMC78921',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-dsgn-HLMC78921" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #06b6d4;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;font-weight:700">SR Rework</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Sr. Designer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment:</strong> Guadalajara Chivas badge colors are incorrect — use the Liga MX-approved color spec (R:215 G:20 B:35). Also, secondary crest placement is off-center by ~8px. See red-line on Figma feedback.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#065f46;flex-shrink:0">✓</div><div><div style="font-size:12px;font-weight:600">Peer Review — Approved</div><div style="font-size:11px;color:var(--text-muted)">Apr 30</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#a5f3fc;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0e7490;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#0e7490">SR Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">May 05 — this rework</div></div></div></div></div></td></tr>
               <!-- PEER REWORK 2 -->
-              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve · Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 15</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- APPROVED -->
-    <div class="view" data-view="approved">
-      <div class="page-head"><div><h1 class="page-title">Approved</h1><div class="page-sub">11 styles cleared all stages</div></div></div>
-      <div class="card">
-        <div class="table-wrap">
-          <table class="styles-table">
-            <thead>
-              <tr>
-                <th class="col-pin sortable">Style #</th>
-                <th>Title</th>
-                <th>Brand</th>
-                <th>Season</th>
-                <th>Capsule</th>
-                <th>Garment</th>
-                <th>Gender</th>
-                <th>Dept</th>
-                <th>Class</th>
-                <th>Style Name</th>
-                                <th>Ticker #</th>
-                <th>SMU ID</th>
-                <th>Ticket Type</th>
-                <th>Assigned</th>
-                <th>Due Date</th>
-                <th>Status</th>
-                <th>Figma Board</th>
-                <th>Submit</th>
-              </tr>
-              <tr class="tbl-filter-row">
-                <td><input placeholder="Style #…"></td>
-                <td><input placeholder="Title…"></td>
-                <td><select><option value="">All Brands</option><option>Pro Standard</option><option>NBA</option><option>NHL</option></select></td>
-                <td><select><option value="">All Seasons</option><option>SS27</option><option>FW26</option><option>SS26</option></select></td>
-                <td><select><option value="">All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option><option>Q2 WMNS Summer League</option></select></td>
-                <td><select><option value="">All Types</option><option>Tee</option><option>Hoodie</option><option>Shorts</option><option>Jacket</option></select></td>
-                <td><select><option value="">All</option><option>MENS</option><option>WMNS</option><option>UNISEX</option></select></td>
-                <td><select><option value="">All Depts</option><option>Apparel</option><option>Headwear</option><option>Accessories</option></select></td>
-                <td><select><option value="">All Classes</option><option>Tops</option><option>Bottoms</option><option>Outerwear</option></select></td>
-                <td><input placeholder="Name…"></td>
-                                <td><input placeholder="Ticker…"></td>
-                <td><input placeholder="SMU…"></td>
-                <td><select><option value="">All Types</option><option>Standard</option><option>SMU</option><option>Collab</option></select></td>
-                <td><input placeholder="Assigned…"></td>
-                <td><input placeholder="Due…"></td>
-                <td><select><option value="">All Statuses</option><option>Pending</option><option>In Review</option><option>Rework</option><option>Approved</option></select></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td><div class="style-title">WMNS Pullover · Throwback</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Throwback</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Lakers</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2701</span></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HEOC68872</div></td><td><div class="style-title">WMNS Cap · America's Team</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Jacket</td><td>WMNS</td><td>Headwear</td><td>Tops</td><td>America's Team</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Cowboys</td><td><span class="due-ok">Apr 14</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2702</span></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HMLLA78910</div></td><td><div class="style-title">MENS Tee · Black &amp; Gold</div></td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Tee</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Black &amp; Gold</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>LAFC</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2703</span></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HNBKID68931</div></td><td><div class="style-title">KIDS Hoodie · Big Bad</div></td><td>Pro Standard</td><td>FW26</td><td>Q4 KIDS</td><td>Hoodie</td><td>UNISEX</td><td>Apparel</td><td>Tops</td><td>Big Bad</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Bruins</td><td><span class="due-ok">Apr 09</span></td><td><span class="pill pill-approved pill-dot">Approved</span></td><td><span class="pill pill-approved">HO-2704</span></td></tr>
+              <tr class="rw-row" id="rw-row-dsgn-HVGW68857"><td class="col-pin"><div class="style-code">HVGW68857</div></td><td><div class="style-title">WMNS Long Sleeve · Splash</div></td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Splash</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td><span class="due-urgent">Apr 15</span></td><td><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;">Peer Rework</span><button class="rw-expand-btn" onclick="toggleReworkPanel('rw-detail-dsgn-HVGW68857',this.closest('tr'))"><span class="rw-chev">▼</span> View Rework Details</button></td><td class="figma-cell" style="min-width:190px"><input class="figma-url-input" placeholder="Paste updated Figma URL…" oninput="checkFigmaLink(this)"><div class="figma-required-tip" style="margin-top:3px">⚠ Paste link to submit</div></td><td style="min-width:130px;vertical-align:middle;padding:4px 8px;"><button class="btn-rework-submit" disabled onclick="submitRework(this)">Submit Rework</button></td></tr>
+              <tr class="rework-detail-row" id="rw-detail-dsgn-HVGW68857" style="display:none"><td colspan="18" style="padding:0;background:var(--surface-raised,#f8f9fb)"><div style="padding:16px 24px 20px;border-top:3px solid #8b5cf6;border-bottom:2px solid var(--border)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span class="pill pill-dot" style="background:#f3e8ff;color:#7c3aed;border:1px solid #ddd6fe;font-weight:700">Peer Rework — Round 2</span><span style="font-size:12px;color:var(--text-muted)">Sent back by Peer Reviewer</span></div><div style="font-size:13px;color:var(--text);margin-bottom:14px"><strong>Comment (Round 2):</strong> Splash graphic still bleeds past the seam on sleeve. Round 1 fix moved it but not far enough — needs 4mm inset from all edges. Template file updated.</div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px">Rework History — 2 rounds</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#ddd6fe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#7c3aed;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#7c3aed">Peer Review — Rejected (Round 1)</div><div style="font-size:11px;color:var(--text-muted)">Apr 08 · Splash graphic bleeds past seam on sleeve</div></div></div><div style="width:1px;height:14px;background:var(--border);margin-left:13px"></div><div style="display:flex;gap:12px;align-items:flex-start"><div style="width:26px;height:26px;border-radius:50%;background:#ddd6fe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#7c3aed;flex-shrink:0">✕</div><div><div style="font-size:12px;font-weight:600;color:#7c3aed">Peer Review — Rejected (Round 2)</div><div style="font-size:11px;color:var(--text-muted)">Apr 15 — this rework · still 4mm short</div></div></div></div></div></td></tr>
             </tbody>
           </table>
         </div>
@@ -4148,49 +3951,6 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
       </div>
     </div>
 
-    <!-- FEEDBACK VIEWS -->
-    <div class="view" data-view="peer-comments">
-      <div class="page-head"><div><h1 class="page-title">Peer Comments</h1><div class="page-sub">3 peer rejections across rounds</div></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><input placeholder="Reviewer…"></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
-        <tr><td><div class="style-code">HLMC78921</div></td><td>Anthony Valtierra</td><td class="lic-status"><span class="ev-rework">Chivas crest aspect ratio off — see brand guide pg 14.</span></td><td>1</td><td>May 05</td></tr>
-      </tbody></table></div>
-    </div>
-    <div class="view" data-view="sr-comments">
-      <div class="page-head"><div><h1 class="page-title">SR Comments</h1></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><input placeholder="Reviewer…"></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
-        <tr><td><div class="style-code">HMBY78904</div></td><td>Arantxa Denegri</td><td class="lic-status"><span class="ev-rework">Type hierarchy needs work.</span></td><td>1</td><td>May 02</td></tr>
-      </tbody></table></div>
-    </div>
-    <div class="view" data-view="lic-comments">
-      <div class="page-head"><div><h1 class="page-title">Licensing Comments</h1></div></div>
-      <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Date</th></tr>
-        <tr class="tbl-filter-row">
-          <td><input placeholder="Style #…"></td>
-          <td><input placeholder="Reviewer…"></td>
-          <td><input placeholder="Search comment…"></td>
-          <td><input placeholder="Date…"></td>
-        </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGW68857</div></td><td>Licensing Dept</td><td class="lic-status"><span class="ev-rework">NBA secondary mark usage rights expired Q1.</span></td><td>Apr 15</td></tr>
-        <tr><td><div class="style-code">HVGU68864</div></td><td>Licensing Dept</td><td class="lic-status"><span class="ev-rework">"16x Champs" — needs trophy count.</span></td><td>Apr 12</td></tr>
-      </tbody></table></div>
-    </div>
     <!-- IN REVIEW -->
     <div class="view" data-view="review">
       <div class="page-head"><div><h1 class="page-title">In Review</h1><div class="page-sub">6 styles in Peer · SR · Licensing</div></div></div>
@@ -5216,6 +4976,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         <div style="display:flex;gap:8px">
           <select class="filter-select"><option>All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option></select>
           <select class="filter-select"><option>Q2 2026</option><option>Q1 2026</option><option>Q4 2025</option></select>
+          <button onclick="document.getElementById('benchmarks-modal').style.display='flex';document.body.style.overflow='hidden'" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap"><i class="ph ph-sliders"></i> Benchmarks</button>
         </div>
       </div>
       <div class="view-tabs">
@@ -6768,6 +6529,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         <div style="display:flex;gap:8px">
           <select class="filter-select"><option>All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option></select>
           <select class="filter-select"><option>Q2 2026</option><option>Q1 2026</option><option>Q4 2025</option></select>
+          <button onclick="document.getElementById('benchmarks-modal').style.display='flex';document.body.style.overflow='hidden'" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap"><i class="ph ph-sliders"></i> Benchmarks</button>
         </div>
       </div>
       <div class="kpi-grid reveal-up" data-delay="1">
@@ -7668,6 +7430,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
                 <th>Style Name</th>
                                 <th>Ticker #</th>
                 <th>SMU ID</th>
+                <th>Delivery</th>
                 <th>Ticket Type</th>
                 <th>Assigned</th>
                 <th>Due Date</th>
@@ -7688,6 +7451,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
                 <td><input placeholder="Name…"></td>
                                 <td><input placeholder="Ticker…"></td>
                 <td><input placeholder="SMU…"></td>
+                <td><input placeholder="Delivery…"></td>
                 <td><select><option value="">All Types</option><option>Standard</option><option>SMU</option><option>Collab</option></select></td>
                 <td><input placeholder="Assigned…"></td>
                 <td><input placeholder="Due…"></td>
@@ -7697,9 +7461,9 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
               </tr>
             </thead>
             <tbody>
-              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td>MNS Hoodie · Fade</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Fade</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Dante Meneses · Team A</td><td><span class="due-ok">May 16</span></td><td><span class="pill pill-peer pill-dot">Peer</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HVGU68862</div></td><td>WMNS Tee · Crest</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Crest</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Diana Adame · Team A</td><td><span class="due-warn">May 15</span></td><td><span class="pill pill-sr pill-dot">SR</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
-              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td>MNS Hoodie · NBA Mark</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>NBA Mark</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Andrea Cardenas · Team A</td><td><span class="due-urgent">Today ⚠</span></td><td><span class="pill pill-licensing pill-dot">Licensing</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68851</div></td><td>MNS Hoodie · Fade</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Fade</td><td>—</td><td>—</td><td>Q3 2026</td><td>Standard</td><td>Dante Meneses · Team A</td><td><span class="due-ok">May 16</span></td><td><span class="pill pill-peer pill-dot">Peer</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGU68862</div></td><td>WMNS Tee · Crest</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Tee</td><td>WMNS</td><td>Apparel</td><td>Tops</td><td>Crest</td><td>—</td><td>—</td><td>Q3 2026</td><td>Standard</td><td>Diana Adame · Team A</td><td><span class="due-warn">May 15</span></td><td><span class="pill pill-sr pill-dot">SR</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
+              <tr><td class="col-pin"><div class="style-code">HVGW68857</div></td><td>MNS Hoodie · NBA Mark</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>NBA Mark</td><td>—</td><td>—</td><td>Q4 2026</td><td>Standard</td><td>Andrea Cardenas · Team A</td><td><span class="due-urgent">Today ⚠</span></td><td><span class="pill pill-licensing pill-dot">Licensing</span></td><td><button class="btn btn-sm" onclick="viewTaskRow(this.closest('tr').querySelector('.style-code, .col-pin') ? (this.closest('tr').querySelector('.style-code') || this.closest('tr').querySelector('.col-pin')).textContent.trim() : 'style')">View</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -7774,6 +7538,7 @@ html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); 
         <div style="display:flex;gap:8px">
           <select class="filter-select"><option>All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option></select>
           <select class="filter-select"><option>Q2 2026</option><option>Q1 2026</option><option>Q4 2025</option></select>
+          <button onclick="document.getElementById('benchmarks-modal').style.display='flex';document.body.style.overflow='hidden'" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap"><i class="ph ph-sliders"></i> Benchmarks</button>
         </div>
       </div>
       <div class="kpi-grid reveal-up" data-delay="1">
@@ -8896,6 +8661,24 @@ function peerCancel(btn) {
   cell.style.whiteSpace = 'nowrap';
   cell.innerHTML = '<button class="btn-peer-action btn-peer-approve" onclick="peerDecision(this,\'approve\')">Approve</button>'
     + ' <button class="btn-peer-action btn-peer-reject" onclick="peerDecision(this,\'reject\')" style="margin-left:4px">Reject</button>';
+}
+
+function toggleReworkPanel(detailId, triggerEl) {
+  var table = triggerEl.closest('table');
+  var target = document.getElementById(detailId);
+  var isOpen = target && target.style.display !== 'none';
+  table.querySelectorAll('.rework-detail-row').forEach(function(d){ d.style.display='none'; });
+  table.querySelectorAll('.rw-row').forEach(function(r){ r.classList.remove('expanded'); });
+  table.querySelectorAll('.rw-expand-btn').forEach(function(b){
+    b.classList.remove('open');
+    b.querySelector('.rw-chev') && (b.querySelector('.rw-chev').textContent='▼');
+  });
+  if (!isOpen && target) {
+    target.style.display = 'table-row';
+    triggerEl.classList.add('expanded');
+    var btn = triggerEl.querySelector('.rw-expand-btn');
+    if (btn) { btn.classList.add('open'); btn.querySelector('.rw-chev') && (btn.querySelector('.rw-chev').textContent='▲'); }
+  }
 }
 
 // submitRework — called when designer submits rework after pasting Figma URL
@@ -11197,6 +10980,116 @@ var DV = (function() {
            drawStackedBar:drawStackedBar, drawAreaLine:drawAreaLine, drawGroupedBar:drawGroupedBar,
            drawHBar:drawHBar, init:initAllCharts };
 })();
+
+function openApprovedModal(role) {
+  document.getElementById('approved-modal-title').textContent = 'Approved Styles';
+  document.getElementById('approved-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeApprovedModal() {
+  document.getElementById('approved-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function filterApprovedModal() {
+  var season = document.getElementById('am-filter-season').value.toLowerCase();
+  var capsule = document.getElementById('am-filter-capsule').value.toLowerCase();
+  var brand = document.getElementById('am-filter-brand').value.toLowerCase();
+  var rows = document.querySelectorAll('#approved-modal-tbody tr');
+  rows.forEach(function(r) {
+    var t = r.textContent.toLowerCase();
+    r.style.display = (!season || t.includes(season)) && (!capsule || t.includes(capsule)) && (!brand || t.includes(brand)) ? '' : 'none';
+  });
+}
+function loadBenchmarkCapsule(val) {
+  var form = document.getElementById('bm-form');
+  if (!val) { form.style.display='none'; return; }
+  form.style.display='block';
+  var defaults = {
+    'cc':  { cycle:'4.5', rework:'12', throughput:'30', total:'150', notes:'Classic Chenille benchmark — established Q1 2025' },
+    'rc':  { cycle:'5.0', rework:'15', throughput:'25', total:'120', notes:'Retro Classics — higher rework due to licensing complexity' },
+    'q2w': { cycle:'3.8', rework:'10', throughput:'35', total:'90',  notes:'Q2 WMNS Summer League — faster cycle, smaller batch' }
+  };
+  var d = defaults[val] || {};
+  document.getElementById('bm-cycle').value = d.cycle || '';
+  document.getElementById('bm-rework-rate').value = d.rework || '';
+  document.getElementById('bm-throughput').value = d.throughput || '';
+  document.getElementById('bm-total').value = d.total || '';
+  document.getElementById('bm-notes').value = d.notes || '';
+}
+function saveBenchmarks() {
+  var note = document.getElementById('bm-saved-note');
+  note.style.display = 'inline';
+  setTimeout(function(){ note.style.display='none'; }, 3500);
+}
 </script>
+
+<div id="approved-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.45);backdrop-filter:blur(4px)" onclick="if(event.target===this)closeApprovedModal()">
+  <div style="position:absolute;top:5vh;left:50%;transform:translateX(-50%);width:min(96vw,1100px);max-height:90vh;background:var(--bg,#fff);border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.2);display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;padding:20px 24px 16px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap">
+      <i class="ph ph-check-circle" style="font-size:22px;color:#10b981"></i>
+      <h2 id="approved-modal-title" style="font-size:18px;font-weight:700;color:var(--text);margin:0">Approved Styles</h2>
+      <div style="display:flex;gap:8px;margin-left:auto;flex-wrap:wrap">
+        <select class="filter-select" id="am-filter-season" onchange="filterApprovedModal()"><option value="">All Seasons</option><option>SS27</option><option>FW26</option><option>SS26</option></select>
+        <select class="filter-select" id="am-filter-capsule" onchange="filterApprovedModal()"><option value="">All Capsules</option><option>Classic Chenille</option><option>Retro Classics</option><option>Q2 WMNS</option><option>Q3 MENS</option><option>Q4 KIDS</option></select>
+        <select class="filter-select" id="am-filter-brand" onchange="filterApprovedModal()"><option value="">All Brands</option><option>Pro Standard</option><option>NBA</option><option>NHL</option></select>
+        <button onclick="closeApprovedModal()" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:13px;color:var(--text-muted)">Close ×</button>
+      </div>
+    </div>
+    <div style="overflow-y:auto;padding:16px 24px">
+      <div class="table-wrap">
+        <table class="styles-table"><thead><tr>
+          <th class="col-pin">Style #</th><th>Title</th><th>Brand</th><th>Season</th><th>Capsule</th><th>Garment</th><th>Gender</th><th>Style Name</th><th>Ticket Type</th><th>Delivery</th><th>Due Date</th><th>Handoff #</th>
+        </tr></thead>
+        <tbody id="approved-modal-tbody">
+          <tr><td class="col-pin"><div class="style-code">HVGU68854</div></td><td>WMNS Pullover · Throwback</td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Hoodie</td><td>WMNS</td><td>Throwback</td><td>Standard</td><td>Q3 2026</td><td><span class="due-ok">Apr 15</span></td><td><span class="pill pill-approved">HO-2701</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HEOC68872</div></td><td>WMNS Cap · America's Team</td><td>Pro Standard</td><td>SS26</td><td>Q2 WMNS</td><td>Jacket</td><td>WMNS</td><td>America's Team</td><td>Standard</td><td>Q3 2026</td><td><span class="due-ok">Apr 14</span></td><td><span class="pill pill-approved">HO-2702</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HMLLA78910</div></td><td>MENS Tee · Black &amp; Gold</td><td>Pro Standard</td><td>FW26</td><td>Q3 MENS</td><td>Tee</td><td>MENS</td><td>Black &amp; Gold</td><td>Standard</td><td>Q4 2026</td><td><span class="due-ok">Apr 11</span></td><td><span class="pill pill-approved">HO-2703</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HNBKID68931</div></td><td>KIDS Hoodie · Big Bad</td><td>Pro Standard</td><td>FW26</td><td>Q4 KIDS</td><td>Hoodie</td><td>UNISEX</td><td>Big Bad</td><td>Standard</td><td>Q4 2026</td><td><span class="due-ok">Apr 09</span></td><td><span class="pill pill-approved">HO-2704</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HVGU68820</div></td><td>MNS Jacket · Heritage Snap</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Jacket</td><td>MENS</td><td>Heritage Snap</td><td>Standard</td><td>Q3 2026</td><td><span class="due-ok">Apr 08</span></td><td><span class="pill pill-approved">HO-2705</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HVGU68821</div></td><td>WMNS Tee · City Wave</td><td>Pro Standard</td><td>SS26</td><td>Classic Chenille</td><td>Tee</td><td>WMNS</td><td>City Wave</td><td>Standard</td><td>Q3 2026</td><td><span class="due-ok">Apr 07</span></td><td><span class="pill pill-approved">HO-2706</span></td></tr>
+          <tr><td class="col-pin"><div class="style-code">HVGU68822</div></td><td>MNS Hoodie · Block Letter</td><td>Pro Standard</td><td>FW26</td><td>Retro Classics</td><td>Hoodie</td><td>MENS</td><td>Block Letter</td><td>SMU</td><td>Q4 2026</td><td><span class="due-ok">Apr 06</span></td><td><span class="pill pill-approved">HO-2707</span></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BENCHMARKS CONFIG MODAL -->
+<div id="benchmarks-modal" style="display:none;position:fixed;inset:0;z-index:9001;background:rgba(0,0,0,0.45);backdrop-filter:blur(4px)" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow=''}">
+  <div style="position:absolute;top:8vh;left:50%;transform:translateX(-50%);width:min(95vw,680px);max-height:84vh;background:var(--bg,#fff);border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.2);display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;padding:20px 24px 16px;border-bottom:1px solid var(--border);gap:12px">
+      <i class="ph ph-sliders" style="font-size:20px;color:#8b5cf6"></i>
+      <div>
+        <h2 style="font-size:17px;font-weight:700;color:var(--text);margin:0">Configure Capsule Benchmarks</h2>
+        <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0">Set per-capsule targets for cycle time, rework rate, and throughput. In production these sync to SharePoint · <em>PAD-Benchmarks</em> list.</p>
+      </div>
+      <button onclick="document.getElementById('benchmarks-modal').style.display='none';document.body.style.overflow=''" style="margin-left:auto;padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:13px;color:var(--text-muted)">Close</button>
+    </div>
+    <div style="overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Select Capsule</div>
+      <select class="filter-select" id="bm-capsule-select" onchange="loadBenchmarkCapsule(this.value)" style="width:100%;padding:9px 12px;font-size:13px">
+        <option value="">— choose capsule —</option>
+        <option value="cc">Classic Chenille 2025</option>
+        <option value="rc">Retro Classics 2025</option>
+        <option value="q2w">Q2 WMNS Summer League</option>
+      </select>
+      <div id="bm-form" style="display:none;flex-direction:column;gap:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Avg Cycle Time Target (days)</label><input type="number" id="bm-cycle" value="4.5" min="1" max="30" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;background:var(--surface)"></div>
+          <div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Max Rework Rate (%)</label><input type="number" id="bm-rework-rate" value="15" min="0" max="100" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;background:var(--surface)"></div>
+          <div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Weekly Throughput Target</label><input type="number" id="bm-throughput" value="25" min="1" max="500" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;background:var(--surface)"></div>
+          <div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Total Styles in Capsule</label><input type="number" id="bm-total" value="150" min="1" max="2000" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;background:var(--surface)"></div>
+        </div>
+        <div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px">Notes / Special Workflow Rules</label><textarea id="bm-notes" rows="3" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;resize:vertical;background:var(--surface)" placeholder="e.g. Extended Licensing review window due to new league team additions…"></textarea></div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;padding-top:4px">
+          <button onclick="document.getElementById('benchmarks-modal').style.display='none';document.body.style.overflow=''" style="padding:8px 18px;border-radius:9px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:13px;color:var(--text-muted)">Cancel</button>
+          <button onclick="saveBenchmarks()" style="padding:8px 20px;border-radius:9px;border:none;background:#8b5cf6;color:#fff;cursor:pointer;font-size:13px;font-weight:600">Save Benchmarks</button>
+        </div>
+      </div>
+      <div id="bm-saved-note" style="display:none;padding:12px 16px;background:#f3e8ff;border-radius:10px;color:#7c3aed;font-size:13px;font-weight:600">✓ Saved for this session. In production, persists to SharePoint PAD-Benchmarks list.</div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
