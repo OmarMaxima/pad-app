@@ -246,9 +246,9 @@ html[data-theme="dark"] .filter-multi { background:var(--surface-2); border-colo
 html[data-theme="dark"] .sidebar-item { color:var(--text-muted); }
 html[data-theme="dark"] .sidebar-item:hover { background:rgba(255,255,255,0.05); color:var(--text); }
 html[data-theme="dark"] .sidebar-item.active { background:rgba(255,255,255,0.08); color:var(--text); border-left-color:#fff; }
-html[data-theme="dark"] .sidebar-item :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock) { color:var(--text-dim); }
-html[data-theme="dark"] .sidebar-item:hover :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock),
-html[data-theme="dark"] .sidebar-item.active :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock) { color:var(--text); }
+html[data-theme="dark"] .sidebar-item .ph { color:var(--text-dim); }
+html[data-theme="dark"] .sidebar-item:hover .ph,
+html[data-theme="dark"] .sidebar-item.active .ph { color:var(--text); }
 html[data-theme="dark"] .sidebar-item .count { background:rgba(255,255,255,0.1); color:var(--text-muted); }
 html[data-theme="dark"] .sidebar-item.active .count { background:rgba(255,255,255,0.2); color:var(--text); }
 html[data-theme="dark"] .filter-select,
@@ -312,14 +312,14 @@ html[data-theme="dark"] .kpi.danger { background:rgba(220,38,38,0.1); }
 .layout { display:flex; min-height:calc(100vh - 82px); width:100%; }
 .dashboard.active, .dashboard[style*="flex"] { width:100%; }
 .sidebar { width:240px; background:#fff; border-right:1px solid #e0e1e6; padding:16px 0; flex-shrink:0; }
-.sidebar-section { margin-bottom:20px; }
-.sidebar-label { font-size:10px; font-weight:700; color:#b0b4ba; letter-spacing:1.2px; text-transform:uppercase; padding:0 20px 12px; }
-.sidebar-item { display:flex; align-items:center; gap:9px; padding:9px 20px; font-size:13px; color:#60646c; cursor:pointer; border-left:3px solid transparent; transition:background 0.12s var(--ease-out),color 0.12s var(--ease-out),border-color 0.12s var(--ease-out); user-select:none; }
+.sidebar-section { margin-bottom:8px; }
+.sidebar-label { font-size:10px; font-weight:700; color:#b0b4ba; letter-spacing:1.2px; text-transform:uppercase; padding:12px 16px 4px; }
+.sidebar-item { display:flex; align-items:center; gap:8px; padding:7px 14px; font-size:13px; color:#60646c; cursor:pointer; border-left:3px solid transparent; transition:background 0.12s var(--ease-out),color 0.12s var(--ease-out),border-color 0.12s var(--ease-out); user-select:none; }
 .sidebar-item:hover { background:#f9fafb; color:#1c2024; }
-.sidebar-item:hover :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock) { color:#1c2024; }
+.sidebar-item:hover .ph { color:#1c2024; }
 .sidebar-item.active { background:#f0f0f3; color:#1c2024; border-left-color:#000; font-weight:600; }
-.sidebar-item.active :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock) { color:#1c2024; }
-.sidebar-item :is(ph-squares-four, ph-shopping-bag, ph-file-xls, ph-tray, ph-file-check, ph-clipboard-text, ph-users, ph-palette, ph-package, ph-chat-square-text, ph-check-circle, ph-calendar-check, ph-arrow-counter-clockwise, ph-chat-circle-text, ph-list-checks, ph-layout, ph-file-text, ph-eye, ph-calendar, ph-chart-bar, ph-activity, ph-x-circle, ph-trend-up, ph-gear, ph-paper-plane-tilt, ph-image, ph-hash, ph-git-pull-request, ph-gauge, ph-clock) { font-size:15px; flex-shrink:0; color:#b0b4ba; transition:color 0.12s; }
+.sidebar-item.active .ph { color:#1c2024; }
+.sidebar-item .ph { font-size:15px; flex-shrink:0; color:#b0b4ba; transition:color 0.12s; display:inline-block; line-height:1; }
 .sidebar-item .si-label { flex:1; min-width:0; }
 .sidebar-item .count { background:#e8e9ed; color:#60646c; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:700; flex-shrink:0; }
 .sidebar-item.active .count { background:#1c2024; color:#fff; }
@@ -1183,9 +1183,9 @@ html[data-theme="dark"] .lic-league-card { background:var(--surface); border-col
 
 /* ── Sidebar: refined with pill active state ─────────────────── */
 .sidebar-item {
-  margin:1px 8px;
+  margin:1px 6px;
   border-radius:8px;
-  padding:8px 11px;
+  padding:6px 10px;
   border-left:3px solid transparent;
 }
 .sidebar-item.active {
@@ -1195,7 +1195,7 @@ html[data-theme="dark"] .lic-league-card { background:var(--surface); border-col
   font-weight:700;
   box-shadow:0 2px 8px rgba(0,0,0,0.18);
 }
-.sidebar-item.active :is(ph-squares-four,ph-shopping-bag,ph-file-xls,ph-tray,ph-file-check,ph-clipboard-text,ph-users,ph-palette,ph-package,ph-chat-square-text,ph-check-circle,ph-calendar-check,ph-arrow-counter-clockwise,ph-chat-circle-text,ph-list-checks,ph-layout,ph-file-text,ph-eye,ph-calendar,ph-chart-bar,ph-activity,ph-x-circle,ph-trend-up,ph-gear,ph-paper-plane-tilt,ph-image,ph-hash,ph-git-pull-request,ph-gauge,ph-clock) { color:#fff; }
+.sidebar-item.active .ph { color:#fff; }
 .sidebar-item.active .count { background:rgba(255,255,255,0.2); color:#fff; }
 html[data-theme="dark"] .sidebar-item.active { background:rgba(255,255,255,0.12); box-shadow:none; color:#fff; border-left-color:transparent; }
 
@@ -1559,16 +1559,14 @@ html[data-theme="dark"] .eyebrow-tag { background: rgba(255,255,255,0.09); }
 }
 .bento-home > * { grid-column: span 2; }
 .bento-home > .bento-featured { grid-column: span 4; }
+.bento-home > .bento-full { grid-column: span 12; }
+.bento-home > .bento-third { grid-column: span 3; min-height: 200px; }
 .bento-home > .bento-featured .gen-stat-value,
 .bento-home > .bento-featured .value { font-size: 44px; letter-spacing: -1.5px; }
 .bento-home > .bento-featured .gen-stat-label,
 .bento-home > .bento-featured .label { font-size: 12px; }
-.bento-home > .bento-featured.gen-stat {
-  background: linear-gradient(145deg, #fff 55%, rgba(28,32,36,0.022) 100%);
-  border: 1px solid rgba(28,32,36,0.1);
-}
 html[data-theme="dark"] .bento-home > .bento-featured.gen-stat {
-  background: linear-gradient(145deg, var(--surface) 55%, rgba(255,255,255,0.03) 100%);
+  background: var(--surface);
 }
 .bento-home > .bento-featured.kpi.success {
   background: linear-gradient(145deg, #f0fdf4 45%, #dcfce7 100%);
@@ -1583,11 +1581,15 @@ html[data-theme="dark"] .bento-home > .bento-featured.gen-stat {
   .bento-home { grid-template-columns: repeat(6, 1fr); }
   .bento-home > * { grid-column: span 2; }
   .bento-home > .bento-featured { grid-column: span 4; }
+  .bento-home > .bento-full { grid-column: span 6; }
+  .bento-home > .bento-third { grid-column: span 3; }
 }
 @media (max-width: 640px) {
   .bento-home { grid-template-columns: repeat(2, 1fr); }
   .bento-home > * { grid-column: span 1; }
   .bento-home > .bento-featured { grid-column: span 2; }
+  .bento-home > .bento-full { grid-column: span 2; }
+  .bento-home > .bento-third { grid-column: span 1; }
   .bento-home > .bento-featured .gen-stat-value,
   .bento-home > .bento-featured .value { font-size: 36px; }
 }
@@ -1929,6 +1931,7 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   font-weight: 800;
   opacity: 0.5;
   text-transform: uppercase;
+  padding: 12px 14px 4px;
 }
 
 /* ── Table headers: tighter tracking ────────────────────────── */
@@ -2181,8 +2184,8 @@ html[data-theme="dark"] .team-logo { color: #fff; }
 
 /* ── Bento featured card — green gradient in dark ────────────── */
 html[data-theme="dark"] .bento-home > .bento-featured.gen-stat {
-  background: linear-gradient(145deg, rgba(5,150,105,0.12) 0%, rgba(5,150,105,0.06) 100%);
-  border-color: rgba(52,211,153,0.15);
+  background: var(--surface);
+  border-color: var(--border);
 }
 
 /* ── Link/reference colors ───────────────────────────────────── */
@@ -2235,6 +2238,205 @@ html[data-theme="dark"] .presence-status-label.available   { color: #34d399 !imp
 html[data-theme="dark"] .presence-status-label.in-meeting  { color: #fbbf24 !important; }
 html[data-theme="dark"] .presence-status-label.busy        { color: #f87171 !important; }
 html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PAD MANAGEMENT BAR
+   Ported from animate-ui community-management-bar
+   Spring-physics expand · Sliding number pagination · Queue actions
+   ════════════════════════════════════════════════════════════════ */
+.pad-mgmt-bar {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 8px;
+  position: sticky;
+  bottom: 16px;
+  z-index: 10;
+  pointer-events: none;
+}
+.mgmt-bar-inner {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #e0e1e6);
+  border-radius: 18px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+  pointer-events: all;
+}
+/* Pagination */
+.mgmt-pagination {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  flex-shrink: 0;
+}
+.mgmt-pg-btn {
+  background: none;
+  border: none;
+  padding: 7px;
+  color: var(--text-muted, #9ca3af);
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+}
+.mgmt-pg-btn:hover:not(:disabled) {
+  color: var(--text, #1c2024);
+  background: rgba(0,0,0,0.05);
+}
+.mgmt-pg-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+.mgmt-pg-display {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  color: var(--text-muted, #6b7280);
+}
+/* Sliding number */
+.mgmt-slide-wrap {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.35em;
+  vertical-align: middle;
+  min-width: 1ch;
+}
+.mgmt-slide-digit {
+  display: block;
+  font-weight: 600;
+  color: var(--text, #1c2024);
+  line-height: 1.35;
+}
+@keyframes mgmt-out-up   { to { transform:translateY(-120%); opacity:0; } }
+@keyframes mgmt-out-down { to { transform:translateY( 120%); opacity:0; } }
+@keyframes mgmt-in-up    { from { transform:translateY( 120%); opacity:0; } to { transform:translateY(0); opacity:1; } }
+@keyframes mgmt-in-down  { from { transform:translateY(-120%); opacity:0; } to { transform:translateY(0); opacity:1; } }
+.mgmt-slide-digit.s-out-up   { animation: mgmt-out-up   0.17s cubic-bezier(0.4,0,1,1) forwards; }
+.mgmt-slide-digit.s-out-down { animation: mgmt-out-down 0.17s cubic-bezier(0.4,0,1,1) forwards; }
+.mgmt-slide-digit.s-in-up    { animation: mgmt-in-up    0.23s cubic-bezier(0.2,0.8,0.2,1) forwards; }
+.mgmt-slide-digit.s-in-down  { animation: mgmt-in-down  0.23s cubic-bezier(0.2,0.8,0.2,1) forwards; }
+.mgmt-pg-sep   { color: var(--text-muted, #9ca3af); font-size: 12px; }
+.mgmt-pg-total { color: var(--text-muted, #6b7280); font-weight: 500; }
+/* Divider */
+.mgmt-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border, #e0e1e6);
+  border-radius: 9999px;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+/* Action buttons — spring-physics expand on hover */
+.mgmt-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mgmt-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  max-width: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: 10px;
+  padding: 0 10px;
+  gap: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  flex-shrink: 0;
+  /* Default: collapse fast */
+  transition: max-width 0.18s ease-in, transform 0.1s ease;
+}
+.mgmt-btn:hover {
+  /* Spring expand: cubic-bezier(0.34,1.56,0.64,1) overshoots then settles */
+  max-width: 160px;
+  transition: max-width 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.08s, transform 0.1s ease;
+}
+.mgmt-btn:active { transform: scale(0.95); }
+.mgmt-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.mgmt-btn-label {
+  opacity: 0;
+  transform: translateX(5px);
+  font-size: 13px;
+  transition: opacity 0.15s, transform 0.15s;
+  transition-delay: 0s;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+.mgmt-btn:hover .mgmt-btn-label {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.24s;
+}
+/* Button color variants */
+.mgmt-btn-flag    { background: rgba(100,116,139,0.12); color: #475569; }
+.mgmt-btn-flag:hover    { background: rgba(100,116,139,0.18); }
+.mgmt-btn-rework  { background: rgba(220,38,38,0.10);   color: #dc2626; }
+.mgmt-btn-rework:hover  { background: rgba(220,38,38,0.16); }
+.mgmt-btn-approve { background: rgba(22,163,74,0.12);   color: #16a34a; }
+.mgmt-btn-approve:hover { background: rgba(22,163,74,0.18); }
+.mgmt-btn-hold    { background: rgba(245,158,11,0.12);  color: #b45309; }
+.mgmt-btn-hold:hover    { background: rgba(245,158,11,0.18); }
+.mgmt-btn-filter  {
+  background: rgba(100,116,139,0.10);
+  color: #64748b;
+  max-width: 40px !important;
+  transition: background 0.15s, transform 0.1s ease !important;
+}
+.mgmt-btn-filter:hover  { background: rgba(100,116,139,0.18); max-width: 40px !important; }
+/* Dark mode */
+html[data-theme="dark"] .mgmt-bar-inner {
+  background: #1a2133;
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.25);
+}
+html[data-theme="dark"] .mgmt-slide-digit { color: #e2e8f0; }
+html[data-theme="dark"] .mgmt-pg-btn:hover:not(:disabled) { color: #e2e8f0; background: rgba(255,255,255,0.07); }
+html[data-theme="dark"] .mgmt-divider { background: rgba(255,255,255,0.09); }
+html[data-theme="dark"] .mgmt-btn-flag    { background: rgba(148,163,184,0.12); color: #94a3b8; }
+html[data-theme="dark"] .mgmt-btn-flag:hover    { background: rgba(148,163,184,0.2); }
+html[data-theme="dark"] .mgmt-btn-rework  { background: rgba(248,113,113,0.12); color: #f87171; }
+html[data-theme="dark"] .mgmt-btn-rework:hover  { background: rgba(248,113,113,0.2); }
+html[data-theme="dark"] .mgmt-btn-approve { background: rgba(74,222,128,0.10);  color: #4ade80; }
+html[data-theme="dark"] .mgmt-btn-approve:hover { background: rgba(74,222,128,0.18); }
+html[data-theme="dark"] .mgmt-btn-hold    { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+html[data-theme="dark"] .mgmt-btn-hold:hover    { background: rgba(251,191,36,0.2); }
+html[data-theme="dark"] .mgmt-btn-filter  { background: rgba(148,163,184,0.08); color: #64748b; }
+
+/* ── Data Viz ─────────────────────────────────────────────── */
+.dv-sparkline-wrap { position:absolute; top:10px; right:10px; pointer-events:none; }
+.dv-sparkline-wrap canvas { display:block; width:56px; height:28px; }
+.dv-donut-wrap { display:flex; justify-content:center; align-items:center; padding:0; flex-shrink:0; }
+.dv-donut-wrap canvas { max-width:160px; width:160px; height:160px; }
+.dv-gauges-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; padding:0; }
+.dv-gauge-cell { display:flex; flex-direction:column; align-items:center; gap:3px; }
+.dv-gauge-cell canvas { display:block; width:90px; height:90px; }
+.dv-gauge-label { font-size:10px; color:var(--text-secondary,#64748b); text-align:center; font-family:'Inter',sans-serif; }
+.dv-kpi-row { display:flex; align-items:center; gap:20px; padding:8px 0 4px; }
+.dv-kpi-row .dv-donut-wrap { flex-shrink:0; }
+.dv-kpi-row .dv-gauges-row { flex:1; justify-content:flex-end; flex-wrap:nowrap; }
+.dv-chart-panel { background:var(--surface,#fff); border:1px solid var(--border,#e0e1e6); border-radius:12px; padding:16px; margin-bottom:16px; }
+.dv-chart-panel h4 { font-size:13px; font-weight:600; color:var(--text,#1e293b); margin:0 0 12px; font-family:'Inter',sans-serif; }
+.dv-chart-panel canvas { display:block; width:100% !important; }
+.analytics-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding-bottom:24px; }
+.analytics-grid .dv-chart-panel { margin-bottom:0; }
+.analytics-grid .dv-panel-wide { grid-column:span 2; }
+@media (max-width:900px) { .analytics-grid { grid-template-columns:1fr; } .analytics-grid .dv-panel-wide { grid-column:span 1; } }
+.dv-stackbar-wrap { margin-bottom:16px; }
+.dv-stackbar-wrap canvas { display:block; width:100% !important; }
 </style>
 </head>
 <body>
@@ -2387,25 +2589,25 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Your work</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="inbox"><ph-tray></ph-tray><span class="si-label">My Inbox</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="review"><ph-eye></ph-eye><span class="si-label">In Review</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="rework"><ph-arrow-counter-clockwise></ph-arrow-counter-clockwise><span class="si-label">Rework</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="approved"><ph-check-circle></ph-check-circle><span class="si-label">Approved</span><span class="count">7</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">7</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><ph-chat-circle-text></ph-chat-circle-text><span class="si-label">Peer Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><ph-chat-square-text></ph-chat-square-text><span class="si-label">SR Comments</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><ph-file-text></ph-file-text><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
-      <div class="sidebar-item" data-view="asst-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="asst-merch-tasks"><i class="ph ph-shopping-bag"></i><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Handoffs</div>
-      <div class="sidebar-item" data-view="asst-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">My Handoffs</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="asst-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">My Handoffs</span><span class="count">3</span></div>
     </div>
   </aside>
 
@@ -2457,13 +2659,52 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
+      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">10:00</div><div class="meeting-time-end">10:30 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Q2 Capsule Kick-off<span class="meeting-now-badge">Now</span></div>
+            <div class="meeting-meta">Ana Avelino · Classic Chenille · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">2:45 PM</div></div>
+          <div class="meeting-bar"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Design Review — Summer League Styles</div>
+            <div class="meeting-meta">Diana Adame, Andrea Cardenas · Conference Room B</div>
+          </div>
+          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">4:00</div><div class="meeting-time-end">4:30 PM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">1:1 with Ana Avelino</div>
+            <div class="meeting-meta">Ana Avelino · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">3 meetings · ~1h 45m today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+
       <!-- General production stats (all capsules) -->
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div></div>
-        <div class="gen-stat" style="cursor:pointer" onclick="navigateToView('asst-handoffs')"><div class="gen-stat-label">Handoffs</div><div class="gen-stat-value stat-value" style="color:#f59e0b">3</div><div class="gen-stat-sub">1 pending · 2 done</div></div>
+        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">7</div><div class="gen-stat-sub">58% of your work</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Total assigned</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">Across 2 capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-total-styles"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">3</div><div class="gen-stat-sub">+1 vs last week</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Waiting approval</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">4</div><div class="gen-stat-sub">Peer · SR · Lic</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
+        <div class="gen-stat" style="cursor:pointer;position:relative" onclick="navigateToView('asst-handoffs')"><div class="gen-stat-label">Handoffs</div><div class="gen-stat-value stat-value" style="color:#f59e0b">3</div><div class="gen-stat-sub">1 pending · 2 done</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-pending"></canvas></div></div>
       </div>
 
       <div class="pill-stat reveal-up" data-delay="2" onclick="togglePillStat(this)" style="margin-bottom:16px">
@@ -2501,6 +2742,14 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             <div style="display:flex;gap:12px;font-size:10px;color:#b0b4ba;margin-top:8px">
               <span>■ Pending 17%</span><span style="color:#8b5cf6">■ In review 16%</span><span style="color:#dc2626">■ Rework 25%</span><span style="color:#065f46">■ Approved 42%</span>
             </div>
+            <div class="dv-kpi-row">
+              <div class="dv-donut-wrap"><canvas id="dv-donut-assistant"></canvas></div>
+              <div class="dv-gauges-row">
+                <div class="dv-gauge-cell"><canvas id="dv-gauge-approval-assistant"></canvas><span class="dv-gauge-label">Approval</span></div>
+                <div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-assistant"></canvas><span class="dv-gauge-label">On-Time</span></div>
+                <div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-assistant"></canvas><span class="dv-gauge-label">Cycle</span></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card mb-0">
@@ -2511,45 +2760,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Licensing avg</span><strong>4.8 days</strong></div>
             <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:8px"><span class="muted">End-to-end avg</span><strong style="color:#1c2024">10.3 days</strong></div>
           </div>
-        </div>
-      </div>
-
-      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
-      <div class="meetings-card reveal-up" data-delay="4">
-        <div class="meetings-card-head">
-          <h2 class="meetings-card-title">Today's Meetings</h2>
-          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">10:00</div><div class="meeting-time-end">10:30 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Q2 Capsule Kick-off<span class="meeting-now-badge">Now</span></div>
-            <div class="meeting-meta">Ana Avelino · Classic Chenille · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">2:45 PM</div></div>
-          <div class="meeting-bar"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Design Review — Summer League Styles</div>
-            <div class="meeting-meta">Diana Adame, Andrea Cardenas · Conference Room B</div>
-          </div>
-          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">4:00</div><div class="meeting-time-end">4:30 PM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">1:1 with Ana Avelino</div>
-            <div class="meeting-meta">Ana Avelino · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meetings-footer">
-          <span class="meetings-footer-note">3 meetings · ~1h 45m today</span>
-          <a class="meetings-footer-link">Open Calendar →</a>
         </div>
       </div>
     </div>
@@ -2671,6 +2881,27 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
               <tr><td class="col-pin"><div class="style-code">HMG91727</div></td><td><div class="style-title">Memphis Grizzlies · MENS Hoodie · Grit &amp; Grind</div></td><td>Pro Standard</td><td>SS27</td><td>Q1 MENS</td><td>Hoodie</td><td>MENS</td><td>Apparel</td><td>Tops</td><td>Grit &amp; Grind</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Diana Adame</td><td><span class="due-warn">May 24</span></td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td class="figma-cell"><a class="btn-figma-open" href="https://www.figma.com/design/mock-board" target="_blank" onclick="onFigmaOpened(this)">Open Figma Board →</a><div class="figma-required-tip" style="margin-top:4px">⚠ Open the Figma link to enable review</div></td><td style="white-space:nowrap"><button class="btn-peer-action btn-peer-approve" disabled onclick="peerDecision(this,\'approve\')">Approve</button> <button class="btn-peer-action btn-peer-reject" disabled onclick="peerDecision(this,\'reject\')" style="margin-left:4px">Reject</button></td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="pad-mgmt-bar" data-mgmt-bar="peer1" data-total="2">
+        <div class="mgmt-bar-inner">
+          <div class="mgmt-pagination">
+            <button class="mgmt-pg-btn" id="mgmt-prev-peer1" disabled onclick="mgmtPrev('peer1')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="mgmt-pg-display">
+              <div class="mgmt-slide-wrap"><span class="mgmt-slide-digit" id="mgmt-num-peer1">1</span></div>
+              <span class="mgmt-pg-sep">of</span>
+              <span class="mgmt-pg-total" id="mgmt-tot-peer1">2</span>
+              <span class="mgmt-pg-sep" style="margin-left:2px">styles</span>
+            </div>
+            <button class="mgmt-pg-btn" id="mgmt-next-peer1" onclick="mgmtNext('peer1')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+          <div class="mgmt-divider"></div>
+          <div class="mgmt-actions">
+            <button class="mgmt-btn mgmt-btn-flag" aria-label="Flag" onclick="mgmtAction('peer1','flag')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span><span class="mgmt-btn-label">Flag</span></button>
+            <button class="mgmt-btn mgmt-btn-rework" aria-label="Request Rework" onclick="mgmtAction('peer1','rework')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></span><span class="mgmt-btn-label">Rework</span></button>
+            <button class="mgmt-btn mgmt-btn-approve" aria-label="Approve" onclick="mgmtAction('peer1','approve')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="mgmt-btn-label">Approve</span></button>
+            <button class="mgmt-btn mgmt-btn-filter" aria-label="Toggle filters" title="Toggle filters" onclick="mgmtAction('peer1','filter')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></span></button>
+          </div>
         </div>
       </div>
     </div>
@@ -2887,8 +3118,8 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
           <td><input placeholder="Date…"></td>
         </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Logo proportions off — 12% smaller, shifted left.</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Color palette mismatch — #FCD34D not #FBBF24.</span></td><td>2</td><td>Apr 12</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
       </tbody></table></div>
     </div>
 
@@ -2903,7 +3134,7 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
           <td><input placeholder="Date…"></td>
         </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Type hierarchy — secondary line dominates lockup.</span></td><td>1</td><td>Apr 14</td></tr>
+        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
       </tbody></table></div>
     </div>
 
@@ -3035,26 +3266,26 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Your work</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="inbox"><ph-tray></ph-tray><span class="si-label">My Inbox</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="review"><ph-eye></ph-eye><span class="si-label">In Review</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="rework"><ph-arrow-counter-clockwise></ph-arrow-counter-clockwise><span class="si-label">Rework</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="approved"><ph-check-circle></ph-check-circle><span class="si-label">Approved</span><span class="count">7</span></div>
-      <div class="sidebar-item" data-view="peer-pending"><ph-users></ph-users><span class="si-label">Peer Review Pending</span><span class="count">2</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">7</span></div>
+      <div class="sidebar-item" data-view="peer-pending"><i class="ph ph-users"></i><span class="si-label">Peer Review Pending</span><span class="count">2</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><ph-chat-circle-text></ph-chat-circle-text><span class="si-label">Peer Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><ph-chat-square-text></ph-chat-square-text><span class="si-label">SR Comments</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><ph-file-text></ph-file-text><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
-      <div class="sidebar-item" data-view="assoc-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="assoc-merch-tasks"><i class="ph ph-shopping-bag"></i><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Handoffs</div>
-      <div class="sidebar-item" data-view="assoc-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">My Handoffs</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="assoc-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">My Handoffs</span><span class="count">3</span></div>
     </div>
   </aside>
 
@@ -3101,6 +3332,28 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             <div class="todo-subtitle"><span class="muted">Pending upload · Due Apr 26</span></div>
           </div>
           <div class="todo-actions"><button class="btn-todo-open">Open →</button></div>
+        </div>
+      </div>
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">10:00</div><div class="meeting-time-end">10:30 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content"><div class="meeting-title">Q2 Capsule Kick-off<span class="meeting-now-badge">Now</span></div><div class="meeting-meta">Ana Avelino · Classic Chenille · Teams call</div></div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">2:45 PM</div></div>
+          <div class="meeting-bar"></div>
+          <div class="meeting-content"><div class="meeting-title">Design Review — Summer League Styles</div><div class="meeting-meta">Diana Adame, Andrea Cardenas · Conference Room B</div></div>
+          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">2 meetings · ~1h 15m today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
         </div>
       </div>
       <div class="bento-home reveal-up" data-delay="1">
@@ -3154,28 +3407,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Licensing avg</span><strong>4.8 days</strong></div>
             <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:8px"><span class="muted">End-to-end avg</span><strong style="color:#1c2024">10.3 days</strong></div>
           </div>
-        </div>
-      </div>
-      <div class="meetings-card reveal-up" data-delay="4">
-        <div class="meetings-card-head">
-          <h2 class="meetings-card-title">Today's Meetings</h2>
-          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">10:00</div><div class="meeting-time-end">10:30 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content"><div class="meeting-title">Q2 Capsule Kick-off<span class="meeting-now-badge">Now</span></div><div class="meeting-meta">Ana Avelino · Classic Chenille · Teams call</div></div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">2:45 PM</div></div>
-          <div class="meeting-bar"></div>
-          <div class="meeting-content"><div class="meeting-title">Design Review — Summer League Styles</div><div class="meeting-meta">Diana Adame, Andrea Cardenas · Conference Room B</div></div>
-          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
-        </div>
-        <div class="meetings-footer">
-          <span class="meetings-footer-note">2 meetings · ~1h 15m today</span>
-          <a class="meetings-footer-link">Open Calendar →</a>
         </div>
       </div>
     </div>
@@ -3236,6 +3467,27 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           </table>
         </div>
       </div>
+      <div class="pad-mgmt-bar" data-mgmt-bar="peer2" data-total="2">
+        <div class="mgmt-bar-inner">
+          <div class="mgmt-pagination">
+            <button class="mgmt-pg-btn" id="mgmt-prev-peer2" disabled onclick="mgmtPrev('peer2')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="mgmt-pg-display">
+              <div class="mgmt-slide-wrap"><span class="mgmt-slide-digit" id="mgmt-num-peer2">1</span></div>
+              <span class="mgmt-pg-sep">of</span>
+              <span class="mgmt-pg-total" id="mgmt-tot-peer2">2</span>
+              <span class="mgmt-pg-sep" style="margin-left:2px">styles</span>
+            </div>
+            <button class="mgmt-pg-btn" id="mgmt-next-peer2" onclick="mgmtNext('peer2')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+          <div class="mgmt-divider"></div>
+          <div class="mgmt-actions">
+            <button class="mgmt-btn mgmt-btn-flag" aria-label="Flag" onclick="mgmtAction('peer2','flag')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span><span class="mgmt-btn-label">Flag</span></button>
+            <button class="mgmt-btn mgmt-btn-rework" aria-label="Request Rework" onclick="mgmtAction('peer2','rework')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></span><span class="mgmt-btn-label">Rework</span></button>
+            <button class="mgmt-btn mgmt-btn-approve" aria-label="Approve" onclick="mgmtAction('peer2','approve')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="mgmt-btn-label">Approve</span></button>
+            <button class="mgmt-btn mgmt-btn-filter" aria-label="Toggle filters" title="Toggle filters" onclick="mgmtAction('peer2','filter')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></span></button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- IN REVIEW -->
@@ -3276,8 +3528,8 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
     <div class="view" data-view="peer-comments">
       <div class="page-head"><div><h1 class="page-title">Peer Comments</h1><div class="page-sub">Comments from your peer reviewer across all rounds</div></div></div>
       <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Logo proportions off — 12% smaller, shifted left.</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Color palette mismatch — #FCD34D not #FBBF24.</span></td><td>2</td><td>Apr 12</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
       </tbody></table></div>
     </div>
 
@@ -3285,7 +3537,7 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
     <div class="view" data-view="sr-comments">
       <div class="page-head"><div><h1 class="page-title">SR Comments</h1><div class="page-sub">Senior Designer feedback on your peer-approved styles</div></div></div>
       <div class="card"><table class="styles-table"><thead><tr><th>Style</th><th>Reviewer</th><th>Comment</th><th>Round</th><th>Date</th></tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Type hierarchy — secondary line dominates lockup.</span></td><td>1</td><td>Apr 14</td></tr>
+        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
       </tbody></table></div>
     </div>
 
@@ -3384,31 +3636,31 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Your work</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">18</span></div>
-      <div class="sidebar-item" data-view="inbox"><ph-tray></ph-tray><span class="si-label">My Inbox</span><span class="count">18</span></div>
-      <div class="sidebar-item" data-view="review"><ph-eye></ph-eye><span class="si-label">In Review</span><span class="count">6</span></div>
-      <div class="sidebar-item" data-view="rework"><ph-arrow-counter-clockwise></ph-arrow-counter-clockwise><span class="si-label">Rework</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="approved"><ph-check-circle></ph-check-circle><span class="si-label">Approved</span><span class="count">11</span></div>
-      <div class="sidebar-item" data-view="peer-pending"><ph-users></ph-users><span class="si-label">Peer Review Pending</span><span class="count">3</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">18</span></div>
+      <div class="sidebar-item" data-view="inbox"><i class="ph ph-tray"></i><span class="si-label">My Inbox</span><span class="count">18</span></div>
+      <div class="sidebar-item" data-view="review"><i class="ph ph-eye"></i><span class="si-label">In Review</span><span class="count">6</span></div>
+      <div class="sidebar-item" data-view="rework"><i class="ph ph-arrow-counter-clockwise"></i><span class="si-label">Rework</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="approved"><i class="ph ph-check-circle"></i><span class="si-label">Approved</span><span class="count">11</span></div>
+      <div class="sidebar-item" data-view="peer-pending"><i class="ph ph-users"></i><span class="si-label">Peer Review Pending</span><span class="count">3</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Trackers</div>
-      <div class="sidebar-item" data-view="art"><ph-palette></ph-palette><span class="si-label">Art Creation</span><span class="count">23</span></div>
-      <div class="sidebar-item" data-view="templates"><ph-layout></ph-layout><span class="si-label">Template Creation</span><span class="count">7</span></div>
+      <div class="sidebar-item" data-view="art"><i class="ph ph-palette"></i><span class="si-label">Art Creation</span><span class="count">23</span></div>
+      <div class="sidebar-item" data-view="templates"><i class="ph ph-layout"></i><span class="si-label">Template Creation</span><span class="count">7</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Feedback</div>
-      <div class="sidebar-item" data-view="peer-comments"><ph-chat-circle-text></ph-chat-circle-text><span class="si-label">Peer Comments</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="sr-comments"><ph-chat-square-text></ph-chat-square-text><span class="si-label">SR Comments</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="lic-comments"><ph-file-text></ph-file-text><span class="si-label">Licensing Comments</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="peer-comments"><i class="ph ph-chat-circle-text"></i><span class="si-label">Peer Comments</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="sr-comments"><i class="ph ph-chat-square-text"></i><span class="si-label">SR Comments</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="lic-comments"><i class="ph ph-file-text"></i><span class="si-label">Licensing Comments</span><span class="count">2</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Merch</div>
-      <div class="sidebar-item" data-view="dsgn-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="dsgn-merch-tasks"><i class="ph ph-shopping-bag"></i><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Handoffs</div>
-      <div class="sidebar-item" data-view="dsgn-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">My Handoffs</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="dsgn-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">My Handoffs</span><span class="count">4</span></div>
     </div>
   </aside>
 
@@ -3427,53 +3679,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         <div class="todo-item" onclick="navigateToView('inbox','HVGU68863')"><span class="todo-indicator normal"></span><div class="todo-content"><div class="todo-title">Upload Figma — HVGU68863 · WMNS Crew Vintage Type</div><div class="todo-subtitle"><span class="muted">Pending upload · Due Apr 26</span></div></div><div class="todo-actions"><button class="btn-todo-open">Open →</button></div></div>
         <div class="todo-item" onclick="navigateToView('art','')"><span class="todo-indicator normal"></span><div class="todo-content"><div class="todo-title">3 art creation tasks pending submission — Q3 MENS Premier</div><div class="todo-subtitle"><span class="muted">Art creation queue</span></div></div><div class="todo-actions"><button class="btn-todo-open">Open →</button></div></div>
       </div>
-      <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">61% overall</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Styles assigned</div><div class="gen-stat-value stat-value">18</div><div class="gen-stat-sub">All active capsules</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">4</div><div class="gen-stat-sub">Peer + Licensing</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Arts in progress</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">23</div><div class="gen-stat-sub">14 approved all-time</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Templates</div><div class="gen-stat-value stat-value">7</div><div class="gen-stat-sub">Q2 active</div></div>
-        <div class="gen-stat" style="cursor:pointer" onclick="navigateToView('dsgn-handoffs')"><div class="gen-stat-label">Handoffs</div><div class="gen-stat-value stat-value" style="color:#f59e0b">4</div><div class="gen-stat-sub">2 pending · 2 done</div></div>
-      </div>
-
-      <div class="pill-stat" onclick="togglePillStat(this)" style="margin-bottom:16px">
-        <div class="pill-stat-head">
-          <span class="pill-stat-label">Your EP Score &middot; Q2 2026</span>
-          <span style="font-size:11px;color:var(--text-dim)">&#9662; details</span>
-        </div>
-        <div style="display:flex;align-items:flex-end;gap:8px;margin:6px 0 2px">
-          <div class="pill-stat-pct">81%</div>
-          <span class="ep-status-label ep-on-track" style="margin-bottom:5px">on track</span>
-        </div>
-        <div class="pill-stat-sub">Efficiency &amp; productivity &middot; this quarter</div>
-        <div class="pill-stat-expand">
-            <div class="ep-sub-row">
-              <div class="ep-sub-label">Efficiency<span class="ep-sub-score">78%</span></div>
-              <div class="ep-bar-track"><div class="ep-bar-fill" style="width:78%;background:#10b981"></div></div>
-              <div class="ep-sub-data">18 boards &nbsp;&middot;&nbsp; 4 reworks &nbsp;&middot;&nbsp; 14 clean</div>
-            </div>
-            <div class="ep-sub-row">
-              <div class="ep-sub-label">Productivity<span class="ep-sub-score">85%</span></div>
-              <div class="ep-bar-track"><div class="ep-bar-fill" style="width:85%;background:#10b981"></div></div>
-              <div class="ep-sub-data">18&thinsp;/&thinsp;12 target &nbsp;&middot;&nbsp; +5 tasks &nbsp;&middot;&nbsp; 2 capsules</div>
-            </div>
-            <div class="ep-threshold-legend">71&ndash;100 on track &nbsp;&middot;&nbsp; 51&ndash;70 attention &nbsp;&middot;&nbsp; &le;50 intervention</div>
-        </div>
-      </div>
-      <div class="home-2col">
-        <div class="card mb-0"><div class="card-head"><h2 class="card-title">Overall pipeline · all capsules</h2></div><div style="padding:16px">
-          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span>18 active styles</span></div>
-          <div class="flow-bar"><div class="flow-seg-p" style="width:16%"></div><div class="flow-seg-rv" style="width:12%"></div><div class="flow-seg-rw" style="width:22%"></div><div class="flow-seg-ap" style="width:50%"></div></div>
-          <div style="display:flex;gap:12px;font-size:10px;color:#b0b4ba;margin-top:8px"><span>■ Pending 16%</span><span style="color:#8b5cf6">■ In review 12%</span><span style="color:#dc2626">■ Rework 22%</span><span style="color:#065f46">■ Approved 50%</span></div>
-        </div></div>
-        <div class="card mb-0"><div class="card-head"><h2 class="card-title">Avg. cycle time · all work</h2></div><div style="padding:16px;display:flex;flex-direction:column;gap:10px;font-size:13px">
-          <div style="display:flex;justify-content:space-between"><span class="muted">Peer review avg</span><strong>2.3 days</strong></div>
-          <div style="display:flex;justify-content:space-between"><span class="muted">SR review avg</span><strong>3.1 days</strong></div>
-          <div style="display:flex;justify-content:space-between"><span class="muted">Licensing avg</span><strong>5.2 days</strong></div>
-          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:8px"><span class="muted">End-to-end avg</span><strong>10.6 days</strong></div>
-        </div></div>
-      </div>
-
       <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
       <div class="meetings-card reveal-up" data-delay="4">
         <div class="meetings-card-head">
@@ -3511,6 +3716,60 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <span class="meetings-footer-note">3 meetings · ~2h today</span>
           <a class="meetings-footer-link">Open Calendar →</a>
         </div>
+      </div>
+      <div class="bento-home reveal-up" data-delay="1">
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">61% overall</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-approved"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Styles assigned</div><div class="gen-stat-value stat-value">18</div><div class="gen-stat-sub">All active capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-total-styles"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">In rework</div><div class="gen-stat-value stat-value" style="color:#dc2626">4</div><div class="gen-stat-sub">Peer + Licensing</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Arts in progress</div><div class="gen-stat-value stat-value" style="color:#8b5cf6">23</div><div class="gen-stat-sub">14 approved all-time</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Templates</div><div class="gen-stat-value stat-value">7</div><div class="gen-stat-sub">Q2 active</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-capsules"></canvas></div></div>
+        <div class="gen-stat" style="cursor:pointer;position:relative" onclick="navigateToView('dsgn-handoffs')"><div class="gen-stat-label">Handoffs</div><div class="gen-stat-value stat-value" style="color:#f59e0b">4</div><div class="gen-stat-sub">2 pending · 2 done</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-pending"></canvas></div></div>
+      </div>
+
+      <div class="pill-stat" onclick="togglePillStat(this)" style="margin-bottom:16px">
+        <div class="pill-stat-head">
+          <span class="pill-stat-label">Your EP Score &middot; Q2 2026</span>
+          <span style="font-size:11px;color:var(--text-dim)">&#9662; details</span>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:8px;margin:6px 0 2px">
+          <div class="pill-stat-pct">81%</div>
+          <span class="ep-status-label ep-on-track" style="margin-bottom:5px">on track</span>
+        </div>
+        <div class="pill-stat-sub">Efficiency &amp; productivity &middot; this quarter</div>
+        <div class="pill-stat-expand">
+            <div class="ep-sub-row">
+              <div class="ep-sub-label">Efficiency<span class="ep-sub-score">78%</span></div>
+              <div class="ep-bar-track"><div class="ep-bar-fill" style="width:78%;background:#10b981"></div></div>
+              <div class="ep-sub-data">18 boards &nbsp;&middot;&nbsp; 4 reworks &nbsp;&middot;&nbsp; 14 clean</div>
+            </div>
+            <div class="ep-sub-row">
+              <div class="ep-sub-label">Productivity<span class="ep-sub-score">85%</span></div>
+              <div class="ep-bar-track"><div class="ep-bar-fill" style="width:85%;background:#10b981"></div></div>
+              <div class="ep-sub-data">18&thinsp;/&thinsp;12 target &nbsp;&middot;&nbsp; +5 tasks &nbsp;&middot;&nbsp; 2 capsules</div>
+            </div>
+            <div class="ep-threshold-legend">71&ndash;100 on track &nbsp;&middot;&nbsp; 51&ndash;70 attention &nbsp;&middot;&nbsp; &le;50 intervention</div>
+        </div>
+      </div>
+      <div class="home-2col">
+        <div class="card mb-0"><div class="card-head"><h2 class="card-title">Overall pipeline · all capsules</h2></div><div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span>18 active styles</span></div>
+          <div class="flow-bar"><div class="flow-seg-p" style="width:16%"></div><div class="flow-seg-rv" style="width:12%"></div><div class="flow-seg-rw" style="width:22%"></div><div class="flow-seg-ap" style="width:50%"></div></div>
+          <div style="display:flex;gap:12px;font-size:10px;color:#b0b4ba;margin-top:8px"><span>■ Pending 16%</span><span style="color:#8b5cf6">■ In review 12%</span><span style="color:#dc2626">■ Rework 22%</span><span style="color:#065f46">■ Approved 50%</span></div>
+          <div class="dv-kpi-row">
+            <div class="dv-donut-wrap"><canvas id="dv-donut-designer"></canvas></div>
+            <div class="dv-gauges-row">
+              <div class="dv-gauge-cell"><canvas id="dv-gauge-approval-designer"></canvas><span class="dv-gauge-label">Approval</span></div>
+              <div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-designer"></canvas><span class="dv-gauge-label">On-Time</span></div>
+              <div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-designer"></canvas><span class="dv-gauge-label">Cycle</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="card mb-0"><div class="card-head"><h2 class="card-title">Avg. cycle time · all work</h2></div><div style="padding:16px;display:flex;flex-direction:column;gap:10px;font-size:13px">
+          <div style="display:flex;justify-content:space-between"><span class="muted">Peer review avg</span><strong>2.3 days</strong></div>
+          <div style="display:flex;justify-content:space-between"><span class="muted">SR review avg</span><strong>3.1 days</strong></div>
+          <div style="display:flex;justify-content:space-between"><span class="muted">Licensing avg</span><strong>5.2 days</strong></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:8px"><span class="muted">End-to-end avg</span><strong>10.6 days</strong></div>
+        </div></div>
       </div>
     </div>
 
@@ -3641,6 +3900,27 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
               <tr><td class="col-pin"><div class="style-code">HMB16022</div></td><td><div class="style-title">Milwaukee Bucks · MENS Jacket · Fiserv</div></td><td>Pro Standard</td><td>SS27</td><td>Q1 MENS</td><td>Jacket</td><td>MENS</td><td>Apparel</td><td>Outerwear</td><td>Fiserv</td><td>—</td><td>—</td><td>—</td><td>Standard</td><td>Amanda Mireles</td><td><span class="due-ok">May 26</span></td><td><span class="pill pill-peer pill-dot">Peer Review</span></td><td class="figma-cell"><a class="btn-figma-open" href="https://www.figma.com/design/mock-board" target="_blank" onclick="onFigmaOpened(this)">Open Figma Board →</a><div class="figma-required-tip" style="margin-top:4px">⚠ Open the Figma link to enable review</div></td><td style="white-space:nowrap"><button class="btn-peer-action btn-peer-approve" disabled onclick="peerDecision(this,\'approve\')">Approve</button> <button class="btn-peer-action btn-peer-reject" disabled onclick="peerDecision(this,\'reject\')" style="margin-left:4px">Reject</button></td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="pad-mgmt-bar" data-mgmt-bar="peer3" data-total="3">
+        <div class="mgmt-bar-inner">
+          <div class="mgmt-pagination">
+            <button class="mgmt-pg-btn" id="mgmt-prev-peer3" disabled onclick="mgmtPrev('peer3')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="mgmt-pg-display">
+              <div class="mgmt-slide-wrap"><span class="mgmt-slide-digit" id="mgmt-num-peer3">1</span></div>
+              <span class="mgmt-pg-sep">of</span>
+              <span class="mgmt-pg-total" id="mgmt-tot-peer3">3</span>
+              <span class="mgmt-pg-sep" style="margin-left:2px">styles</span>
+            </div>
+            <button class="mgmt-pg-btn" id="mgmt-next-peer3" onclick="mgmtNext('peer3')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+          <div class="mgmt-divider"></div>
+          <div class="mgmt-actions">
+            <button class="mgmt-btn mgmt-btn-flag" aria-label="Flag" onclick="mgmtAction('peer3','flag')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span><span class="mgmt-btn-label">Flag</span></button>
+            <button class="mgmt-btn mgmt-btn-rework" aria-label="Request Rework" onclick="mgmtAction('peer3','rework')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></span><span class="mgmt-btn-label">Rework</span></button>
+            <button class="mgmt-btn mgmt-btn-approve" aria-label="Approve" onclick="mgmtAction('peer3','approve')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="mgmt-btn-label">Approve</span></button>
+            <button class="mgmt-btn mgmt-btn-filter" aria-label="Toggle filters" title="Toggle filters" onclick="mgmtAction('peer3','filter')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></span></button>
+          </div>
         </div>
       </div>
     </div>
@@ -3879,8 +4159,8 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
           <td><input placeholder="Date…"></td>
         </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Logo proportions off — 12% smaller, shifted left.</span></td><td>1</td><td>Apr 08</td></tr>
-        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Color palette mismatch — #FCD34D not #FBBF24.</span></td><td>2</td><td>Apr 12</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Logo proportions corrected — approved ✓</span></td><td>1</td><td>Apr 08</td></tr>
+        <tr><td><div class="style-code">HVGU68851</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Color palette verified and approved ✓</span></td><td>2</td><td>Apr 12</td></tr>
         <tr><td><div class="style-code">HLMC78921</div></td><td>Anthony Valtierra</td><td class="lic-status"><span class="ev-rework">Chivas crest aspect ratio off — see brand guide pg 14.</span></td><td>1</td><td>May 05</td></tr>
       </tbody></table></div>
     </div>
@@ -3894,7 +4174,7 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <td><select><option value="">All Rounds</option><option>Round 1</option><option>Round 2</option><option>Round 3</option></select></td>
           <td><input placeholder="Date…"></td>
         </tr></thead><tbody>
-        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-rework">Type hierarchy — secondary line dominates lockup.</span></td><td>1</td><td>Apr 14</td></tr>
+        <tr><td><div class="style-code">HVGU68863</div></td><td>Ana Avelino</td><td class="lic-status"><span class="ev-approved">Type hierarchy clean — approved ✓</span></td><td>1</td><td>Apr 14</td></tr>
         <tr><td><div class="style-code">HMBY78904</div></td><td>Arantxa Denegri</td><td class="lic-status"><span class="ev-rework">Type hierarchy needs work.</span></td><td>1</td><td>May 02</td></tr>
       </tbody></table></div>
     </div>
@@ -4059,30 +4339,34 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Your work</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">9</span></div>
-      <div class="sidebar-item" data-view="peer-status"><ph-git-pull-request></ph-git-pull-request><span class="si-label">Peer Status</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="sr-approved"><ph-check-circle></ph-check-circle><span class="si-label">SR Approved</span><span class="count">57</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">9</span></div>
+      <div class="sidebar-item" data-view="peer-status"><i class="ph ph-git-pull-request"></i><span class="si-label">Peer Status</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="sr-approved"><i class="ph ph-check-circle"></i><span class="si-label">SR Approved</span><span class="count">57</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Team</div>
-      <div class="sidebar-item" data-view="workload"><ph-chart-bar></ph-chart-bar><span class="si-label">Team Workload</span></div>
-      <div class="sidebar-item" data-view="capsule-progress"><ph-trend-up></ph-trend-up><span class="si-label">Capsule Progress</span></div>
-      <div class="sidebar-item" data-view="daily-progress"><ph-calendar-check></ph-calendar-check><span class="si-label">Daily Progress</span></div>
-      <div class="sidebar-item" data-view="metrics"><ph-activity></ph-activity><span class="si-label">Team Metrics</span></div>
+      <div class="sidebar-item" data-view="workload"><i class="ph ph-chart-bar"></i><span class="si-label">Team Workload</span></div>
+      <div class="sidebar-item" data-view="capsule-progress"><i class="ph ph-trend-up"></i><span class="si-label">Capsule Progress</span></div>
+      <div class="sidebar-item" data-view="daily-progress"><i class="ph ph-calendar-check"></i><span class="si-label">Daily Progress</span></div>
+      <div class="sidebar-item" data-view="metrics"><i class="ph ph-activity"></i><span class="si-label">Team Metrics</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Trackers</div>
-      <div class="sidebar-item" data-view="licensing"><ph-file-check></ph-file-check><span class="si-label">Licensing Tracker</span></div>
-      <div class="sidebar-item" data-view="art-creation"><ph-palette></ph-palette><span class="si-label">Art Creation</span></div>
-      <div class="sidebar-item" data-view="templates"><ph-layout></ph-layout><span class="si-label">Templates</span></div>
+      <div class="sidebar-item" data-view="licensing"><i class="ph ph-file-check"></i><span class="si-label">Licensing Tracker</span></div>
+      <div class="sidebar-item" data-view="art-creation"><i class="ph ph-palette"></i><span class="si-label">Art Creation</span></div>
+      <div class="sidebar-item" data-view="templates"><i class="ph ph-layout"></i><span class="si-label">Templates</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tasks</div>
-      <div class="sidebar-item" data-view="task-queue"><ph-list-checks></ph-list-checks><span class="si-label">Task Queue</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="style-num-requests"><ph-hash></ph-hash><span class="si-label">New Style # Requests</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="sr-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="sr-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="task-queue"><i class="ph ph-list-checks"></i><span class="si-label">Task Queue</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="pending-assign"><i class="ph ph-clipboard-text"></i><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="style-num-requests"><i class="ph ph-hash"></i><span class="si-label">New Style # Requests</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="sr-merch-tasks"><i class="ph ph-shopping-bag"></i><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="sr-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">Handoffs</span><span class="count">4</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Insights</div>
+      <div class="sidebar-item" data-view="sr-analytics"><i class="ph ph-chart-bar"></i><span class="si-label">Analytics</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('sr')">+ Assign Task</button>
   </aside>
@@ -4099,12 +4383,103 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
+      <!-- Daily To-Do — SharePoint fed -->
+      <div class="todo-card reveal-up">
+        <div class="todo-card-head">
+          <h2 class="todo-card-title">Daily To-Do</h2>
+          <div class="todo-sync-badge"><span class="todo-sync-dot"></span>Live · SharePoint</div>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('peer-status','HVGU68866')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Peer review decision needed — HVGU68866</div>
+            <div class="todo-subtitle"><span>Dante Meneses · Due today</span><span style="color:#dc2626;font-weight:700">URGENT</span></div>
+          </div>
+          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('peer-status','HVGU68866')">Open →</button>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('peer-status','HLMC78921')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Reassign HLMC78921 — stalled 4 days</div>
+            <div class="todo-subtitle"><span>Unassigned · Rework pending</span><span style="color:#f97316;font-weight:700">ACTION NEEDED</span></div>
+          </div>
+          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('peer-status','HLMC78921')">Open →</button>
+        </div>
+        <div class="todo-item" onclick="navigateToView('peer-status')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Review peer queue — 4 styles awaiting SR decision</div>
+            <div class="todo-subtitle"><span>Peer Status</span><span>Due May 17</span></div>
+          </div>
+          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('peer-status')">Open →</button>
+        </div>
+        <div class="todo-item" onclick="navigateToView('art-creation')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Approve Art Creation batch — Q2 8 styles</div>
+            <div class="todo-subtitle"><span>Art Creation · Diana Adame</span><span>Due May 18</span></div>
+          </div>
+          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('art-creation')">Open →</button>
+        </div>
+        <div class="todo-item" onclick="navigateToView('licensing-tracker')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Licensing rework notes review — 6 pending</div>
+            <div class="todo-subtitle"><span>Licensing Tracker</span><span>Due May 20</span></div>
+          </div>
+          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('licensing-tracker')">Open →</button>
+        </div>
+      </div>
+
+      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">9:00</div><div class="meeting-time-end">9:30 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Morning Standup — Design Team<span class="meeting-now-badge">Now</span></div>
+            <div class="meeting-meta">Dante Meneses, Diana Adame, Andrea Cardenas · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">11:00</div><div class="meeting-time-end">11:45 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Peer Review Sync — Q2 Backlog</div>
+            <div class="meeting-meta">Ana Avelino · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">3:00</div><div class="meeting-time-end">3:30 PM</div></div>
+          <div class="meeting-bar"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Manager Check-in</div>
+            <div class="meeting-meta">Arantxa Denegri · Conference Room A</div>
+          </div>
+          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">3 meetings · ~2h today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+
       <!-- General progress stats -->
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">SR Approved · Week</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">across all capsules</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Peer Queue</div><div class="gen-stat-value stat-value">4</div><div class="gen-stat-sub">styles awaiting SR decision</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Reworks Issued</div><div class="gen-stat-value stat-value" style="color:#f59e0b">6</div><div class="gen-stat-sub">this quarter</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Team Capacity</div><div class="gen-stat-value stat-value">76%</div><div class="gen-stat-sub">3 designers active</div></div>
+        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">SR Approved · Week</div><div class="gen-stat-value stat-value" style="color:#065f46">11</div><div class="gen-stat-sub">across all capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-my-styles"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Peer Queue</div><div class="gen-stat-value stat-value">4</div><div class="gen-stat-sub">styles awaiting SR decision</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-peer-queue"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Reworks Issued</div><div class="gen-stat-value stat-value" style="color:#f59e0b">6</div><div class="gen-stat-sub">this quarter</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Team Capacity</div><div class="gen-stat-value stat-value">76%</div><div class="gen-stat-sub">3 designers active</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-team-output"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:8px;"><div class="gen-stat-label">Pipeline Stages</div><div class="dv-donut-wrap"><canvas id="dv-donut-sr"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Approval Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-approval-sr"></canvas><span class="dv-gauge-label">Approval</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">On-Time Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-sr"></canvas><span class="dv-gauge-label">On-Time</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Avg Cycle Time</div><div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-sr"></canvas><span class="dv-gauge-label">Cycle</span></div></div>
       </div>
 
       <!-- Pill stat cards -->
@@ -4312,93 +4687,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
-      <!-- Daily To-Do — SharePoint fed -->
-      <div class="todo-card reveal-up">
-        <div class="todo-card-head">
-          <h2 class="todo-card-title">Daily To-Do</h2>
-          <div class="todo-sync-badge"><span class="todo-sync-dot"></span>Live · SharePoint</div>
-        </div>
-        <div class="todo-item todo-urgent" onclick="navigateToView('peer-status','HVGU68866')">
-          <span class="todo-indicator urgent"></span>
-          <div class="todo-content">
-            <div class="todo-title">Peer review decision needed — HVGU68866</div>
-            <div class="todo-subtitle"><span>Dante Meneses · Due today</span><span style="color:#dc2626;font-weight:700">URGENT</span></div>
-          </div>
-          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('peer-status','HVGU68866')">Open →</button>
-        </div>
-        <div class="todo-item todo-urgent" onclick="navigateToView('peer-status','HLMC78921')">
-          <span class="todo-indicator urgent"></span>
-          <div class="todo-content">
-            <div class="todo-title">Reassign HLMC78921 — stalled 4 days</div>
-            <div class="todo-subtitle"><span>Unassigned · Rework pending</span><span style="color:#f97316;font-weight:700">ACTION NEEDED</span></div>
-          </div>
-          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('peer-status','HLMC78921')">Open →</button>
-        </div>
-        <div class="todo-item" onclick="navigateToView('peer-status')">
-          <span class="todo-indicator normal"></span>
-          <div class="todo-content">
-            <div class="todo-title">Review peer queue — 4 styles awaiting SR decision</div>
-            <div class="todo-subtitle"><span>Peer Status</span><span>Due May 17</span></div>
-          </div>
-          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('peer-status')">Open →</button>
-        </div>
-        <div class="todo-item" onclick="navigateToView('art-creation')">
-          <span class="todo-indicator normal"></span>
-          <div class="todo-content">
-            <div class="todo-title">Approve Art Creation batch — Q2 8 styles</div>
-            <div class="todo-subtitle"><span>Art Creation · Diana Adame</span><span>Due May 18</span></div>
-          </div>
-          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('art-creation')">Open →</button>
-        </div>
-        <div class="todo-item" onclick="navigateToView('licensing-tracker')">
-          <span class="todo-indicator normal"></span>
-          <div class="todo-content">
-            <div class="todo-title">Licensing rework notes review — 6 pending</div>
-            <div class="todo-subtitle"><span>Licensing Tracker</span><span>Due May 20</span></div>
-          </div>
-          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('licensing-tracker')">Open →</button>
-        </div>
-      </div>
-
-      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
-      <div class="meetings-card reveal-up" data-delay="4">
-        <div class="meetings-card-head">
-          <h2 class="meetings-card-title">Today's Meetings</h2>
-          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">9:00</div><div class="meeting-time-end">9:30 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Morning Standup — Design Team<span class="meeting-now-badge">Now</span></div>
-            <div class="meeting-meta">Dante Meneses, Diana Adame, Andrea Cardenas · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">11:00</div><div class="meeting-time-end">11:45 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Peer Review Sync — Q2 Backlog</div>
-            <div class="meeting-meta">Ana Avelino · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">3:00</div><div class="meeting-time-end">3:30 PM</div></div>
-          <div class="meeting-bar"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Manager Check-in</div>
-            <div class="meeting-meta">Arantxa Denegri · Conference Room A</div>
-          </div>
-          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
-        </div>
-        <div class="meetings-footer">
-          <span class="meetings-footer-note">3 meetings · ~2h today</span>
-          <a class="meetings-footer-link">Open Calendar →</a>
-        </div>
-      </div>
-
       <!-- TEAM PRESENCE — Graph: /communications/getPresencesByUserId · availability only, no calendar details -->
       <div class="presence-card reveal-up" data-delay="5">
         <div class="presence-card-head">
@@ -4589,6 +4877,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
 
     <!-- CAPSULE PROGRESS -->
     <div class="view" data-view="capsule-progress">
+      <div class="dv-stackbar-wrap dv-chart-panel">
+        <h4>Capsule Progress by Stage</h4>
+        <canvas id="dv-stackbar-sr"></canvas>
+      </div>
       <div class="page-head">
         <div><h1 class="page-title">Capsule Progress</h1><div class="page-sub">Visual flow per capsule</div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -5439,6 +5731,25 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
     </div>
+
+    <!-- SR ANALYTICS -->
+    <div class="view" data-view="sr-analytics">
+      <div class="view-header"><h2><svg width="18" height="18" viewBox="0 0 16 16" fill="none" style="vertical-align:-3px;margin-right:8px;opacity:0.7"><path d="M2 12l3-4 3 2 3-5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics — Sr. Designer</h2></div>
+      <div class="analytics-grid">
+        <div class="dv-chart-panel">
+          <h4>Approval Rate Trend — Last 8 Weeks</h4>
+          <canvas id="dv-area-sr" style="height:200px"></canvas>
+        </div>
+        <div class="dv-chart-panel">
+          <h4>Avg Stage Cycle Time (days)</h4>
+          <canvas id="dv-hbar-sr-cycle"></canvas>
+        </div>
+        <div class="dv-chart-panel dv-panel-wide">
+          <h4>Rework Requests by Designer</h4>
+          <canvas id="dv-grouped-sr" style="height:180px"></canvas>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -5449,17 +5760,21 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Queue</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">8</span></div>
-      <div class="sidebar-item" data-view="lic-review"><ph-paper-plane-tilt></ph-paper-plane-tilt><span class="si-label">Submitted for Review</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="lic-queue"><ph-tray></ph-tray><span class="si-label">Pending Submission</span><span class="count">8</span></div>
-      <div class="sidebar-item" data-view="lic-approved"><ph-clock></ph-clock><span class="si-label">Waiting for Upload</span><span class="count">5</span></div>
-      <div class="sidebar-item" data-view="lic-rejected"><ph-x-circle></ph-x-circle><span class="si-label">Rejected / Rework</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">8</span></div>
+      <div class="sidebar-item" data-view="lic-review"><i class="ph ph-paper-plane-tilt"></i><span class="si-label">Submitted for Review</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="lic-queue"><i class="ph ph-tray"></i><span class="si-label">Pending Submission</span><span class="count">8</span></div>
+      <div class="sidebar-item" data-view="lic-approved"><i class="ph ph-clock"></i><span class="si-label">Waiting for Upload</span><span class="count">5</span></div>
+      <div class="sidebar-item" data-view="lic-rejected"><i class="ph ph-x-circle"></i><span class="si-label">Rejected / Rework</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Reports</div>
-      <div class="sidebar-item" data-view="lic-designer-responses"><ph-chat-square-text></ph-chat-square-text><span class="si-label">Designer Responses</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="lic-capsules"><ph-package></ph-package><span class="si-label">By Capsule</span></div>
-      <div class="sidebar-item" data-view="lic-calendar"><ph-calendar></ph-calendar><span class="si-label">Calendar</span></div>
+      <div class="sidebar-item" data-view="lic-designer-responses"><i class="ph ph-chat-square-text"></i><span class="si-label">Designer Responses</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="lic-capsules"><i class="ph ph-package"></i><span class="si-label">By Capsule</span></div>
+      <div class="sidebar-item" data-view="lic-calendar"><i class="ph ph-calendar"></i><span class="si-label">Calendar</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Insights</div>
+      <div class="sidebar-item" data-view="licensing-analytics"><i class="ph ph-chart-bar"></i><span class="si-label">Analytics</span></div>
     </div>
   </aside>
   <main class="main">
@@ -5472,28 +5787,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <button class="period-btn" data-period="week">Week</button>
           <button class="period-btn" data-period="month">Month</button>
           <button class="period-btn" data-period="q">Q</button>
-        </div>
-      </div>
-
-      <!-- General progress stats -->
-      <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">Approved · Month</div><div class="gen-stat-value stat-value" style="color:#065f46">34</div><div class="gen-stat-sub">cleared all reviews</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Waiting for Upload</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">designer upload required</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Pending Submission</div><div class="gen-stat-value stat-value">8</div><div class="gen-stat-sub">ready to submit to portal</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Reworks Issued</div><div class="gen-stat-value stat-value" style="color:#f59e0b">6</div><div class="gen-stat-sub">sent back to designers</div></div>
-      </div>
-
-      <!-- Designer Activity Notifications -->
-      <div class="lic-notify-strip" id="licNotifyStrip">
-        <div class="lic-notify-pill lnp-pushback" onclick="navigateToView('lic-designer-responses')">
-          <span class="lnp-dot"></span>
-          <span>1 Design Pushback — awaiting your review</span>
-          <span style="margin-left:4px;opacity:0.55">→</span>
-        </div>
-        <div class="lic-notify-pill lnp-clarify" onclick="navigateToView('lic-designer-responses')">
-          <span class="lnp-dot"></span>
-          <span>1 Clarification Request — needs your response</span>
-          <span style="margin-left:4px;opacity:0.55">→</span>
         </div>
       </div>
 
@@ -5564,6 +5857,32 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         <div class="meetings-footer">
           <span class="meetings-footer-note">2 meetings · ~1h today</span>
           <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+
+      <!-- General progress stats -->
+      <div class="bento-home reveal-up" data-delay="1">
+        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">Approved · Month</div><div class="gen-stat-value stat-value" style="color:#065f46">34</div><div class="gen-stat-sub">cleared all reviews</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-compliant"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Waiting for Upload</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">designer upload required</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-pending"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Pending Submission</div><div class="gen-stat-value stat-value">8</div><div class="gen-stat-sub">ready to submit to portal</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-lic-queue"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Reworks Issued</div><div class="gen-stat-value stat-value" style="color:#f59e0b">6</div><div class="gen-stat-sub">sent back to designers</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-lic-rework"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:8px;"><div class="gen-stat-label">Pipeline Stages</div><div class="dv-donut-wrap"><canvas id="dv-donut-licensing"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Approval Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-approval-licensing"></canvas><span class="dv-gauge-label">Approval</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">On-Time Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-licensing"></canvas><span class="dv-gauge-label">On-Time</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Avg Cycle Time</div><div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-licensing"></canvas><span class="dv-gauge-label">Cycle</span></div></div>
+      </div>
+
+      <!-- Designer Activity Notifications -->
+      <div class="lic-notify-strip" id="licNotifyStrip">
+        <div class="lic-notify-pill lnp-pushback" onclick="navigateToView('lic-designer-responses')">
+          <span class="lnp-dot"></span>
+          <span>1 Design Pushback — awaiting your review</span>
+          <span style="margin-left:4px;opacity:0.55">→</span>
+        </div>
+        <div class="lic-notify-pill lnp-clarify" onclick="navigateToView('lic-designer-responses')">
+          <span class="lnp-dot"></span>
+          <span>1 Clarification Request — needs your response</span>
+          <span style="margin-left:4px;opacity:0.55">→</span>
         </div>
       </div>
     </div>
@@ -5997,6 +6316,27 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           </div>
         </div>
       </div>
+      <div class="pad-mgmt-bar" data-mgmt-bar="lic1" data-total="2">
+        <div class="mgmt-bar-inner">
+          <div class="mgmt-pagination">
+            <button class="mgmt-pg-btn" id="mgmt-prev-lic1" disabled onclick="mgmtPrev('lic1')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="mgmt-pg-display">
+              <div class="mgmt-slide-wrap"><span class="mgmt-slide-digit" id="mgmt-num-lic1">1</span></div>
+              <span class="mgmt-pg-sep">of</span>
+              <span class="mgmt-pg-total" id="mgmt-tot-lic1">2</span>
+              <span class="mgmt-pg-sep" style="margin-left:2px">leagues</span>
+            </div>
+            <button class="mgmt-pg-btn" id="mgmt-next-lic1" onclick="mgmtNext('lic1')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+          <div class="mgmt-divider"></div>
+          <div class="mgmt-actions">
+            <button class="mgmt-btn mgmt-btn-hold" aria-label="Hold" onclick="mgmtAction('lic1','hold')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><span class="mgmt-btn-label">Hold</span></button>
+            <button class="mgmt-btn mgmt-btn-rework" aria-label="Reject League" onclick="mgmtAction('lic1','reject')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span><span class="mgmt-btn-label">Reject</span></button>
+            <button class="mgmt-btn mgmt-btn-approve" aria-label="Approve All" onclick="mgmtAction('lic1','approve-all')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="mgmt-btn-label">Approve All</span></button>
+            <button class="mgmt-btn mgmt-btn-filter" aria-label="Filter leagues" title="Filter leagues" onclick="mgmtAction('lic1','filter')"><span class="mgmt-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></span></button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- BY CAPSULE -->
@@ -6078,6 +6418,25 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
       </div>
     </div>
 
+    <!-- LICENSING ANALYTICS -->
+    <div class="view" data-view="licensing-analytics">
+      <div class="view-header"><h2><svg width="18" height="18" viewBox="0 0 16 16" fill="none" style="vertical-align:-3px;margin-right:8px;opacity:0.7"><path d="M2 12l3-4 3 2 3-5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics — Licensing</h2></div>
+      <div class="analytics-grid">
+        <div class="dv-chart-panel">
+          <h4>Portal Submissions vs Approvals — Last 8 Weeks</h4>
+          <canvas id="dv-area-licensing" style="height:200px"></canvas>
+        </div>
+        <div class="dv-chart-panel">
+          <h4>Avg Review Lag by League (days)</h4>
+          <canvas id="dv-hbar-lic-lag"></canvas>
+        </div>
+        <div class="dv-chart-panel dv-panel-wide">
+          <h4>Compliance Status by Capsule</h4>
+          <canvas id="dv-stacked-lic" style="height:180px"></canvas>
+        </div>
+      </div>
+    </div>
+
     <!-- LICENSING — MERCH TASKS -->
   </main>
 </div>
@@ -6089,22 +6448,26 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Overview</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">5</span></div>
-      <div class="sidebar-item" data-view="cross-team"><ph-chart-bar></ph-chart-bar><span class="si-label">Cross-Team Metrics</span></div>
-      <div class="sidebar-item" data-view="capsule-status"><ph-package></ph-package><span class="si-label">Capsule Status</span></div>
-      <div class="sidebar-item" data-view="capacity"><ph-gauge></ph-gauge><span class="si-label">Capacity Planning</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">5</span></div>
+      <div class="sidebar-item" data-view="cross-team"><i class="ph ph-chart-bar"></i><span class="si-label">Cross-Team Metrics</span></div>
+      <div class="sidebar-item" data-view="capsule-status"><i class="ph ph-package"></i><span class="si-label">Capsule Status</span></div>
+      <div class="sidebar-item" data-view="capacity"><i class="ph ph-gauge"></i><span class="si-label">Capacity Planning</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tracking</div>
-      <div class="sidebar-item" data-view="mgr-licensing"><ph-file-check></ph-file-check><span class="si-label">Licensing Overview</span></div>
-      <div class="sidebar-item" data-view="daily-progress"><ph-calendar-check></ph-calendar-check><span class="si-label">Daily Progress</span></div>
+      <div class="sidebar-item" data-view="mgr-licensing"><i class="ph ph-file-check"></i><span class="si-label">Licensing Overview</span></div>
+      <div class="sidebar-item" data-view="daily-progress"><i class="ph ph-calendar-check"></i><span class="si-label">Daily Progress</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tasks</div>
-      <div class="sidebar-item" data-view="mgr-task-queue"><ph-list-checks></ph-list-checks><span class="si-label">Task Queue</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="mgr-merch-tasks"><ph-shopping-bag></ph-shopping-bag><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="mgr-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">7</span></div>
+      <div class="sidebar-item" data-view="mgr-task-queue"><i class="ph ph-list-checks"></i><span class="si-label">Task Queue</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="pending-assign"><i class="ph ph-clipboard-text"></i><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="mgr-merch-tasks"><i class="ph ph-shopping-bag"></i><span class="si-label">Merch Tasks</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="mgr-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">Handoffs</span><span class="count">7</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Insights</div>
+      <div class="sidebar-item" data-view="manager-analytics"><i class="ph ph-chart-bar"></i><span class="si-label">Analytics</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('manager')">+ Assign Task</button>
   </aside>
@@ -6121,12 +6484,95 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
+      <!-- Daily To-Do — SharePoint fed -->
+      <div class="todo-card reveal-up">
+        <div class="todo-card-head">
+          <h2 class="todo-card-title">Daily To-Do</h2>
+          <div class="todo-sync-badge"><span class="todo-sync-dot"></span>Live · SharePoint</div>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('cross-team')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Review escalation — Team A: 3 styles stalled &gt;5 days</div>
+            <div class="todo-subtitle"><span>Cross-Team Metrics · Action required</span><span style="color:#dc2626;font-weight:700">URGENT</span></div>
+          </div>
+          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('cross-team')">Open →</button>
+        </div>
+        <div class="todo-item todo-urgent" onclick="navigateToView('capacity')">
+          <span class="todo-indicator urgent"></span>
+          <div class="todo-content">
+            <div class="todo-title">Capacity alert — Amanda Mireles at 95%, consider reassignment</div>
+            <div class="todo-subtitle"><span>Capacity Planning · Team A</span><span style="color:#f97316;font-weight:700">ACTION NEEDED</span></div>
+          </div>
+          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('capacity')">Open →</button>
+        </div>
+        <div class="todo-item" onclick="navigateToView('lic-overview')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Licensing batch deadline May 16 — confirm all team submissions</div>
+            <div class="todo-subtitle"><span>Licensing Overview</span><span>Due May 16</span></div>
+          </div>
+          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('lic-overview')">Open →</button>
+        </div>
+        <div class="todo-item" onclick="navigateToView('task-queue')">
+          <span class="todo-indicator normal"></span>
+          <div class="todo-content">
+            <div class="todo-title">Assign incoming tasks — 3 pending from Admin</div>
+            <div class="todo-subtitle"><span>Task Queue</span><span>Unassigned</span></div>
+          </div>
+          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('task-queue')">Open →</button>
+        </div>
+      </div>
+
+      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">8:30</div><div class="meeting-time-end">9:00 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Sr. Designer Weekly Sync<span class="meeting-now-badge">Now</span></div>
+            <div class="meeting-meta">Ana Avelino, Arantxa Denegri, Anthony Valtierra · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">11:00</div><div class="meeting-time-end">12:00 PM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Q2 Capsule Milestone Review</div>
+            <div class="meeting-meta">All Sr. Designers · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">4:00</div><div class="meeting-time-end">4:30 PM</div></div>
+          <div class="meeting-bar"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Capacity Planning — Escalation Review</div>
+            <div class="meeting-meta">Omar Ruiz · Conference Room A</div>
+          </div>
+          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">3 meetings · ~2h 30m today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+
       <!-- General progress stats -->
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">Approved · Month</div><div class="gen-stat-value stat-value" style="color:#065f46">87</div><div class="gen-stat-sub">all capsules</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Active Designers</div><div class="gen-stat-value stat-value">9</div><div class="gen-stat-sub">across 3 teams</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Stalled Styles</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">&gt;5 days no movement</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Overall On-Time</div><div class="gen-stat-value stat-value">89%</div><div class="gen-stat-sub">this quarter</div></div>
+        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">Approved · Month</div><div class="gen-stat-value stat-value" style="color:#065f46">87</div><div class="gen-stat-sub">all capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-mgr-approved"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Active Designers</div><div class="gen-stat-value stat-value">9</div><div class="gen-stat-sub">across 3 teams</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-mgr-total"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Stalled Styles</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">&gt;5 days no movement</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Overall On-Time</div><div class="gen-stat-value stat-value">89%</div><div class="gen-stat-sub">this quarter</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:8px;"><div class="gen-stat-label">Pipeline Stages</div><div class="dv-donut-wrap"><canvas id="dv-donut-manager"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Approval Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-approval-manager"></canvas><span class="dv-gauge-label">Approval</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">On-Time Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-manager"></canvas><span class="dv-gauge-label">On-Time</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Avg Cycle Time</div><div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-manager"></canvas><span class="dv-gauge-label">Cycle</span></div></div>
       </div>
 
       <!-- EP section -->
@@ -6235,85 +6681,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
             </tr>
           </tbody>
         </table>
-      </div>
-
-      <!-- Daily To-Do — SharePoint fed -->
-      <div class="todo-card reveal-up">
-        <div class="todo-card-head">
-          <h2 class="todo-card-title">Daily To-Do</h2>
-          <div class="todo-sync-badge"><span class="todo-sync-dot"></span>Live · SharePoint</div>
-        </div>
-        <div class="todo-item todo-urgent" onclick="navigateToView('cross-team')">
-          <span class="todo-indicator urgent"></span>
-          <div class="todo-content">
-            <div class="todo-title">Review escalation — Team A: 3 styles stalled &gt;5 days</div>
-            <div class="todo-subtitle"><span>Cross-Team Metrics · Action required</span><span style="color:#dc2626;font-weight:700">URGENT</span></div>
-          </div>
-          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('cross-team')">Open →</button>
-        </div>
-        <div class="todo-item todo-urgent" onclick="navigateToView('capacity')">
-          <span class="todo-indicator urgent"></span>
-          <div class="todo-content">
-            <div class="todo-title">Capacity alert — Amanda Mireles at 95%, consider reassignment</div>
-            <div class="todo-subtitle"><span>Capacity Planning · Team A</span><span style="color:#f97316;font-weight:700">ACTION NEEDED</span></div>
-          </div>
-          <button class="btn-todo-open urgent" onclick="event.stopPropagation();navigateToView('capacity')">Open →</button>
-        </div>
-        <div class="todo-item" onclick="navigateToView('lic-overview')">
-          <span class="todo-indicator normal"></span>
-          <div class="todo-content">
-            <div class="todo-title">Licensing batch deadline May 16 — confirm all team submissions</div>
-            <div class="todo-subtitle"><span>Licensing Overview</span><span>Due May 16</span></div>
-          </div>
-          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('lic-overview')">Open →</button>
-        </div>
-        <div class="todo-item" onclick="navigateToView('task-queue')">
-          <span class="todo-indicator normal"></span>
-          <div class="todo-content">
-            <div class="todo-title">Assign incoming tasks — 3 pending from Admin</div>
-            <div class="todo-subtitle"><span>Task Queue</span><span>Unassigned</span></div>
-          </div>
-          <button class="btn-todo-open" onclick="event.stopPropagation();navigateToView('task-queue')">Open →</button>
-        </div>
-      </div>
-
-      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
-      <div class="meetings-card reveal-up" data-delay="4">
-        <div class="meetings-card-head">
-          <h2 class="meetings-card-title">Today's Meetings</h2>
-          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">8:30</div><div class="meeting-time-end">9:00 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Sr. Designer Weekly Sync<span class="meeting-now-badge">Now</span></div>
-            <div class="meeting-meta">Ana Avelino, Arantxa Denegri, Anthony Valtierra · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">11:00</div><div class="meeting-time-end">12:00 PM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Q2 Capsule Milestone Review</div>
-            <div class="meeting-meta">All Sr. Designers · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">4:00</div><div class="meeting-time-end">4:30 PM</div></div>
-          <div class="meeting-bar"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Capacity Planning — Escalation Review</div>
-            <div class="meeting-meta">Omar Ruiz · Conference Room A</div>
-          </div>
-          <button class="btn-join" style="background:#e0e1e6;color:#60646c;cursor:default">No link</button>
-        </div>
-        <div class="meetings-footer">
-          <span class="meetings-footer-note">3 meetings · ~2h 30m today</span>
-          <a class="meetings-footer-link">Open Calendar →</a>
-        </div>
       </div>
 
       <!-- TEAM PRESENCE — Graph: /communications/getPresencesByUserId · availability only -->
@@ -6510,6 +6877,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
 
     <!-- CAPSULE STATUS -->
     <div class="view" data-view="capsule-status">
+      <div class="dv-stackbar-wrap dv-chart-panel">
+        <h4>Capsule Progress by Stage</h4>
+        <canvas id="dv-stackbar-manager"></canvas>
+      </div>
       <div class="page-head"><div><h1 class="page-title">Capsule Status</h1><div class="page-sub">All capsules — pipeline overview</div></div></div>
       <div class="card">
         <table class="styles-table">
@@ -6701,9 +7072,9 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <div>
             <div class="dp-member-row" style="cursor:pointer;" onmouseenter="this.style.background='#f9fafb'" onmouseleave="this.style.background=''" onclick="mgrDpShow('team','Ana Avelino (Sr.)')">
               <div style="width:175px;"><div style="font-weight:600;font-size:13px;">Ana Avelino (Sr.)</div><div style="font-size:11px;color:#60646c;">Team A · 3 designers</div></div>
-              <div class="dp-count"><span class="done">19</span><span class="total"> / 30</span></div>
-              <div class="dp-bar-track"><div class="dp-bar-fill" style="width:63%;background:#10b981;height:100%;border-radius:4px;"></div></div>
-              <span style="font-size:11px;color:#60646c;">11 pending</span>
+              <div class="dp-count"><span class="done">27</span><span class="total"> / 30</span></div>
+              <div class="dp-bar-track"><div class="dp-bar-fill" style="width:90%;background:#10b981;height:100%;border-radius:4px;"></div></div>
+              <span style="font-size:11px;color:#065f46;">Nearly done</span>
               <span style="margin-left:auto;font-size:12px;color:#0d74ce;font-weight:500;white-space:nowrap;">View team →</span>
             </div>
             <div class="dp-member-row" style="cursor:pointer;" onmouseenter="this.style.background='#f9fafb'" onmouseleave="this.style.background=''" onclick="mgrDpShow('team','Arantxa Denegri (Sr.)')">
@@ -6965,6 +7336,25 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
     </div>
+
+    <!-- MANAGER ANALYTICS -->
+    <div class="view" data-view="manager-analytics">
+      <div class="view-header"><h2><svg width="18" height="18" viewBox="0 0 16 16" fill="none" style="vertical-align:-3px;margin-right:8px;opacity:0.7"><path d="M2 12l3-4 3 2 3-5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics — Manager</h2></div>
+      <div class="analytics-grid">
+        <div class="dv-chart-panel">
+          <h4>Team Pipeline Volume — Last 8 Weeks</h4>
+          <canvas id="dv-area-manager" style="height:200px"></canvas>
+        </div>
+        <div class="dv-chart-panel">
+          <h4>Sr. Designer Team Output This Quarter</h4>
+          <canvas id="dv-grouped-mgr-output" style="height:200px"></canvas>
+        </div>
+        <div class="dv-chart-panel dv-panel-wide">
+          <h4>Capsule Stage Distribution</h4>
+          <canvas id="dv-stacked-mgr-capsules" style="height:180px"></canvas>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -6975,22 +7365,26 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Overview</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">7</span></div>
-      <div class="sidebar-item" data-view="all-styles"><ph-palette></ph-palette><span class="si-label">All Styles</span></div>
-      <div class="sidebar-item" data-view="all-capsules"><ph-package></ph-package><span class="si-label">All Capsules</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">7</span></div>
+      <div class="sidebar-item" data-view="all-styles"><i class="ph ph-palette"></i><span class="si-label">All Styles</span></div>
+      <div class="sidebar-item" data-view="all-capsules"><i class="ph ph-package"></i><span class="si-label">All Capsules</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Management</div>
-      <div class="sidebar-item" data-view="admin-metrics"><ph-activity></ph-activity><span class="si-label">System Metrics</span></div>
-      <div class="sidebar-item" data-view="admin-users"><ph-users></ph-users><span class="si-label">Users &amp; Roles</span></div>
-      <div class="sidebar-item" data-view="admin-licensing"><ph-file-check></ph-file-check><span class="si-label">Licensing</span></div>
-      <div class="sidebar-item" data-view="admin-config"><ph-gear></ph-gear><span class="si-label">Config</span></div>
+      <div class="sidebar-item" data-view="admin-metrics"><i class="ph ph-activity"></i><span class="si-label">System Metrics</span></div>
+      <div class="sidebar-item" data-view="admin-users"><i class="ph ph-users"></i><span class="si-label">Users &amp; Roles</span></div>
+      <div class="sidebar-item" data-view="admin-licensing"><i class="ph ph-file-check"></i><span class="si-label">Licensing</span></div>
+      <div class="sidebar-item" data-view="admin-config"><i class="ph ph-gear"></i><span class="si-label">Config</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tasks</div>
-      <div class="sidebar-item" data-view="daily-progress"><ph-calendar-check></ph-calendar-check><span class="si-label">Daily Progress</span></div>
-      <div class="sidebar-item" data-view="pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
-      <div class="sidebar-item" data-view="admin-handoffs"><ph-arrow-square-out></ph-arrow-square-out><span class="si-label">Handoffs</span><span class="count">11</span></div>
+      <div class="sidebar-item" data-view="daily-progress"><i class="ph ph-calendar-check"></i><span class="si-label">Daily Progress</span></div>
+      <div class="sidebar-item" data-view="pending-assign"><i class="ph ph-clipboard-text"></i><span class="si-label">Pending to Assign</span><span class="count">12</span></div>
+      <div class="sidebar-item" data-view="admin-handoffs"><i class="ph ph-arrow-square-out"></i><span class="si-label">Handoffs</span><span class="count">11</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Insights</div>
+      <div class="sidebar-item" data-view="admin-analytics"><i class="ph ph-chart-bar"></i><span class="si-label">Analytics</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openTaskModal('admin')">+ Assign Task</button>
   </aside>
@@ -7047,12 +7441,46 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
+      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
+      <div class="meetings-card reveal-up" data-delay="4">
+        <div class="meetings-card-head">
+          <h2 class="meetings-card-title">Today's Meetings</h2>
+          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">9:00</div><div class="meeting-time-end">9:30 AM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">IT Admin Consent Follow-up<span class="meeting-now-badge">Now</span></div>
+            <div class="meeting-meta">IT Team · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meeting-item">
+          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">3:00 PM</div></div>
+          <div class="meeting-bar teams"></div>
+          <div class="meeting-content">
+            <div class="meeting-title">Capacity &amp; Escalation Review</div>
+            <div class="meeting-meta">Arantxa Denegri (Manager) · Teams call</div>
+          </div>
+          <button class="btn-join">Join</button>
+        </div>
+        <div class="meetings-footer">
+          <span class="meetings-footer-note">2 meetings · ~1h 30m today</span>
+          <a class="meetings-footer-link">Open Calendar →</a>
+        </div>
+      </div>
+
       <!-- General progress stats -->
       <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">87</div><div class="gen-stat-sub">cleared all stages</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Total Styles</div><div class="gen-stat-value stat-value">230</div><div class="gen-stat-sub">all capsules</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Stalled &gt;5d</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">need intervention</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Active Users</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">across all roles</div></div>
+        <div class="gen-stat bento-featured" style="position:relative"><div class="gen-stat-label">Approved</div><div class="gen-stat-value stat-value" style="color:#065f46">87</div><div class="gen-stat-sub">cleared all stages</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-mgr-approved"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Total Styles</div><div class="gen-stat-value stat-value">230</div><div class="gen-stat-sub">all capsules</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-mgr-total"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Stalled &gt;5d</div><div class="gen-stat-value stat-value" style="color:#f59e0b">5</div><div class="gen-stat-sub">need intervention</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-rework"></canvas></div></div>
+        <div class="gen-stat" style="position:relative"><div class="gen-stat-label">Active Users</div><div class="gen-stat-value stat-value">12</div><div class="gen-stat-sub">across all roles</div><div class="dv-sparkline-wrap"><canvas id="dv-sp-in-review"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:8px;"><div class="gen-stat-label">Pipeline Stages</div><div class="dv-donut-wrap"><canvas id="dv-donut-admin"></canvas></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Approval Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-approval-admin"></canvas><span class="dv-gauge-label">Approval</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">On-Time Rate</div><div class="dv-gauge-cell"><canvas id="dv-gauge-ontime-admin"></canvas><span class="dv-gauge-label">On-Time</span></div></div>
+        <div class="gen-stat bento-third" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;gap:6px;"><div class="gen-stat-label">Avg Cycle Time</div><div class="dv-gauge-cell"><canvas id="dv-gauge-cycle-admin"></canvas><span class="dv-gauge-label">Cycle</span></div></div>
       </div>
 
       <!-- EP section -->
@@ -7126,36 +7554,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:4px">
             <span>76 styles</span><span>51</span><span>18</span><span>85</span>
           </div>
-        </div>
-      </div>
-
-      <!-- MEETINGS — fed from Microsoft 365 Calendar (Graph: GET /me/calendarView) -->
-      <div class="meetings-card reveal-up" data-delay="4">
-        <div class="meetings-card-head">
-          <h2 class="meetings-card-title">Today's Meetings</h2>
-          <div class="meetings-sync-badge"><span class="meetings-sync-dot"></span>Microsoft 365 Calendar</div>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">9:00</div><div class="meeting-time-end">9:30 AM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">IT Admin Consent Follow-up<span class="meeting-now-badge">Now</span></div>
-            <div class="meeting-meta">IT Team · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meeting-item">
-          <div class="meeting-time-col"><div class="meeting-time-start">2:00</div><div class="meeting-time-end">3:00 PM</div></div>
-          <div class="meeting-bar teams"></div>
-          <div class="meeting-content">
-            <div class="meeting-title">Capacity &amp; Escalation Review</div>
-            <div class="meeting-meta">Arantxa Denegri (Manager) · Teams call</div>
-          </div>
-          <button class="btn-join">Join</button>
-        </div>
-        <div class="meetings-footer">
-          <span class="meetings-footer-note">2 meetings · ~1h 30m today</span>
-          <a class="meetings-footer-link">Open Calendar →</a>
         </div>
       </div>
 
@@ -7310,6 +7708,10 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
 
     <!-- ALL CAPSULES -->
     <div class="view" data-view="all-capsules">
+      <div class="dv-stackbar-wrap dv-chart-panel">
+        <h4>Capsule Progress by Stage</h4>
+        <canvas id="dv-stackbar-admin"></canvas>
+      </div>
       <div class="page-head"><div><h1 class="page-title">All Capsules</h1><div class="page-sub">Pipeline per capsule</div></div></div>
       <div class="card">
         <div class="table-wrap">
@@ -7791,6 +8193,25 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
     </div>
+
+    <!-- ADMIN ANALYTICS -->
+    <div class="view" data-view="admin-analytics">
+      <div class="view-header"><h2><svg width="18" height="18" viewBox="0 0 16 16" fill="none" style="vertical-align:-3px;margin-right:8px;opacity:0.7"><path d="M2 12l3-4 3 2 3-5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Analytics — Admin</h2></div>
+      <div class="analytics-grid">
+        <div class="dv-chart-panel">
+          <h4>System Pipeline Volume — Last 8 Weeks</h4>
+          <canvas id="dv-area-admin" style="height:200px"></canvas>
+        </div>
+        <div class="dv-chart-panel">
+          <h4>Rework by Category</h4>
+          <canvas id="dv-hbar-admin-esc"></canvas>
+        </div>
+        <div class="dv-chart-panel dv-panel-wide">
+          <h4>Cross-Team Performance</h4>
+          <canvas id="dv-grouped-admin" style="height:180px"></canvas>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -7801,16 +8222,16 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Queue</div>
-      <div class="sidebar-item active" data-view="home"><ph-squares-four></ph-squares-four><span class="si-label">Home</span><span class="count">5</span></div>
-      <div class="sidebar-item" data-view="merch-task-queue"><ph-tray></ph-tray><span class="si-label">Task Queue</span><span class="count">3</span></div>
-      <div class="sidebar-item" data-view="merch-pending-assign"><ph-clipboard-text></ph-clipboard-text><span class="si-label">Pending to Assign</span><span class="count">2</span></div>
+      <div class="sidebar-item active" data-view="home"><i class="ph ph-squares-four"></i><span class="si-label">Home</span><span class="count">5</span></div>
+      <div class="sidebar-item" data-view="merch-task-queue"><i class="ph ph-tray"></i><span class="si-label">Task Queue</span><span class="count">3</span></div>
+      <div class="sidebar-item" data-view="merch-pending-assign"><i class="ph ph-clipboard-text"></i><span class="si-label">Pending to Assign</span><span class="count">2</span></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Work</div>
-      <div class="sidebar-item" data-view="merch-logo-update"><ph-image></ph-image><span class="si-label">Logo Update Tasks</span><span class="count">4</span></div>
-      <div class="sidebar-item" data-view="merch-style-requests"><ph-hash></ph-hash><span class="si-label">New Style # Requests</span><span class="count">1</span></div>
-      <div class="sidebar-item" data-view="merch-lic-followup"><ph-file-check></ph-file-check><span class="si-label">Licensing Follow-Up</span><span class="count">2</span></div>
-      <div class="sidebar-item" data-view="merch-calendar"><ph-calendar></ph-calendar><span class="si-label">Calendar</span></div>
+      <div class="sidebar-item" data-view="merch-logo-update"><i class="ph ph-image"></i><span class="si-label">Logo Update Tasks</span><span class="count">4</span></div>
+      <div class="sidebar-item" data-view="merch-style-requests"><i class="ph ph-hash"></i><span class="si-label">New Style # Requests</span><span class="count">1</span></div>
+      <div class="sidebar-item" data-view="merch-lic-followup"><i class="ph ph-file-check"></i><span class="si-label">Licensing Follow-Up</span><span class="count">2</span></div>
+      <div class="sidebar-item" data-view="merch-calendar"><i class="ph ph-calendar"></i><span class="si-label">Calendar</span></div>
     </div>
     <button class="sidebar-btn" data-magnetic onclick="openMerchTaskModal()">+ Create Task</button>
   </aside>
@@ -7867,13 +8288,6 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
         </div>
       </div>
 
-      <div class="bento-home reveal-up" data-delay="1">
-        <div class="gen-stat bento-featured"><div class="gen-stat-label">Completed (Month)</div><div class="gen-stat-value stat-value" style="color:#065f46">12</div><div class="gen-stat-sub">sent to Licensing</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Active Tasks</div><div class="gen-stat-value stat-value">5</div><div class="gen-stat-sub">logo update + style #</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Pending to Assign</div><div class="gen-stat-value stat-value" style="color:#f59e0b">2</div><div class="gen-stat-sub">waiting on Sr. assignment</div></div>
-        <div class="gen-stat"><div class="gen-stat-label">Style # Requests</div><div class="gen-stat-value stat-value" style="color:#dc2626">1</div><div class="gen-stat-sub">blocking pipeline</div></div>
-      </div>
-
       <div class="meetings-card reveal-up" data-delay="4">
         <div class="meetings-card-head">
           <h2 class="meetings-card-title">Today's Meetings</h2>
@@ -7895,6 +8309,13 @@ html[data-theme="dark"] .presence-status-label.away        { color: #94a3b8 !imp
           <span class="meetings-footer-note">2 meetings · ~1h today</span>
           <a class="meetings-footer-link">Open Calendar →</a>
         </div>
+      </div>
+
+      <div class="bento-home reveal-up" data-delay="1">
+        <div class="gen-stat bento-featured"><div class="gen-stat-label">Completed (Month)</div><div class="gen-stat-value stat-value" style="color:#065f46">12</div><div class="gen-stat-sub">sent to Licensing</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Active Tasks</div><div class="gen-stat-value stat-value">5</div><div class="gen-stat-sub">logo update + style #</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Pending to Assign</div><div class="gen-stat-value stat-value" style="color:#f59e0b">2</div><div class="gen-stat-sub">waiting on Sr. assignment</div></div>
+        <div class="gen-stat"><div class="gen-stat-label">Style # Requests</div><div class="gen-stat-value stat-value" style="color:#dc2626">1</div><div class="gen-stat-sub">blocking pipeline</div></div>
       </div>
     </div>
 
@@ -8360,6 +8781,11 @@ function switchView(dash, viewName) {
       t.classList.add('view-entering');
       animateCounters(t);
       if (window.__revealObserve) window.__revealObserve(t);
+      // Redraw DV charts if the new view contains analytics canvases
+      if (typeof DV !== 'undefined') {
+        var hasDvCanvas = t.querySelector('[id^="dv-area-"],[id^="dv-grouped-"],[id^="dv-stackbar-"]');
+        if (hasDvCanvas) DV.init();
+      }
     }
     updateFilterBar(viewName);
   }
@@ -10134,6 +10560,90 @@ if (initHome) animateCounters(initHome);
   window.__revealObserve = observe;
   observe();
 })();
+
+// ─── PAD Management Bar ───────────────────────────────────────────
+// Ported from animate-ui community-management-bar
+// Handles spring-physics expand, sliding number pagination, queue actions
+(function() {
+  var _state = {};
+
+  function _sync(id) {
+    var s = _state[id]; if (!s) return;
+    var prev = document.getElementById('mgmt-prev-' + id);
+    var next = document.getElementById('mgmt-next-' + id);
+    if (prev) prev.disabled = s.current <= 1;
+    if (next) next.disabled = s.current >= s.total;
+  }
+
+  function _slide(id, newVal, dir) {
+    var el = document.getElementById('mgmt-num-' + id); if (!el) return;
+    var outCls = dir === 'up' ? 's-out-up' : 's-out-down';
+    var inCls  = dir === 'up' ? 's-in-up'  : 's-in-down';
+    el.classList.add(outCls);
+    setTimeout(function() {
+      el.textContent = newVal;
+      el.classList.remove(outCls);
+      void el.offsetWidth; // force reflow for re-trigger
+      el.classList.add(inCls);
+      setTimeout(function() { el.classList.remove(inCls); }, 260);
+    }, 170);
+  }
+
+  window.mgmtNext = function(id) {
+    var s = _state[id]; if (!s || s.current >= s.total) return;
+    s.current++;
+    _slide(id, s.current, 'up');
+    _sync(id);
+  };
+
+  window.mgmtPrev = function(id) {
+    var s = _state[id]; if (!s || s.current <= 1) return;
+    s.current--;
+    _slide(id, s.current, 'down');
+    _sync(id);
+  };
+
+  window.mgmtAction = function(id, action) {
+    if (action === 'filter') {
+      // Actually toggle the filter row in the parent view
+      var bar = document.querySelector('[data-mgmt-bar="' + id + '"]');
+      if (bar) {
+        var view = bar.closest('.view');
+        if (view) {
+          var fr = view.querySelector('.tbl-filter-row');
+          if (fr) {
+            var hidden = fr.style.display === 'none';
+            fr.style.display = hidden ? '' : 'none';
+            if (window.showToast) showToast(hidden ? 'Filters shown' : 'Filters hidden', 'success');
+            return;
+          }
+        }
+      }
+      return;
+    }
+    var msgs = {
+      flag:          ['Style flagged for follow-up', 'warn'],
+      rework:        ['Rework requested — style sent back', 'warn'],
+      approve:       ['Style approved ✓', 'success'],
+      hold:          ['League placed on hold', 'warn'],
+      reject:        ['League rejected', 'warn'],
+      'approve-all': ['All teams approved ✓', 'success']
+    };
+    var m = msgs[action];
+    if (m && window.showToast) showToast(m[0], m[1]);
+  };
+
+  // Auto-init all bars declared with data-mgmt-bar attribute
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-mgmt-bar]').forEach(function(el) {
+      var id    = el.getAttribute('data-mgmt-bar');
+      var total = parseInt(el.getAttribute('data-total'), 10) || 1;
+      _state[id] = { current: 1, total: total };
+      _sync(id);
+    });
+  });
+})();
+
 </script>
 <!-- ── Reassign Modal ──────────────────────────────────────────────────────── -->
 <div class="reassign-modal-overlay" id="reassignModalOverlay" onclick="if(event.target===this)closeReassignModal()">
@@ -10173,5 +10683,520 @@ if (initHome) animateCounters(initHome);
     </div>
   </div>
 </div>
+<script>
+/* ── PAD Data Visualization Engine ───────────────────────── */
+var DV = (function() {
+  var C = {
+    cyan:   '#4ac8dc',
+    orange: '#f5a623',
+    purple: '#b464dd',
+    red:    '#dc6464',
+    green:  '#5ddc5d',
+    blue:   '#3b82f6',
+    slate:  '#64748b'
+  };
+
+  function dpr(canvas, w, h) {
+    var r = window.devicePixelRatio || 1;
+    canvas.width  = w * r;
+    canvas.height = h * r;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.scale(r, r);
+    return ctx;
+  }
+
+  function drawSparkline(canvas, data, color) {
+    var W = 56, H = 28;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    if (!data || data.length < 2) return;
+    var mn = Math.min.apply(null, data), mx = Math.max.apply(null, data);
+    var range = mx - mn || 1;
+    var pts = data.map(function(v, i) {
+      return { x: i / (data.length - 1) * (W - 4) + 2, y: H - 4 - (v - mn) / range * (H - 8) };
+    });
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, H);
+    pts.forEach(function(p) { ctx.lineTo(p.x, p.y); });
+    ctx.lineTo(pts[pts.length-1].x, H);
+    ctx.closePath();
+    var grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, color + '55');
+    grad.addColorStop(1, color + '00');
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.beginPath();
+    pts.forEach(function(p, i) { i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); });
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+
+  function drawDonut(canvas, segments, labels) {
+    var W = canvas.offsetWidth || 160, H = canvas.offsetHeight || 160;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var cx = W/2, cy = H/2, ro = W * 0.30, ri = W * 0.19;
+    var colors = [C.orange, C.purple, C.cyan, C.green, C.red];
+    var total = segments.reduce(function(a,b){return a+b;},0) || 1;
+    var angle = -Math.PI/2;
+    segments.forEach(function(v, i) {
+      var sweep = (v / total) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ro, angle, angle + sweep);
+      ctx.arc(cx, cy, ri, angle + sweep, angle, true);
+      ctx.closePath();
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fill();
+      angle += sweep;
+    });
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold ' + Math.round(W * 0.13) + 'px Inter,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(total, cx, cy - W * 0.05);
+    ctx.font = Math.round(W * 0.075) + 'px Inter,sans-serif';
+    ctx.fillStyle = C.slate;
+    ctx.fillText('styles', cx, cy + W * 0.065);
+  }
+
+  function drawGauge(canvas, pct, color, centerLabel) {
+    var W = canvas.offsetWidth || 90, H = canvas.offsetHeight || 90;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var cx = W/2, cy = H/2, r = W * 0.36;
+    var lw = Math.max(5, Math.round(W * 0.08));
+    var start = Math.PI * 0.75, end = Math.PI * 2.25;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, end);
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = lw;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    var fillEnd = start + (end - start) * Math.min(pct, 1);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, fillEnd);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lw;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold ' + Math.round(W * 0.16) + 'px Inter,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(Math.round(pct * 100) + '%', cx, cy - W * 0.04);
+    ctx.font = Math.round(W * 0.11) + 'px Inter,sans-serif';
+    ctx.fillStyle = C.slate;
+    ctx.fillText(centerLabel, cx, cy + W * 0.13);
+  }
+
+  function drawStackedBar(canvas, data) {
+    var W = canvas.parentElement ? (canvas.parentElement.clientWidth || 520) : 520, H = 160;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var pad = { l:8, r:8, t:18, b:28 };
+    var n = data.labels.length;
+    var bw = Math.floor((W - pad.l - pad.r) / n) - 6;
+    var maxV = data.labels.map(function(_, i) {
+      return data.series.reduce(function(s, ser){ return s + (ser.values[i]||0); }, 0);
+    }).reduce(function(a,b){return Math.max(a,b);}, 1);
+    data.labels.forEach(function(lbl, i) {
+      var x = pad.l + i * ((W - pad.l - pad.r) / n) + 3;
+      var base = H - pad.b;
+      data.series.forEach(function(ser) {
+        var h = ((ser.values[i]||0) / maxV) * (H - pad.t - pad.b);
+        if (h < 1) return;
+        ctx.fillStyle = ser.color;
+        ctx.beginPath();
+        if (ctx.roundRect) { ctx.roundRect(x, base - h, bw, h, 2); } else { ctx.rect(x, base - h, bw, h); }
+        ctx.fill();
+        base -= h;
+      });
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(lbl, x + bw/2, H - pad.b + 12);
+    });
+    var lx = pad.l;
+    data.series.forEach(function(ser) {
+      ctx.fillStyle = ser.color;
+      ctx.fillRect(lx, 2, 8, 8);
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(ser.label, lx + 11, 10);
+      lx += ctx.measureText(ser.label).width + 24;
+    });
+  }
+
+  function drawAreaLine(canvas, data) {
+    var W = canvas.parentElement ? (canvas.parentElement.clientWidth || 520) : 520, H = 180;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var pad = { l:28, r:12, t:18, b:28 };
+    var allVals = data.series.reduce(function(a, s){ return a.concat(s.values); }, []);
+    var maxV = Math.max.apply(null, allVals) || 1;
+    var n = data.labels.length;
+    function px(i) { return pad.l + i * (W - pad.l - pad.r) / (n - 1); }
+    function py(v) { return H - pad.b - (v / maxV) * (H - pad.t - pad.b); }
+    [0.25, 0.5, 0.75, 1].forEach(function(f) {
+      var y = H - pad.b - f * (H - pad.t - pad.b);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y);
+      ctx.strokeStyle = '#e2e8f066'; ctx.lineWidth = 1; ctx.stroke();
+    });
+    data.series.forEach(function(ser) {
+      var pts = ser.values.map(function(v, i){ return {x: px(i), y: py(v)}; });
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, H - pad.b);
+      pts.forEach(function(p){ ctx.lineTo(p.x, p.y); });
+      ctx.lineTo(pts[pts.length-1].x, H - pad.b);
+      ctx.closePath();
+      var grad = ctx.createLinearGradient(0, pad.t, 0, H - pad.b);
+      grad.addColorStop(0, ser.color + '44');
+      grad.addColorStop(1, ser.color + '00');
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.beginPath();
+      pts.forEach(function(p, i){ i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
+      ctx.strokeStyle = ser.color;
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+    });
+    ctx.fillStyle = C.slate;
+    ctx.font = '9px Inter,sans-serif';
+    ctx.textAlign = 'center';
+    data.labels.forEach(function(lbl, i) {
+      if (i % 2 === 0) ctx.fillText(lbl, px(i), H - pad.b + 12);
+    });
+    var lx = pad.l;
+    data.series.forEach(function(ser) {
+      ctx.fillStyle = ser.color;
+      ctx.fillRect(lx, 2, 10, 4);
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(ser.label, lx + 13, 10);
+      lx += ctx.measureText(ser.label).width + 28;
+    });
+  }
+
+  function drawGroupedBar(canvas, data) {
+    var W = canvas.parentElement ? (canvas.parentElement.clientWidth || 520) : 520, H = 160;
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var pad = { l:8, r:8, t:18, b:28 };
+    var groupW = (W - pad.l - pad.r) / data.labels.length;
+    var bw = Math.floor(groupW / (data.series.length + 1));
+    var allVals = data.series.reduce(function(a, s){ return a.concat(s.values); }, []);
+    var maxV = Math.max.apply(null, allVals) || 1;
+    data.labels.forEach(function(lbl, i) {
+      var gx = pad.l + i * groupW + bw * 0.5;
+      data.series.forEach(function(ser, j) {
+        var v = ser.values[i] || 0;
+        var h = (v / maxV) * (H - pad.t - pad.b);
+        if (h < 1) return;
+        var x = gx + j * bw;
+        ctx.fillStyle = ser.color;
+        ctx.beginPath();
+        if (ctx.roundRect) { ctx.roundRect(x, H - pad.b - h, bw - 2, h, 2); } else { ctx.rect(x, H - pad.b - h, bw - 2, h); }
+        ctx.fill();
+      });
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(lbl, pad.l + i * groupW + groupW/2, H - pad.b + 12);
+    });
+    var lx = pad.l;
+    data.series.forEach(function(ser) {
+      ctx.fillStyle = ser.color;
+      ctx.fillRect(lx, 2, 8, 8);
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(ser.label, lx + 11, 10);
+      lx += ctx.measureText(ser.label).width + 24;
+    });
+  }
+
+  function drawHBar(canvas, data) {
+    var nG = data.labels.length, nS = data.series.length;
+    var rowH = 20, gapH = 12, pad = { l:92, r:44, t:20, b:28 };
+    var W = canvas.parentElement ? (canvas.parentElement.clientWidth || 480) : 480;
+    var H = pad.t + nG * (nS * rowH + gapH) + pad.b;
+    canvas.style.height = H + 'px';
+    var ctx = dpr(canvas, W, H);
+    ctx.clearRect(0, 0, W, H);
+    var allVals = data.series.reduce(function(a,s){ return a.concat(s.values); }, []);
+    var maxV = Math.max.apply(null, allVals) || 1;
+    var chartW = W - pad.l - pad.r;
+    var barH = Math.max(8, rowH - 4);
+    data.labels.forEach(function(lbl, i) {
+      var gy = pad.t + i * (nS * rowH + gapH);
+      ctx.fillStyle = C.slate;
+      ctx.font = '9.5px Inter,sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(lbl, pad.l - 8, gy + (nS * rowH) / 2 + 3);
+      data.series.forEach(function(ser, j) {
+        var v = ser.values[i] || 0;
+        var bw = (v / maxV) * chartW;
+        var y = gy + j * rowH;
+        ctx.fillStyle = ser.color;
+        ctx.globalAlpha = 0.88;
+        ctx.beginPath();
+        if (ctx.roundRect) { ctx.roundRect(pad.l, y, Math.max(3, bw), barH, 3); }
+        else { ctx.rect(pad.l, y, Math.max(3, bw), barH); }
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = C.slate;
+        ctx.font = 'bold 8.5px Inter,sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(v + (data.unit || ''), pad.l + bw + 5, y + barH / 2 + 3);
+      });
+    });
+    var lx = pad.l;
+    data.series.forEach(function(ser) {
+      ctx.fillStyle = ser.color;
+      ctx.fillRect(lx, H - 16, 8, 8);
+      ctx.fillStyle = C.slate;
+      ctx.font = '9px Inter,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(ser.label, lx + 11, H - 9);
+      lx += ctx.measureText(ser.label).width + 26;
+    });
+  }
+
+  function initAllCharts() {
+    var sparkData = {
+      'dv-sp-total-styles':    [48,51,49,54,57,55,60],
+      'dv-sp-in-review':       [12,14,11,13,16,15,18],
+      'dv-sp-approved':        [22,25,24,28,30,29,34],
+      'dv-sp-rework':          [6,5,7,4,3,5,4],
+      'dv-sp-pending':         [8,7,7,9,8,6,7],
+      'dv-sp-capsules':        [3,3,4,4,4,5,5],
+      'dv-sp-open-tasks':      [9,8,10,7,6,8,7],
+      'dv-sp-completed':       [14,16,15,18,20,19,22],
+      'dv-sp-my-styles':       [5,6,5,7,8,7,9],
+      'dv-sp-peer-queue':      [3,4,3,5,4,3,4],
+      'dv-sp-team-output':     [18,20,19,22,24,23,26],
+      'dv-sp-lic-queue':       [8,9,10,8,7,9,11],
+      'dv-sp-compliant':       [30,32,31,35,37,36,40],
+      'dv-sp-lic-rework':      [4,3,5,4,3,2,3],
+      'dv-sp-mgr-total':       [60,63,61,67,70,68,74],
+      'dv-sp-mgr-approved':    [28,31,30,34,37,36,41],
+    };
+    var sparkColors = {
+      'dv-sp-total-styles': C.cyan,   'dv-sp-in-review': C.orange,
+      'dv-sp-approved': C.green,      'dv-sp-rework': C.red,
+      'dv-sp-pending': C.orange,      'dv-sp-capsules': C.purple,
+      'dv-sp-open-tasks': C.orange,   'dv-sp-completed': C.green,
+      'dv-sp-my-styles': C.cyan,      'dv-sp-peer-queue': C.purple,
+      'dv-sp-team-output': C.cyan,    'dv-sp-lic-queue': C.orange,
+      'dv-sp-compliant': C.green,     'dv-sp-lic-rework': C.red,
+      'dv-sp-mgr-total': C.cyan,      'dv-sp-mgr-approved': C.green,
+    };
+    Object.keys(sparkData).forEach(function(id) {
+      var c = document.getElementById(id);
+      if (c) drawSparkline(c, sparkData[id], sparkColors[id] || C.cyan);
+    });
+
+    var donuts = {
+      'dv-donut-designer':  { seg:[8,12,24,6],   labels:['Upload','Review','Approved','Rework'] },
+      'dv-donut-sr':        { seg:[5,10,28,7],   labels:['Upload','Review','Approved','Rework'] },
+      'dv-donut-licensing': { seg:[6,14,30,5],   labels:['Pending','Review','Compliant','Rework'] },
+      'dv-donut-manager':   { seg:[10,18,40,8],  labels:['Upload','Review','Approved','Rework'] },
+      'dv-donut-admin':     { seg:[12,20,48,8],  labels:['Upload','Review','Approved','Rework'] },
+      'dv-donut-assistant': { seg:[4,6,12,3],    labels:['Upload','Review','Approved','Rework'] },
+    };
+    Object.keys(donuts).forEach(function(id) {
+      var c = document.getElementById(id);
+      if (c) drawDonut(c, donuts[id].seg, donuts[id].labels);
+    });
+
+    [
+      ['dv-gauge-approval-designer',  0.71, C.green,  'Approval'],
+      ['dv-gauge-ontime-designer',    0.84, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-designer',     0.68, C.orange, 'Cycle'],
+      ['dv-gauge-approval-sr',        0.78, C.green,  'Approval'],
+      ['dv-gauge-ontime-sr',          0.88, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-sr',           0.72, C.orange, 'Cycle'],
+      ['dv-gauge-approval-licensing', 0.82, C.green,  'Approval'],
+      ['dv-gauge-ontime-licensing',   0.90, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-licensing',    0.75, C.orange, 'Cycle'],
+      ['dv-gauge-approval-manager',   0.74, C.green,  'Approval'],
+      ['dv-gauge-ontime-manager',     0.86, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-manager',      0.70, C.orange, 'Cycle'],
+      ['dv-gauge-approval-admin',     0.76, C.green,  'Approval'],
+      ['dv-gauge-ontime-admin',       0.87, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-admin',        0.71, C.orange, 'Cycle'],
+      ['dv-gauge-approval-assistant', 0.65, C.green,  'Approval'],
+      ['dv-gauge-ontime-assistant',   0.80, C.cyan,   'On-Time'],
+      ['dv-gauge-cycle-assistant',    0.62, C.orange, 'Cycle'],
+    ].forEach(function(g) {
+      var c = document.getElementById(g[0]);
+      if (c) drawGauge(c, g[1], g[2], g[3]);
+    });
+
+    var capsuleLabels = ['NBA FA25','NHL FA25','MLB FA25','NBA Pre','MLS FA25','NBPA'];
+    var stackSeries = [
+      { label:'Upload',   color:C.orange, values:[8,6,10,4,7,5] },
+      { label:'Review',   color:C.purple, values:[12,9,14,6,10,7] },
+      { label:'Approved', color:C.green,  values:[24,18,28,12,20,14] },
+      { label:'Rework',   color:C.red,    values:[4,3,6,2,3,2] },
+    ];
+    ['dv-stackbar-sr','dv-stackbar-manager','dv-stackbar-admin'].forEach(function(id) {
+      var c = document.getElementById(id);
+      if (c) drawStackedBar(c, { labels:capsuleLabels, series:stackSeries });
+    });
+
+    var weeks = ['W1','W2','W3','W4','W5','W6','W7','W8'];
+
+    // ── SR DESIGNER ANALYTICS ──────────────────────────────
+    var srAreaData = {
+      labels: weeks,
+      series: [
+        { label:'Submitted',  color:C.orange, values:[14,17,15,20,22,19,24,21] },
+        { label:'Approved',   color:C.green,  values:[10,12,11,15,18,16,20,18] },
+        { label:'Peer-flagged', color:C.purple, values:[3,4,3,4,3,2,3,2] },
+      ]
+    };
+    var srAreaC = document.getElementById('dv-area-sr');
+    if (srAreaC) drawAreaLine(srAreaC, srAreaData);
+
+    var srCycleHBar = {
+      unit: 'd',
+      labels: ['Upload → Peer','Peer → SR','SR → Licensing','Licensing → Done'],
+      series: [
+        { label:'Avg days', color:C.cyan,   values:[1.8, 2.4, 1.6, 3.2] },
+        { label:'Target',   color:C.green,  values:[1.5, 2.0, 1.5, 2.5] },
+      ]
+    };
+    var srCycleC = document.getElementById('dv-hbar-sr-cycle');
+    if (srCycleC) drawHBar(srCycleC, srCycleHBar);
+
+    var srGrouped = {
+      labels: ['Dante M.','Diana A.','Andrea C.','Ana A.','Arantxa D.'],
+      series: [
+        { label:'Color',    color:C.red,    values:[3,2,4,0,2] },
+        { label:'Art',      color:C.orange, values:[2,3,2,1,1] },
+        { label:'Template', color:C.purple, values:[1,1,2,0,2] },
+      ]
+    };
+    var srGC = document.getElementById('dv-grouped-sr');
+    if (srGC) drawGroupedBar(srGC, srGrouped);
+
+    // ── LICENSING ANALYTICS ────────────────────────────────
+    var licAreaData = {
+      labels: weeks,
+      series: [
+        { label:'Received',  color:C.orange, values:[18,21,17,24,26,22,28,25] },
+        { label:'Compliant', color:C.green,  values:[14,16,13,19,22,18,24,22] },
+        { label:'Rework sent', color:C.red,  values:[4,5,4,5,4,4,4,3] },
+      ]
+    };
+    var licAreaC = document.getElementById('dv-area-licensing');
+    if (licAreaC) drawAreaLine(licAreaC, licAreaData);
+
+    var licLagHBar = {
+      unit: 'd',
+      labels: ['NBA','NHL','MLB','MLS','NBPA'],
+      series: [
+        { label:'Avg review lag', color:C.orange, values:[4.2, 3.8, 5.1, 3.2, 4.7] },
+      ]
+    };
+    var licLagC = document.getElementById('dv-hbar-lic-lag');
+    if (licLagC) drawHBar(licLagC, licLagHBar);
+
+    var licStackedData = {
+      labels: ['NBA FA25','NHL FA25','MLB FA25','NBA Pre','MLS FA25','NBPA'],
+      series: [
+        { label:'Compliant', color:C.green,  values:[28,22,32,14,24,16] },
+        { label:'In Review', color:C.cyan,   values:[6,5,7,3,5,4] },
+        { label:'Rework',    color:C.red,    values:[3,2,4,2,2,2] },
+        { label:'On Hold',   color:C.orange, values:[2,1,2,1,2,1] },
+      ]
+    };
+    var licStackedC = document.getElementById('dv-stacked-lic');
+    if (licStackedC) drawStackedBar(licStackedC, licStackedData);
+
+    // ── MANAGER ANALYTICS ──────────────────────────────────
+    var mgrAreaData = {
+      labels: weeks,
+      series: [
+        { label:'Total Active',  color:C.cyan,   values:[58,63,60,68,72,69,76,74] },
+        { label:'Approved',      color:C.green,  values:[28,31,29,35,38,36,42,40] },
+        { label:'In Rework',     color:C.red,    values:[8,7,9,6,5,7,5,4] },
+      ]
+    };
+    var mgrAreaC = document.getElementById('dv-area-manager');
+    if (mgrAreaC) drawAreaLine(mgrAreaC, mgrAreaData);
+
+    var mgrOutputGrouped = {
+      labels: ['Sr. Team A','Sr. Team B','Sr. Team C'],
+      series: [
+        { label:'Submitted',  color:C.cyan,   values:[42,38,36] },
+        { label:'Approved',   color:C.green,  values:[36,31,30] },
+        { label:'Rework',     color:C.red,    values:[4,5,3] },
+      ]
+    };
+    var mgrOutC = document.getElementById('dv-grouped-mgr-output');
+    if (mgrOutC) drawGroupedBar(mgrOutC, mgrOutputGrouped);
+
+    var mgrCapsuleStacked = {
+      labels: ['NBA FA25','NHL FA25','MLB FA25','NBA Pre','MLS FA25','NBPA'],
+      series: [
+        { label:'Upload',   color:C.orange, values:[8,6,10,4,7,5] },
+        { label:'Review',   color:C.purple, values:[12,9,14,6,10,7] },
+        { label:'Approved', color:C.green,  values:[24,18,28,12,20,14] },
+        { label:'Rework',   color:C.red,    values:[4,3,5,2,3,2] },
+      ]
+    };
+    var mgrCapsC = document.getElementById('dv-stacked-mgr-capsules');
+    if (mgrCapsC) drawStackedBar(mgrCapsC, mgrCapsuleStacked);
+
+    // ── ADMIN ANALYTICS ────────────────────────────────────
+    var adminAreaData = {
+      labels: weeks,
+      series: [
+        { label:'Total styles',  color:C.cyan,   values:[88,94,91,102,108,105,116,112] },
+        { label:'Approved',      color:C.green,  values:[42,47,45,53,58,56,64,62] },
+        { label:'In Rework',     color:C.red,    values:[12,10,13,9,8,10,7,6] },
+      ]
+    };
+    var adminAreaC = document.getElementById('dv-area-admin');
+    if (adminAreaC) drawAreaLine(adminAreaC, adminAreaData);
+
+    var adminReworkHBar = {
+      labels: ['Color Issues','Art / Artwork','Template Errors','Compliance Flags','Missing Assets'],
+      series: [
+        { label:'Count', color:C.red,    values:[18,14,9,12,6] },
+      ]
+    };
+    var adminEscC = document.getElementById('dv-hbar-admin-esc');
+    if (adminEscC) drawHBar(adminEscC, adminReworkHBar);
+
+    var adminTeamGrouped = {
+      labels: ['Design Team A','Design Team B','Design Team C'],
+      series: [
+        { label:'Uploaded',  color:C.cyan,   values:[42,38,36] },
+        { label:'Approved',  color:C.green,  values:[36,31,30] },
+        { label:'Rework',    color:C.red,    values:[4,5,3] },
+        { label:'On Hold',   color:C.orange, values:[2,2,3] },
+      ]
+    };
+    var adminGC = document.getElementById('dv-grouped-admin');
+    if (adminGC) drawGroupedBar(adminGC, adminTeamGrouped);
+  }
+
+  document.addEventListener('DOMContentLoaded', initAllCharts);
+
+  return { drawSparkline:drawSparkline, drawDonut:drawDonut, drawGauge:drawGauge,
+           drawStackedBar:drawStackedBar, drawAreaLine:drawAreaLine, drawGroupedBar:drawGroupedBar,
+           drawHBar:drawHBar, init:initAllCharts };
+})();
+</script>
 </body>
 </html>
